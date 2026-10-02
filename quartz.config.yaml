@@ -1,0 +1,229 @@
+# Configuração do site llm-notes
+#
+# A pasta content/ é regerada por `npm run exportar` a partir do vault
+# Obsidian. Este arquivo é a parte manual: layout, cores, plugins.
+#
+# No Quartz 5 não existe seção `transformers`: tudo é plugin, e a categoria
+# vem do manifesto do pacote. Um `link:` inventado aqui é silenciosamente
+# ignorado — e o sintoma é frontmatter vazando como texto na página.
+
+configuration:
+  pageTitle: "LLMs por dentro"
+  pageTitleSuffix: "Notas de estudo sobre modelos de linguagem"
+  enableSPA: true
+  enablePopovers: true
+  analytics:
+    provider: null
+  locale: "pt-BR"
+  baseUrl: "llm-notes"
+  ignorePatterns:
+    - private
+    - templates
+    - .obsidian
+    - .quartz-cache
+    - .git
+  theme:
+    fontOrigin: googleFonts
+    cdnCaching: true
+    typography:
+      header: "Schibsted Grotesk"
+      body: "Inter"
+      code: "IBM Plex Mono"
+    colors:
+      lightMode:
+        light: "#fdfdfc"
+        lightgray: "#e8e6e1"
+        gray: "#b4b0a8"
+        darkgray: "#4c4a45"
+        dark: "#23231f"
+        secondary: "#1f5f4e"
+        tertiary: "#8a7a4f"
+      darkMode:
+        light: "#1b1b19"
+        lightgray: "#3a3a36"
+        gray: "#6e6b64"
+        darkgray: "#b0aca3"
+        dark: "#f5f4f0"
+        secondary: "#7fc4a5"
+        tertiary: "#c8b073"
+  icon: "brain"
+  banner: "Notas de estudo sobre LLMs, transformers e engenharia de contexto."
+  footer:
+    text: "Conteúdo derivado de estudo pessoal. Revisitar sempre."
+  generateSocialImages: false
+
+# Ordem baixa processa antes. Os transformers precisam vir antes dos
+# pageTypes, senão o frontmatter ainda não foi lido quando a página é montada.
+plugins:
+  # --- markdown ---
+  - source: "@quartz-community/obsidian-flavored-markdown"
+    enabled: true
+    options:
+      enableCheckbox: true
+    order: 10
+  - source: "@quartz-community/github-flavored-markdown"
+    enabled: true
+    order: 11
+  - source: "@quartz-community/syntax-highlighting"
+    enabled: true
+    options:
+      theme:
+        light: github-light
+        dark: github-dark
+      keepBackground: false
+    order: 12
+
+  # --- datas e propriedades ---
+  - source: "@quartz-community/created-modified-date"
+    enabled: true
+    options:
+      defaultDateType: modified
+      priority:
+        - frontmatter
+        - git
+        - filesystem
+    order: 20
+  - source: "@quartz-community/note-properties"
+    enabled: true
+    order: 21
+    options:
+      properties:
+        - title
+        - description
+        - tags
+        - tipo
+
+  # --- conteúdo ---
+  - source: "@quartz-community/crawl-links"
+    enabled: true
+    order: 30
+    options:
+      markdownLinkResolution: shortest
+  - source: "@quartz-community/description"
+    enabled: true
+    order: 31
+  - source: "@quartz-community/roam"
+    enabled: true
+    order: 32
+  - source: "@quartz-community/latex"
+    enabled: true
+    order: 33
+    options:
+      renderEngine: katex
+  - source: "@quartz-community/unlisted-pages"
+    enabled: true
+    order: 34
+  - source: "@quartz-community/quartz-fonts"
+    enabled: true
+    order: 35
+  - source: "@quartz-community/hard-line-breaks"
+    enabled: false
+
+  # --- páginas ---
+  - source: "@quartz-community/content-page"
+    enabled: true
+    order: 50
+  - source: "@quartz-community/folder-page"
+    enabled: true
+    order: 51
+    options:
+      showFolderCount: false
+  - source: "@quartz-community/tag-page"
+    enabled: true
+    order: 52
+  - source: "@quartz-community/canvas-page"
+    enabled: true
+    order: 53
+
+  # --- emitters ---
+  - source: "@quartz-community/alias-redirects"
+    enabled: true
+    order: 60
+  - source: "@quartz-community/content-index"
+    enabled: true
+    order: 61
+    options:
+      enableSiteMap: true
+      enableRSS: true
+  - source: "@quartz-community/favicon"
+    enabled: true
+    order: 62
+  - source: "@quartz-community/og-image"
+    enabled: false
+  - source: "@quartz-community/cname"
+    enabled: true
+
+  # --- filtros ---
+  - source: "@quartz-community/remove-draft"
+    enabled: true
+    order: 70
+  - source: "@quartz-community/explicit-publish"
+    enabled: false
+
+  # --- layout ---
+  - source: "@quartz-community/article-title"
+    enabled: false
+    order: 79
+  - source: "@quartz-community/page-title"
+    enabled: true
+    order: 78
+    layout:
+      position: left
+      priority: 10
+  - source: "@quartz-community/table-of-contents"
+    enabled: true
+    order: 80
+    layout:
+      position: right
+      priority: 30
+  - source: "@quartz-community/explorer"
+    enabled: true
+    order: 81
+    layout:
+      position: left
+      priority: 50
+  - source: "@quartz-community/graph"
+    enabled: true
+    order: 82
+    layout:
+      position: right
+      priority: 10
+  - source: "@quartz-community/search"
+    enabled: true
+    order: 83
+    layout:
+      position: right
+      priority: 60
+    options:
+      placeholder: "Buscar conceitos, labs e papers..."
+  - source: "@quartz-community/darkmode"
+    enabled: true
+    order: 84
+    options:
+      default: auto
+      preference: system
+  - source: "@quartz-community/footer"
+    enabled: true
+    order: 85
+
+layout:
+  groups:
+    toolbar:
+      priority: 35
+      direction: row
+      gap: 0.5rem
+  byPageType:
+    "404":
+      positions:
+        beforeBody: []
+        left: []
+        right: []
+    content:
+      exclude:
+        - reader-mode
+    folder:
+      exclude:
+        - reader-mode
+    tag:
+      exclude:
+        - reader-mode

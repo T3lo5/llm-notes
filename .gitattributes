@@ -1,0 +1,8 @@
+* text=auto eol=lf
+
+# O emojimap tem 15 MB de mapeamento de emoji em UTF-8. Sob `text=auto` o
+# git o normaliza como texto e o servidor recalcula o blob na recepcao,
+# produzindo um hash diferente do enviado: o push falha com
+# "did not receive expected object". Marcando como binario, os bytes vao
+# como estao e o hash confere.
+quartz/util/emojimap.json -text -diff

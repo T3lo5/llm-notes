@@ -1,0 +1,8 @@
+public
+node_modules
+.quartz-cache
+
+# Gerado por scripts/exportar.py a partir do vault. Formatar aqui seria
+# sobrescrito no proximo `npm run sync`.
+content
+quartz/static/dados
