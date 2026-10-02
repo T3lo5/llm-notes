@@ -15,7 +15,10 @@ configuration:
   analytics:
     provider: null
   locale: "pt-BR"
-  baseUrl: "llm-notes"
+  # Quartz deriva o basePath com new URL("https://" + baseUrl).pathname, entao
+  # o valor precisa incluir o dominio E o subpath do GitHub Pages. Com apenas
+  # "llm-notes" o pathname sai "/" e todo link perde o prefixo /llm-notes.
+  baseUrl: "t3lo5.github.io/llm-notes"
   ignorePatterns:
     - private
     - templates
