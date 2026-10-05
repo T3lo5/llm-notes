@@ -37,7 +37,7 @@ Duas métricas:
 
 ## Onde vi isso
 
-- Visto em:[[Self-Attention]]
+- Visto em: [[Como o modelo gera respostas, token a token]]
 
 ## Ver também
 

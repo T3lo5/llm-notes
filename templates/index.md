@@ -75,7 +75,8 @@ fonte da verdade é o vault, não este site.
 
 ## Praticar
 
-- [Banco de questões](/questoes) — 45 questões com nível de dificuldade e origem no módulo.
+- [Banco de questões](/questoes) — 45 questões com nível de dificuldade e tema de origem.
+- [Guias](/guias) — os temas em prosa, do enquadramento à mecânica.
 - [Labs](/labs) — código executável sobre tokens, embeddings, atenção e sampling.
 - [Pesquisas](/pesquisas) — o que cada paper realmente mudou, e o que é só otimização de constante.
 - [Papers](/papers) — Attention Is All You Need, Chinchilla, GQA, InstructGPT, LoRA, Mamba e RoPE.

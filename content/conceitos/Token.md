@@ -58,7 +58,7 @@ n = len(enc.encode("processamento"))
 
 ## Onde vi isso
 
-- Visto em:[[Token]]
+- Visto em: [[Tokens e por que eles custam]]
 - Aprofundamento: [[Pesquisa - Tokens, custo e tokenização]]
 
 ## Ver também

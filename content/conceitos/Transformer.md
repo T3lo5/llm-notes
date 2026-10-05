@@ -57,11 +57,11 @@ Os LLMs de chat são **decoder-only**.
 ## Autoavaliação
 1. **P:** Por que remover a recorrência mudou o que era possível treinar? **R:** porque eliminou a dependência sequencial entre estados, permitindo paralelizar todos os passos do treino na GPU.
 2. **P:** Onde estão a maior parte dos parâmetros? **R:** no MLP, não na atenção. A atenção é a parte que "razona"; o MLP é o que guarda.
-3. **P:** Por que attention weights não servem como explicação? **R:** são uma fração dos parâmetros e producto de muitas camadas; explicabilidade exige accounting do caminho causal completo.
+3. **P:** Por que attention weights não servem como explicação? **R:** são uma fração dos parâmetros e produto de muitas camadas; explicabilidade exige accounting do caminho causal completo.
 
 ## Onde vi isso
 
-- Visto em:[[Transformer]]
+- Visto em: [[Transformers, de um jeito simples]]
 
 ## Ver também
 

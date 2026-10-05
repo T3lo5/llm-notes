@@ -30,12 +30,12 @@ A divisão acontece **nos logits, antes do softmax**. Toda truncagem (top-k, top
 import numpy as np
 
 def softmax(z, T=1.0):
-    if T <= 0:                       # caso degenerado: argmax
-        m = np.zeros_like(z); m[np.argmax(z)] = 1.0; return m
-    z = z / T                        # temperatura ANTES do softmax
-    z = z - z.max()                  # estabilidade numérica
-    e = np.exp(z)
-    return e / e.sum()
+ if T <= 0: # caso degenerado: argmax
+ m = np.zeros_like(z); m[np.argmax(z)] = 1.0; return m
+ z = z / T # temperatura ANTES do softmax
+ z = z - z.max() # estabilidade numérica
+ e = np.exp(z)
+ return e / e.sum()
 ```
 
 ## Autoavaliação
@@ -44,7 +44,7 @@ def softmax(z, T=1.0):
 
 ## Onde vi isso
 
-- Visto em:[[Temperatura]],[[Self-Attention]]
+- Visto em: [[Por que a resposta do modelo muda]], [[Como o modelo gera respostas, token a token]]
 
 ## Ver também
 

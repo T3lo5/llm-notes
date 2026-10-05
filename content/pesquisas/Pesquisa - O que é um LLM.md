@@ -13,7 +13,7 @@ date: "2026-10-07"
 
 ## Resposta curta (TL;DR)
 
-Porque "continuar texto" é uma tarefaCompression tão densa que, para fazê-la bem, o modelo precisa internalizar gramática, fatos, raciocínio e estilo — tudo em um único objetivo. Não há símbolo de "verdade" no objetivo, e é por isso que alucinação é consequência e não defeito. E é por isso que a distinção operacional entre **parâmetros** (conhecimento comprimido, caro de atualizar) e **contexto** (conhecimento fornecido agora, barato de atualizar) é a que organiza toda engenharia de LLMs em produção.
+Porque "continuar texto" é uma tarefa de compressão tão densa que, para fazê-la bem, o modelo precisa internalizar gramática, fatos, raciocínio e estilo — tudo em um único objetivo. Não há símbolo de "verdade" no objetivo, e é por isso que alucinação é consequência e não defeito. E é por isso que a distinção operacional entre **parâmetros** (conhecimento comprimido, caro de atualizar) e **contexto** (conhecimento fornecido agora, barato de atualizar) é a que organiza toda engenharia de LLMs em produção.
 
 ## Resposta completa
 
@@ -54,7 +54,7 @@ Isso é **compressão estatística**. É por isso que há quem diga que o modelo
 
 ### Scaling: o que a literatura mostra
 
-**Kaplan et al. (2020)** — *Scaling Laws*: perda de validação segue lei de potência em parâmetros ($N$), dados ($D$) e compute ($C$). Previsibilidadehg alta o suficiente para planejar experimentos.
+**Kaplan et al. (2020)** — *Scaling Laws*: perda de validação segue lei de potência em parâmetros ($N$), dados ($D$) e compute ($C$). Previsibilidade alta o suficiente para planejar experimentos.
 
 **Hoffmann et al. (2022)** — *Chinchilla*: ao corrigir o método (treinar centenas de modelos), concluíram que para compute ótimo **parâmetros e tokens escalam na mesma proporção**. A capacidade dos modelos grandes vinha sendo subutilizada — undertrained, não subdimensionado.
 
@@ -97,17 +97,17 @@ Usar fine-tuning para ensinar fato é caro e desatualiza. Usar RAG para ensinar 
 ```python
 # O LLM inteiro, em pseudocódigo de 6 linhas.
 def gerar(prompt, modelo, T=0.7, max_tokens=100):
-    tokens = tokenizer.encode(prompt)
-    saida = []
-    for _ in range(max_tokens):
-        logits = modelo(tokens)                    # transformer: densa e paralela
-        p = softmax(logits / T)                   # temperatura NOS LOGITS
-        p = top_p_filter(p, 0.9)                  # trunca a cauda não confiável
-        t = sample(p, rng)                        # <- ÚNICO ponto estocástico
-        saida.append(t)
-        if t == EOS: break
-        tokens.append(t)                          # o token gerado volta ao contexto
-    return tokenizer.decode(saida)
+ tokens = tokenizer.encode(prompt)
+ saida = []
+ for _ in range(max_tokens):
+ logits = modelo(tokens) # transformer: densa e paralela
+ p = softmax(logits / T) # temperatura NOS LOGITS
+ p = top_p_filter(p, 0.9) # trunca a cauda não confiável
+ t = sample(p, rng) # <- ÚNICO ponto estocástico
+ saida.append(t)
+ if t == EOS: break
+ tokens.append(t) # o token gerado volta ao contexto
+ return tokenizer.decode(saida)
 ```
 
 ## Limitações e riscos
@@ -138,7 +138,7 @@ def gerar(prompt, modelo, T=0.7, max_tokens=100):
 
 ## Ver também
 
--16 - O que é um LLM de verdade · [[Modelo Base]] · [[RAG]] · [[Alucinação]]
+- [[O que é um LLM, de verdade]] · [[Modelo Base]] · [[RAG]] · [[Alucinação]]
 
 ---
 *Atualizado em 2026-09-30*

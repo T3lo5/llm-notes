@@ -76,7 +76,7 @@ Extrapolação além do comprimento de treino **não é perfeita**. A comunidade
 
 ## Rethinking
 
-> A[[Transformer]] diz "atenção é permutacional, precisa de posição". Este paper mostra a **segunda metade**: posição absoluta é a representação errada. Uma boa intuição aqui já salva metade da leitura de papers de posição.
+> A[[Transformers, de um jeito simples]] diz "atenção é permutacional, precisa de posição". Este paper mostra a **segunda metade**: posição absoluta é a representação errada. Uma boa intuição aqui já salva metade da leitura de papers de posição.
 
 ## Notas de leitura
 

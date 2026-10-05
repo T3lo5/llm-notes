@@ -9,7 +9,7 @@ date: "2026-10-07"
 
 # Paper — Attention Is All You Need
 
-> **Por que estou lendo isso:** porque o Transformer é o objeto de tudo que o mapa descreve. Sem este paper, a[[Transformer]] é receita sem receita original.
+> **Por que estou lendo isso:** porque o Transformer é o objeto de tudo que o mapa descreve. Sem este paper, a[[Transformers, de um jeito simples]] é receita sem receita original.
 
 ## Ficha
 

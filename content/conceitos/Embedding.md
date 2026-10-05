@@ -29,7 +29,7 @@ Um embedding mapeia texto (ou imagem, ou áudio) para um ponto de um espaço con
 from sentence_transformers import SentenceTransformer
 m = SentenceTransformer("all-MiniLM-L6-v2")
 v = m.encode("o dog está latindo")
-v.shape  # (384,)
+v.shape # (384,)
 ```
 
 ## Comparações
@@ -59,7 +59,7 @@ Por isso **busca híbrida** é o padrão real: ver [[Busca Semântica]].
 
 ## Onde vi isso
 
-- Visto em:[[Embedding]]
+- Visto em: [[Embeddings: transformando texto em vetores]]
 - Aprofundamento: [[Pesquisa - Embeddings e busca semântica]]
 
 ## Ver também

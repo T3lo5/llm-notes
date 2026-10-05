@@ -55,11 +55,11 @@ O texto do atacante compete em pé de igualdade com o texto do sistema. Como a t
 
 ## Onde vi isso
 
-- Visto em:[[Janela de Contexto]]
+- Visto em: [[Sensibilidade de prompt: ordem importa]]
 
 ## Ver também
 
--[[Janela de Contexto]] · [[RAG]] · [[Modelo Base]]
+-[[Sensibilidade de prompt: ordem importa]] · [[RAG]] · [[Modelo Base]]
 
 ---
 *Atualizado em 2026-09-30*

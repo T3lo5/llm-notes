@@ -48,7 +48,7 @@ Caro, lento, desatualiza a cada documento novo, e não dá citação. Isso é [[
 
 ## Onde vi isso
 
-- Visto em:16 - O que é um LLM de verdade
+- Visto em: [[O que é um LLM, de verdade]]
 - Paper: LoRA — https://arxiv.org/abs/2106.09685
 
 ## Ver também

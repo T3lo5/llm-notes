@@ -1,6 +1,6 @@
 ---
 title: Banco de questões
-description: 45 questões de fundamentos e funcionamento de LLMs, com nível de dificuldade e módulo de origem.
+description: 45 questões de fundamentos e funcionamento de LLMs, com nível de dificuldade e tema de origem.
 tags:
   - exercicios
   - revisao
@@ -9,7 +9,7 @@ tipo: pagina
 
 # Banco de questões
 
-Questões extraídas do banco de perguntas do vault. Responda antes de revelar — o
+Questões extraídas do banco de questões do vault. Responda antes de revelar — o
 interesse está no esforço, não na resposta.
 
 <div id="quiz-app">
@@ -170,19 +170,19 @@ interesse está no esforço, não na resposta.
       return;
     }
 
-    const modulos = [...new Set(questoes.map((q) => q.modulo))].sort();
+    const temas = [...new Set(questoes.map((q) => q.tema))].sort();
     const niveis = [...new Set(questoes.map((q) => q.nivel).filter(Boolean))];
 
     app.innerHTML = [
       '<div class="quiz-controles">',
-      '  <label>Módulo <select id="q-modulo"><option value="">todos</option>',
-      ...modulos.map((m) => `<option value="${esc(m)}">${esc(m)} (${count(questoes, m, "")})</option>`),
+      '  <label>Tema <select id="q-tema"><option value="">todos</option>',
+      ...temas.map((m) => `<option value="${esc(m)}">${esc(m)} (${count(questoes, m, "")})</option>`),
       "  </select></label>",
       '  <label>Nível <select id="q-nivel"><option value="">todos</option>',
       ...niveis.map((n) => `<option value="${esc(n)}">${esc(NIVEL[n] || n)} (${count(questoes, "", n)})</option>`),
       "  </select></label>",
       '  <label>Ordenar <select id="q-ordem">',
-      '    <option value="modulo">por módulo</option>',
+      '    <option value="tema">por tema</option>',
       '    <option value="dificuldade">por dificuldade</option>',
       "  </select></label>",
       '  <button id="q-embaralhar" type="button">embaralhar</button>',
@@ -199,9 +199,9 @@ interesse está no esforço, não na resposta.
     let visiveis = questoes;
     let embaralhadas = false;
 
-    function count(base, mod, niv) {
+    function count(base, tem, niv) {
       return base.filter(
-        (q) => (!mod || q.modulo === mod) && (!niv || q.nivel === niv)
+        (q) => (!tem || q.tema === tem) && (!niv || q.nivel === niv)
       ).length;
     }
 
@@ -213,11 +213,11 @@ interesse está no esforço, não na resposta.
         copia.sort(
           (a, b) =>
             (peso[a.nivel] ?? 1) - (peso[b.nivel] ?? 1) ||
-            String(a.modulo).localeCompare(String(b.modulo)) ||
+            String(a.tema).localeCompare(String(b.tema)) ||
             a.seq - b.seq
         );
       } else {
-        copia.sort((a, b) => a.modulo.localeCompare(b.modulo) || a.seq - b.seq);
+        copia.sort((a, b) => a.tema.localeCompare(b.tema) || a.seq - b.seq);
       }
       if (embaralhadas) {
         for (let i = copia.length - 1; i > 0; i--) {
@@ -231,11 +231,11 @@ interesse está no esforço, não na resposta.
     function item(q) {
       const tags = [];
       if (q.nivel) tags.push(NIVEL[q.nivel] || q.nivel);
-      if (q.modulo) tags.push(q.modulo);
+      if (q.tema) tags.push(q.tema);
       const detalhes = (q.detalhes || []).filter(Boolean);
 
       return [
-        '<li class="quiz-item" data-modulo="' + esc(q.modulo) + '">',
+        '<li class="quiz-item" data-tema="' + esc(q.tema) + '">',
         '  <div class="quiz-enunciado">' + md(q.enunciado) + "</div>",
         detalhes.length
           ? '  <ul class="quiz-detalhes">' +
@@ -286,26 +286,26 @@ interesse está no esforço, não na resposta.
     }
 
     function filtrar() {
-      const mod = document.getElementById("q-modulo").value;
+      const tem = document.getElementById("q-tema").value;
       const niv = document.getElementById("q-nivel").value;
       visiveis = questoes.filter(
-        (q) => (!mod || q.modulo === mod) && (!niv || q.nivel === niv)
+        (q) => (!tem || q.tema === tem) && (!niv || q.nivel === niv)
       );
 
       // atualiza contadores nos selects
-      document.querySelectorAll("#q-modulo option").forEach((o) => {
+      document.querySelectorAll("#q-tema option").forEach((o) => {
         const m = o.value;
         o.textContent = (m || "todos ") + "(" + count(questoes, m, niv) + ")";
       });
       document.querySelectorAll("#q-nivel option").forEach((o) => {
         const n = o.value;
-        o.textContent = (n ? NIVEL[n] || n : "todos") + " (" + count(questoes, mod, n) + ")";
+        o.textContent = (n ? NIVEL[n] || n : "todos") + " (" + count(questoes, tem, n) + ")";
       });
 
       pintar();
     }
 
-    document.getElementById("q-modulo").addEventListener("change", filtrar);
+    document.getElementById("q-tema").addEventListener("change", filtrar);
     document.getElementById("q-nivel").addEventListener("change", filtrar);
     document.getElementById("q-ordem").addEventListener("change", pintar);
     document.getElementById("q-embaralhar").addEventListener("click", () => {

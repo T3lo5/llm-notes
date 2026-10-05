@@ -26,12 +26,12 @@ Top-k com $k$ fixo é arbitrário: o mesmo $k$ é errado para uma distribuição
 import numpy as np
 
 def top_p_filter(p, top_p=0.9):
-    order = np.argsort(-p)
-    cum = np.cumsum(p[order])
-    k = int(np.searchsorted(cum, top_p) + 1)
-    mask = np.zeros(len(p), dtype=bool)
-    mask[order[:k]] = True
-    return p * mask / (p * mask).sum()   # renormaliza
+ order = np.argsort(-p)
+ cum = np.cumsum(p[order])
+ k = int(np.searchsorted(cum, top_p) + 1)
+ mask = np.zeros(len(p), dtype=bool)
+ mask[order[:k]] = True
+ return p * mask / (p * mask).sum() # renormaliza
 ```
 
 ## Parentes
@@ -45,7 +45,7 @@ def top_p_filter(p, top_p=0.9):
 
 ## Onde vi isso
 
-- Visto em:[[Temperatura]]
+- Visto em: [[Por que a resposta do modelo muda]]
 
 ## Ver também
 

@@ -10,11 +10,12 @@ Gerado com [Quartz 5](https://quartz.jzhao.xyz). Deploy via GitHub Pages, sem cu
 
 ```
 vault Obsidian
-   │  scripts/exportar.py
+   │  scripts/exportar.py  +  scripts/origem.py (não versionado)
    ├─► content/conceitos/      24 fichas de conceito
+   ├─► content/guias/          18 guias em prosa
    ├─► content/pesquisas/       6 pesquisas
-   ├─► content/labs/            4 labs com código
-   ├─► content/papers/          8 fichas de paper
+   ├─► content/labs/            5 labs com código
+   ├─► content/papers/          7 fichas de paper
    ├─► content/mapa/            mapa conceitual
    ├─► content/{index,questoes,sobre}.md
    └─► quartz/static/dados/questions.json   45 questões
@@ -38,53 +39,76 @@ npm run sync       # exportar do vault + build (use antes de commitar)
 npm run check      # typecheck + prettier
 ```
 
-O vault fica em `~/Documentos/coders-pos/coders-pos` por padrão. Para usar outro
-caminho, exporta a variável antes do sync:
+O exportador precisa de duas coisas que são só da sua máquina: o caminho do
+vault, que é privado, e `scripts/origem.py`, que **não é versionado**.
 
 ```bash
-CODERS_VAULT=/caminho/do/vault npm run sync
+LLM_NOTES_VAULT=/caminho/do/vault npm run sync
 ```
+
+Sem a variável o exportador aborta com erro, em vez de gerar um `content/`
+quase vazio sem avisar. Sem `scripts/origem.py` ele avisa o que está faltando.
+
+### Por que `origem.py` não está no git
+
+O repositório é público e o material de origem é privado. `origem.py` concentra
+tudo que descreve essa origem: os caminhos das pastas no vault, o que entra e o
+que sai, e o vocabulário que precisa ser removido do texto antes de publicar.
+
+Um filtro que remove um termo precisa conter o termo — se a regra ficasse em
+`exportar.py`, o próprio filtro publicaria o vocabulary que existe para apagar.
+Então `exportar.py` guarda só a parte limpa (layout do site, frontmatter, links,
+slugs) e importa o resto de `origem.py`.
+
+O arquivo está no seu `.gitignore`.
 
 ## O que entra no site
 
-Definido no topo de `scripts/exportar.py`, em `PUBLIC_DIRS` e `PUBLIC_FILES`.
+Definido em `scripts/origem.py`: `PUBLICA` e `PUBLICA_ARQUIVOS` para as pastas
+comuns, `NOTAS_PUBLICAS` para a seção `guias/`.
 
 ## O que não entra
 
 - `01 - Diário/`
-- Trabalhos e micro-capstones
-- Notas que reproduzem conteúdo da pós-graduação
-- O plano de leitura por módulo do curso
+- Trabalhos e entregáveis
+- Notas que reproduzem material de terceiros
+- Planejamentos de leitura
 - Qualquer arquivo com credencial ou dado pessoal
 
 Wikilinks para notas fora do site são convertidos em texto simples
-automaticamente, então não há link quebrado e o site não revela a estrutura do
-curso. Referências a aulas escritas em prosa ("ver aula 22") viram link para o
-conceito equivalente, que é o que o leitor do site precisa. O exportador reporta
-quantos fez isso a cada execução.
+automaticamente, então não há link quebrado e o site não expõe a estrutura de
+origem do material. Referências escritas em prosa viram link para a nota
+equivalente, que é o que o leitor do site precisa. O exportador reporta quantos
+fez isso a cada execução.
 
-Para incluir uma pasta nova no site, acrescente a `PUBLIC_DIRS` e confira a
-contagem de links convertidos no output. Se subir de repente, provavelmente
-alguma nota do curso entrou por engano.
+Para incluir uma pasta nova no site, acrescente a `PUBLICA` e confira a contagem
+de links convertidos no output. Se subir de repente, provavelmente alguma nota
+que não era pública entrou por engano.
 
 ## Onde a exclusão é decidida
 
-O `NEVER` no topo do exportador é o filtro mais forte: bloqueia por nome, mesmo
-que a pasta esteja na lista. `Índice de papers.md` está lá porque é o plano de
-leitura do curso — traz a trilha dos 12 módulos e o que cada um exige. É
-organização do curso, não conteúdo técnico.
+O `NUNCA` em `origem.py` é o filtro mais forte: bloqueia por nome, mesmo que a
+pasta esteja na lista. `Índice de papers.md` está lá porque é um plano de
+leitura, não conteúdo técnico: diz o que ler em cada etapa e o que cada uma exige.
+
+As notas numeradas entram por uma allowlist explícita, `NOTAS_PUBLICAS`, e é a
+fronteira de publicação mais sensível do site: ela lista **números**, não
+pastas, para que uma nota nova na pasta não entre sozinha. O que ficou de fora
+está comentado no arquivo, com o motivo.
 
 ## Banco de questões
 
 `quartz/static/dados/questions.json` é gerado a partir de dois bancos no vault,
 que usam formatos diferentes:
 
-- **M00** — lista numerada, com gabarito em tabela `| N | resposta |`.
-- **M01** — headings `### Qn · \`D\` · [[Aula ...]]`, com nível de dificuldade.
+- **lista numerada**, com gabarito em tabela `| N | resposta |`.
+- **headings** `### Qn · \`D\` · [[...]]`, com nível de dificuldade.
 
 O exportador detecta o formato pelo heading e normaliza para o mesmo JSON. Campos
-por questão: `id`, `modulo`, `numero`, `nivel`, `aula`, `enunciado`, `detalhes`,
-`resposta`, `origem`.
+por questão: `id`, `tema`, `numero`, `nivel`, `enunciado`, `detalhes`,
+`resposta`, `seq`. `fonte` e `origem` são lidos do vault e descartados na
+exportação: os dois identificam de onde o material veio, e o site não precisa
+mostrar isso. O campo `tema` guarda um rótulo neutro, suficiente para filtrar.
 
 A página `/questoes` faz `fetch()` desse arquivo. Como é estático, o gabarito
 está no próprio JSON e visível no devtools — isso é deliberado num site de

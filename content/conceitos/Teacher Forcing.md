@@ -45,7 +45,7 @@ Esse dessincronia é a razão pela qual o modelo pode gerar **um token por vez**
 
 ## Onde vi isso
 
-- Visto em:[[Self-Attention]]
+- Visto em: [[Como o modelo gera respostas, token a token]]
 
 ## Ver também
 

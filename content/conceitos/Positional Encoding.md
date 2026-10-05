@@ -39,7 +39,7 @@ O custo: extrapolação ainda não é perfeita — por isso existem ajustes de *
 
 ## Onde vi isso
 
-- Visto em:[[Transformer]]
+- Visto em: [[Transformers, de um jeito simples]]
 
 ## Ver também
 

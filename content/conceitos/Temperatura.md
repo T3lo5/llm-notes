@@ -44,7 +44,7 @@ $$p_i = \frac{e^{z_i/T}}{\sum_j e^{z_j/T}}$$
 
 ## Onde vi isso
 
-- Visto em:[[Temperatura]]
+- Visto em: [[Por que a resposta do modelo muda]]
 
 ## Ver também
 

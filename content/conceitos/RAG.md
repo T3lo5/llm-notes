@@ -15,15 +15,15 @@ date: "2026-10-01"
 
 ```mermaid
 flowchart LR
-    A[Corpus] --> B[Chunking]
-    B --> C[Embeddings]
-    C --> D[Índice vetorial]
-    Q[Query] --> E[Embedding]
-    E --> F[Busca híbrida<br/>BM25 + vetorial]
-    D --> F
-    F --> G[Reranking<br/>cross-encoder]
-    G --> H[Contexto no prompt]
-    H --> I[LLM]
+ A[Corpus] --> B[Chunking]
+ B --> C[Embeddings]
+ C --> D[Índice vetorial]
+ Q[Query] --> E[Embedding]
+ E --> F[Busca híbrida<br/>BM25 + vetorial]
+ D --> F
+ F --> G[Reranking<br/>cross-encoder]
+ G --> H[Contexto no prompt]
+ H --> I[LLM]
 ```
 
 ## Por que funciona
@@ -55,7 +55,7 @@ Porque separa **onde o conhecimento mora** de **como ele é usado**:
 | capacidade nova (cálculo, acesso a rede) | **ferramentas** |
 | conhecimento mutável e pessoal | memória externa / RAG |
 
-Usar fine-tuning para teachar fato é caro e desatualiza. Usar RAG para ensinar formato é desperdício de tokens.
+Usar fine-tuning para ensinar fato é caro e desatualiza. Usar RAG para ensinar formato é desperdício de tokens.
 
 ## Autoavaliação
 1. **P:** Por que RAG não altera os pesos? **R:** o mecanismo de atenção trata os tokens do contexto como parte da sequência, lendo-os na inferência. Nenhum gradiente é calculado.
@@ -63,7 +63,7 @@ Usar fine-tuning para teachar fato é caro e desatualiza. Usar RAG para ensinar 
 
 ## Onde vi isso
 
-- Visto em:16 - O que é um LLM de verdade,[[Embedding]]
+- Visto em: [[O que é um LLM, de verdade]], [[Embeddings: transformando texto em vetores]]
 
 ## Ver também
 

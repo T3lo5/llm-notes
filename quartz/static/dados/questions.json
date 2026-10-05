@@ -1,458 +1,458 @@
 {
-  "gerado_em": "2026-10-03T20:32:29+00:00",
-  "origem": "bancos de perguntas do vault de estudo",
+  "gerado_em": "2026-10-05T13:59:54+00:00",
+  "origem": "bancos de questões do vault de estudo",
   "total": 45,
   "com_resposta": 20,
   "questoes": [
     {
       "id": "qm0001",
-      "modulo": "fundamentos",
       "numero": 1,
       "nivel": "",
       "enunciado": "Qual a diferença entre IA, machine learning e LLM? Dê um exemplo de cada um.",
       "detalhes": [],
       "resposta": "",
-      "seq": 1
+      "seq": 1,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0002",
-      "modulo": "fundamentos",
       "numero": 2,
       "nivel": "",
       "enunciado": "Por que todo sistema de IA em produção é descrito como \"de escopo estreito\"?",
       "detalhes": [],
       "resposta": "",
-      "seq": 2
+      "seq": 2,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0003",
-      "modulo": "fundamentos",
       "numero": 3,
       "nivel": "",
       "enunciado": "Classifique em \"software tradicional\" ou \"IA\": validação de CPF, recomendação de filme, redação de e-mail, contador.",
       "detalhes": [],
       "resposta": "",
-      "seq": 3
+      "seq": 3,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0004",
-      "modulo": "fundamentos",
       "numero": 4,
       "nivel": "",
       "enunciado": "Por que um sistema determinístico é preferível quando o custo de um erro é alto?",
       "detalhes": [],
       "resposta": "",
-      "seq": 4
+      "seq": 4,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0005",
-      "modulo": "fundamentos",
       "numero": 5,
       "nivel": "",
       "enunciado": "O que um LLM **não** é? Liste cinco coisas.",
       "detalhes": [],
       "resposta": "",
-      "seq": 5
+      "seq": 5,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0006",
-      "modulo": "fundamentos",
       "numero": 6,
       "nivel": "",
       "enunciado": "Quais as quatro condições que um problema precisa ter para ser bom caso de uso de IA?",
       "detalhes": [],
       "resposta": "Volume alto, tarefa recorrente, entrada não estruturada, erro tolerável",
-      "seq": 6
+      "seq": 6,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0007",
-      "modulo": "fundamentos",
       "numero": 7,
       "nivel": "",
       "enunciado": "Por que \"entrada não estruturada\" é o denominador comum dos casos de uso?",
       "detalhes": [],
       "resposta": "",
-      "seq": 7
+      "seq": 7,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0008",
-      "modulo": "fundamentos",
       "numero": 8,
       "nivel": "",
       "enunciado": "Um processo com 500 documentos por mês e resultado crítico — passa na triagem? Justifique.",
       "detalhes": [],
       "resposta": "",
-      "seq": 8
+      "seq": 8,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0009",
-      "modulo": "fundamentos",
       "numero": 9,
       "nivel": "",
       "enunciado": "Cite um problema do seu trabalho que passa na triagem e um que não passa.",
       "detalhes": [],
       "resposta": "",
-      "seq": 9
+      "seq": 9,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0010",
-      "modulo": "fundamentos",
       "numero": 10,
       "nivel": "",
       "enunciado": "Por que a família \"buscar e responder\" tem tolerância a erro bem menor que as outras?",
       "detalhes": [],
       "resposta": "",
-      "seq": 10
+      "seq": 10,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0011",
-      "modulo": "fundamentos",
       "numero": 11,
       "nivel": "",
       "enunciado": "Quais são as seis razões para **não** usar IA? Cite duas com alternativa concreta.",
       "detalhes": [],
       "resposta": "",
-      "seq": 11
+      "seq": 11,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0012",
-      "modulo": "fundamentos",
       "numero": 12,
       "nivel": "",
       "enunciado": "O que é a \"regra das 90%\" e por que ela é uma boa diretriz?",
       "detalhes": [],
       "resposta": "",
-      "seq": 12
+      "seq": 12,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0013",
-      "modulo": "fundamentos",
       "numero": 13,
       "nivel": "",
       "enunciado": "Enumere as 8 perguntas do framework de decisão. Qual delas reprova mais projetos?",
       "detalhes": [],
       "resposta": "A pergunta 7 — \"como medir o antes e o depois\"",
-      "seq": 13
+      "seq": 13,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0014",
-      "modulo": "fundamentos",
       "numero": 14,
       "nivel": "",
       "enunciado": "O que é o **critério de abandono** e por que ele impede o piloto eterno?",
       "detalhes": [],
       "resposta": "",
-      "seq": 14
+      "seq": 14,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0015",
-      "modulo": "fundamentos",
       "numero": 15,
       "nivel": "",
       "enunciado": "Quando o erro é aceitável se há revisão humana antes de agir? E quando não é?",
       "detalhes": [],
       "resposta": "",
-      "seq": 15
+      "seq": 15,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0016",
-      "modulo": "fundamentos",
       "numero": 16,
       "nivel": "",
       "enunciado": "Quais as quatro alavancas de valor? Dê um exemplo de cada.",
       "detalhes": [],
       "resposta": "",
-      "seq": 16
+      "seq": 16,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0017",
-      "modulo": "fundamentos",
       "numero": 17,
       "nivel": "",
       "enunciado": "Escreva a fórmula do valor líquido e explique os dois termos.",
       "detalhes": [],
       "resposta": "`valor = (volume × ganho por unidade) − custo total`",
-      "seq": 17
+      "seq": 17,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0018",
-      "modulo": "fundamentos",
       "numero": 18,
       "nivel": "",
       "enunciado": "Por que supervisão humana costuma custar mais que a chamada ao modelo?",
       "detalhes": [],
       "resposta": "",
-      "seq": 18
+      "seq": 18,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0019",
-      "modulo": "fundamentos",
       "numero": 19,
       "nivel": "",
       "enunciado": "Diferencie ganho teórico, técnico e de negócio. Qual costuma ser confundido com os outros?",
       "detalhes": [],
       "resposta": "",
-      "seq": 19
+      "seq": 19,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0020",
-      "modulo": "fundamentos",
       "numero": 20,
       "nivel": "",
       "enunciado": "\"O sistema funciona e o número não mudou.\" Quais são as três causas prováveis?",
       "detalhes": [],
       "resposta": "",
-      "seq": 20
+      "seq": 20,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0021",
-      "modulo": "fundamentos",
       "numero": 21,
       "nivel": "",
       "enunciado": "Escreva o erro nº 1 na adoção de IA de forma precisa.",
       "detalhes": [],
       "resposta": "Escolher a tecnologia primeiro e procurar o problema depois",
-      "seq": 21
+      "seq": 21,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0022",
-      "modulo": "fundamentos",
       "numero": 22,
       "nivel": "",
       "enunciado": "Qual o sintoma, em uma frase, de um projeto que está na ordem errada?",
       "detalhes": [],
       "resposta": "",
-      "seq": 22
+      "seq": 22,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0023",
-      "modulo": "fundamentos",
       "numero": 23,
       "nivel": "",
       "enunciado": "Liste cinco antipadrões e o sintoma de cada um.",
       "detalhes": [],
       "resposta": "Piloto eterno, tecnologia primeiro, sem dono, mede o modelo, custo invisível",
-      "seq": 23
+      "seq": 23,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0024",
-      "modulo": "fundamentos",
       "numero": 24,
       "nivel": "",
       "enunciado": "Por que os antipadrões são falhas de gestão e não falhas de modelo?",
       "detalhes": [],
       "resposta": "",
-      "seq": 24
+      "seq": 24,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0025",
-      "modulo": "fundamentos",
       "numero": 25,
       "nivel": "",
       "enunciado": "Qual antipadrão é o mais difícil de detectar de dentro do projeto? Por quê?",
       "detalhes": [],
       "resposta": "",
-      "seq": 25
+      "seq": 25,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0026",
-      "modulo": "fundamentos",
       "numero": 26,
       "nivel": "",
       "enunciado": "Quais são as cinco seções do documento de decisão do documento de decisão?",
       "detalhes": [],
       "resposta": "",
-      "seq": 26
+      "seq": 26,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0027",
-      "modulo": "fundamentos",
       "numero": 27,
       "nivel": "",
       "enunciado": "Por que a linha de base precisa ser medida **antes**?",
       "detalhes": [],
       "resposta": "",
-      "seq": 27
+      "seq": 27,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0028",
-      "modulo": "fundamentos",
       "numero": 28,
       "nivel": "",
       "enunciado": "Quais são as três recomendações possíveis — e por que \"não construir\" é uma entrega válida?",
       "detalhes": [],
       "resposta": "",
-      "seq": 28
+      "seq": 28,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0029",
-      "modulo": "fundamentos",
       "numero": 29,
       "nivel": "",
       "enunciado": "O que diferencia um \"menor experimento\" de um MVP?",
       "detalhes": [],
       "resposta": "",
-      "seq": 29
+      "seq": 29,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0030",
-      "modulo": "fundamentos",
       "numero": 30,
       "nivel": "",
       "enunciado": "Por que a hipótese deve conter a métrica, o valor antes e o valor depois?",
       "detalhes": [],
       "resposta": "",
-      "seq": 30
+      "seq": 30,
+      "tema": "fundamentos"
     },
     {
       "id": "qm0101",
-      "modulo": "modelos de linguagem",
       "numero": 1,
       "nivel": "facil",
       "enunciado": "Descreva o pipeline de um LLM em uma frase, do texto à resposta.",
       "detalhes": [],
       "resposta": "Texto → tokenizer → tokens → embeddings → blocos Transformer (atenção causal + MLP) → logits → truncagem/temperatura → softmax → amostragem → repetição até condição de parada → detokenizador → texto. Os passos de embedding e transformer são paralelos; o de amostragem é sequencial.",
-      "seq": 31
+      "seq": 31,
+      "tema": "modelos de linguagem"
     },
     {
       "id": "qm0102",
-      "modulo": "modelos de linguagem",
       "numero": 2,
       "nivel": "facil",
       "enunciado": "Liste cinco coisas que um LLM **não** é, e explique por que cada uma.",
       "detalhes": [],
       "resposta": "1. Banco de dados — não há consulta; há transição estatística aprendida.\n2. Memória persistente — estado = pesos + janela de contexto.\n3. Verificador de verdade — o objetivo é plausibilidade, não veracidade.\n4. Simulador de mundo — raciocínio é padrão aprendido, não mecanismo garantido.\n5. Determinístico — a decodificação é estocástica (e há ainda variância numérica).",
-      "seq": 32
+      "seq": 32,
+      "tema": "modelos de linguagem"
     },
     {
       "id": "qm0103",
-      "modulo": "modelos de linguagem",
       "numero": 3,
       "nivel": "media",
       "enunciado": "Por que o histórico da conversa é cobrado como input a cada turno, e qual o impacto disso num agente de N turnos?",
       "detalhes": [],
       "resposta": "Protocolos de chat reenviam todo o histórico — incluindo respostas anteriores do modelo — como input a cada chamada, e todo input é cobrado. Como o histórico cresce, o total de tokens de entrada em N turnos é ~N(N+1)/2, isto é, **superlinear**. Mitigações: prompt caching, resumo do histórico, memória externa.",
-      "seq": 33
+      "seq": 33,
+      "tema": "modelos de linguagem"
     },
     {
       "id": "qm0104",
-      "modulo": "modelos de linguagem",
       "numero": 4,
       "nivel": "media",
       "enunciado": "Um sistema precisa achar o contrato \"8842-A\" e responder paráfrases como \"termo de rescisão\". Qual método para cada caso, e por quê?",
       "detalhes": [],
       "resposta": "- \"8842-A\": BM25. Identificadores alfanuméricos arbitrários são ruído semântico; embedding falha.\n- \"termo de rescisão\": embedding. Paráfrase sem sobreposição é falha **estrutural** do BM25.\nConclusão: os erros são estruturalmente opostos → **busca híbrida**.",
-      "seq": 34
+      "seq": 34,
+      "tema": "modelos de linguagem"
     },
     {
       "id": "qm0105",
-      "modulo": "modelos de linguagem",
       "numero": 5,
       "nivel": "media",
       "enunciado": "O que acontece com a loss de um decoder-only se a máscara causal for removida?",
       "detalhes": [],
       "resposta": "Cai para quase zero: o modelo passa a enxergar o token alvo ao prevê-lo, e o alvo vira cópia da entrada. O gradiente flui, mas nada é aprendido — o modelo degenera em *copy* das últimas posições. A máscara causal é o que torna o treino autoregressivo válido.",
-      "seq": 35
+      "seq": 35,
+      "tema": "modelos de linguagem"
     },
     {
       "id": "qm0106",
-      "modulo": "modelos de linguagem",
       "numero": 6,
       "nivel": "dificil",
       "enunciado": "Num contexto de 1M de tokens, GQA e FlashAttention resolvem o problema? Separe o que é complexidade e o que é constante.",
       "detalhes": [],
       "resposta": "Não. **GQA** reduz o número de cabeças K/V → encolhe o KV cache → melhora o decode (constante). **FlashAttention** faz tiling e é IO-aware, mantendo a atenção **exata** (constante). As duas compram fatores, e fatores se esgotam: a atenção continua O(n²). Só uma mudança de complexidade — sliding window, atenção linear ou Mamba (SSM seletivo, linear) — altera o regime.",
-      "seq": 36
+      "seq": 36,
+      "tema": "modelos de linguagem"
     },
     {
       "id": "qm0107",
-      "modulo": "modelos de linguagem",
       "numero": 7,
       "nivel": "media",
       "enunciado": "Você fixa `temperature=0` e `seed=7`, envia o mesmo prompt duas vezes, e as respostas divergem na terceira frase. Cite duas causas tecnicamente distintas e diga o que observaria em `system_fingerprint`.",
       "detalhes": [],
       "resposta": "1. **Paramétrica/configurativa** — algum parâmetro efetivo mudou (truncamento, `max_tokens`, versão do modelo).\n2. **Numérica** — pipeline não reprodutível bit a bit: batching mudou a ordem das reduções em ponto flutuante, ou kernels usam `atomicAdd` com ordem arbitrária. Como a soma não é associativa, logits variam em ~1e-7, o que basta para inverter o `argmax` num topo empatado.\n`system_fingerprint` **igual** + saídas diferentes ⇒ causa numérica. **Diferente** ⇒ o provedor mudou o backend.",
-      "seq": 37
+      "seq": 37,
+      "tema": "modelos de linguagem"
     },
     {
       "id": "qm0108",
-      "modulo": "modelos de linguagem",
       "numero": 8,
       "nivel": "media",
       "enunciado": "Top-k com k fixo e top-p: qual é a diferença estrutural e por que top-p virou o padrão?",
       "detalhes": [],
       "resposta": "Top-k mantém sempre exatamente k candidatos, independentemente da confiança do modelo — ruim quando a distribuição é plana (corta demais) ou afiada (mantém candidatos inúteis). Top-p mantém o menor conjunto cuja massa acumulada atinge p, então o tamanho **adapta-se** à confiança. Daí ser o padrão.",
-      "seq": 38
+      "seq": 38,
+      "tema": "modelos de linguagem"
     },
     {
       "id": "qm0109",
-      "modulo": "modelos de linguagem",
       "numero": 9,
       "nivel": "media",
       "enunciado": "Contexto 32k, resposta 500 tokens, prefill 3 s, decode 80 tokens/s. (a) O que domina a latência percebida? (b) E ao dobrar o batch?",
       "detalhes": [],
       "resposta": "(a) As duas, em regiões distintas: TTFT de 3 s vem do prefill (limitado por **cálculo**, atenção O(T²)); os 80 tok/s vêm do decode (limitado por **banda de memória**). Se a resposta for curta, prefill domina; se longa, decode.\n(b) TTFT tende a **subir** (mais sequências competem, mais padding), throughput agregado **sobe bastante** (o custo de memória por passo é compartilhado). Compromisso clássico latência × vazão.",
-      "seq": 39
+      "seq": 39,
+      "tema": "modelos de linguagem"
     },
     {
       "id": "qm0110",
-      "modulo": "modelos de linguagem",
       "numero": 10,
       "nivel": "dificil",
       "enunciado": "Structured output e \"responda em JSON\": qual garante validade, e por quê a diferença importa?",
       "detalhes": [],
       "resposta": "**Structured output** garante. A cada passo, os logits são mascarados para permitir apenas tokens válidos segundo o JSON Schema — o modelo nunca tem chance de emitir algo inválido. É **garantia por construção**, não disciplina. \"Responda em JSON\" é um pedido, com taxa de falha residual. Para pipelines que quebram com JSON malformado, a diferença é entre o sistema funcionar ou não.",
-      "seq": 40
+      "seq": 40,
+      "tema": "modelos de linguagem"
     },
     {
       "id": "qm0111",
-      "modulo": "modelos de linguagem",
       "numero": 11,
       "nivel": "media",
       "enunciado": "O que o KV cache armazena, e por que o decode é limitado por memória e não por FLOPs?",
       "detalhes": [],
       "resposta": "Armazena as projeções de chave e valor de todos os tokens anteriores, em cada camada. Tamanho ∝ 2·camadas·cabeçasKV·d_cabeça·T. No decode, cada passo gera **um** token, mas precisa ler **todos** os pesos do modelo (bilhões de parâmetros) e todo o KV cache. Como a quantidade de dados lidos é enorme e a aritmética é mínima, o gargalo é **banda de memória** — daí GQA e quantização do cache acelerarem tanto.",
-      "seq": 41
+      "seq": 41,
+      "tema": "modelos de linguagem"
     },
     {
       "id": "qm0112",
-      "modulo": "modelos de linguagem",
       "numero": 12,
       "nivel": "media",
       "enunciado": "Você monta um prompt de RAG com 20 passagens e a pergunta no final. Como reestruturar, e por que a pergunta no meio não é necessariamente melhor?",
       "detalhes": [],
       "resposta": "Coloque a **evidência mais relevante no início ou no fim** — nunca no meio. Isso explora primacy bias e recency bias e evita o *lost in the middle*, cuja curva em U mostra que a informação no meio pode performar **abaixo** do closed-book (sem documento nenhum). A pergunta no meio sofre do mesmo efeito, e quebrar o contexto em segmentos empurra as passagens para posições piores. Tudo isso é propriedade do modelo e do tamanho do contexto: **meça**.",
-      "seq": 42
+      "seq": 42,
+      "tema": "modelos de linguagem"
     },
     {
       "id": "qm0113",
-      "modulo": "modelos de linguagem",
       "numero": 13,
       "nivel": "dificil",
       "enunciado": "Um prompt novo melhorou em 8 de 10 casos de teste. O que você precisa checar antes de colocar em produção?",
       "detalhes": [],
       "resposta": "1. **Os 2 casos que pioraram** — e se um deles é um caso crítico?\n2. **Variância** — 10 casos é pouco. Rodar de novo dá o mesmo resultado? (Lembre: a fonte numérica.)\n3. **Generalização** — os casos são representativos do tráfego real, ou foram escolhidos para o prompt?\n4. **Custo e latência** — o prompt novo é maior? tokens e ms por chamada.\n5. **Reprodutibilidade** — mesmo modelo, `seed` fixa, `system_fingerprint` registrado.\n6. **Regressão** — o prompt antigo ainda está no git? Dá para reverter?\n7. **Segurança** — a mudança abriu brecha de injeção?",
-      "seq": 43
+      "seq": 43,
+      "tema": "modelos de linguagem"
     },
     {
       "id": "qm0114",
-      "modulo": "modelos de linguagem",
       "numero": 14,
       "nivel": "media",
       "enunciado": "Por que \"IMPORTANTE: siga as instruções do sistema\" no topo não resolve prompt injection?",
       "detalhes": [],
       "resposta": "Porque um aviso em linguagem natural é apenas mais um pedaço de texto competindo com o texto do atacante, no mesmo nível. A defesa estrutural é (1) **hierarquia de privilégio** — system/developer acima de user, conforme Instruction Hierarchy e Model Spec; (2) entrada externa **marcada como dado** (tags, canal de tool result), nunca como prompt; (3) **validar a saída** antes de executá-la; (4) privilégio mínimo. A validação de saída é a mais importante porque não depende de o modelo obedecer.",
-      "seq": 44
+      "seq": 44,
+      "tema": "modelos de linguagem"
     },
     {
       "id": "qm0115",
-      "modulo": "modelos de linguagem",
       "numero": 15,
       "nivel": "dificil",
       "enunciado": "Quando usar RAG, quando usar fine-tuning, e quando usar ferramentas? Justifique.",
       "detalhes": [],
       "resposta": "- **RAG** — conhecimento factual novo/atualizado, que precisa ser citado e atualizado sem re-treinar. Custo: tokens de entrada por consulta.\n- **Fine-tuning** — tom, formato e estrutura estáveis, ou tarefa nova com muitos exemplos rotulados. **Não** para ensinar fatos: é caro, desatualiza, e não dá citação.\n- **Ferramentas** — capacidade nova: cálculo, acesso a rede, execução de código. Torna a resposta verificável.\nA regra: escolha pela **natureza da necessidade** (fato / formato / capacidade), não pela moda.",
-      "seq": 45
+      "seq": 45,
+      "tema": "modelos de linguagem"
     }
   ]
 }

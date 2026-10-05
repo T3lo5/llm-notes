@@ -101,7 +101,7 @@ Não use conhecimento externo. Não faça suposições.
 </system>
 
 <context>
-[doc-7] {chunk mais relevante}      <-- ponta superior
+[doc-7] {chunk mais relevante} <-- ponta superior
 [doc-2] {segundo chunk}
 ...
 [doc-5] {último chunk}
@@ -160,7 +160,7 @@ Checklist de revisão de prompt:
 
 ## Ver também
 
--[[Janela de Contexto]] · [[Lost in the Middle]] · [[RAG]] · [[Prompt Injection]]
+- [[Sensibilidade de prompt: ordem importa]] · [[Lost in the Middle]] · [[RAG]] · [[Prompt Injection]]
 
 ---
 *Atualizado em 2026-09-30*

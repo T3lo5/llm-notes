@@ -9,7 +9,7 @@ date: "2026-11-04"
 
 # Paper — Mamba: Linear-Time Sequence Modeling with Selective State Spaces
 
-> **Por que estou lendo isso:** porque é a pergunta mais relevante sobre o futuro do Transformer, e a[[Transformer]] termina apontando pra cá.
+> **Por que estou lendo isso:** porque é a pergunta mais relevante sobre o futuro do Transformer, e a[[Transformers, de um jeito simples]] termina apontando pra cá.
 
 ## Ficha
 

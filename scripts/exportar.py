@@ -8,11 +8,14 @@ Gera:
   quartz/static/dados/questions.json   banco de questoes servido via fetch()
   content/questoes.md                   pagina do quiz, vinda de templates/
 
-Fonte:  o vault Obsidian, configurado em VAULT (ou a variavel CODERS_VAULT)
+Fonte:  o vault Obsidian, configurado em LLM_NOTES_VAULT
 Destino: a raiz deste repositorio (ou a variavel LLM_NOTES_DIR)
 
-Regra de inclusao: so entram arquivos com `publicar: true` no frontmatter,
-ou que estejam nas pastas listadas em PUBLIC_DIRS.
+Este arquivo e a parte limpa: layout do site, frontmatter, links, slugs. Tudo
+que descreve a origem do material -- caminhos do vault, o que entra, o
+vocabulario a remover -- vem de `scripts/origem.py`, que NAO e versionado,
+porque o repositorio e publico e o material de origem e privado. Um filtro que
+remove um termo precisa conter o termo; por isso essa parte mora fora do git.
 
 O vault e privado e nao entra no repositorio. A exportacao roda so na sua
 maquina; o CI apenas executa `npx quartz build` sobre o `content/` versionado.
@@ -26,70 +29,67 @@ import sys
 import unicodedata
 from datetime import datetime, timezone
 
+try:
+    from origem import (
+        NOTAS_PUBLICAS,
+        BANCOS,
+        NOTA_EQUIVALENTE,
+        NUNCA,
+        PASTA_AULAS,
+        PASTAS_SITE,
+        PUBLICA,
+        PUBLICA_ARQUIVOS,
+        RE_ALVO_NUMERADO,
+        RE_CODIGO_NO_TITULO,
+        RE_ITEM_NUMERADO,
+        RE_NUMERO_ARQUIVO,
+        RE_NUMERO_H1,
+        RE_PREFIXO,
+        RE_PROVENIENCIA,
+        RE_REFERENCIA_NUMERADA,
+        RE_RODAPE,
+        REGRAS_AVALIACAO,
+        REGRAS_PROSA,
+        REGRAS_TITULO,
+        ROTULOS_TEMA,
+        TAGS_DESCARTADAS,
+        TERMOS_ENUNCIADO,
+        TIPOS,
+        VAZAMENTOS,
+        achatar_nome,
+    )
+except ImportError:
+    print(
+        "erro: scripts/origem.py nao encontrado.\n"
+        "      Ele guarda os caminhos do vault e o vocabulario que o\n"
+        "      exportador remove, e nao e versionado. See README.",
+        file=sys.stderr,
+    )
+    sys.exit(1)
+
 SITE = os.environ.get("LLM_NOTES_DIR") or os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))
 )
-VAULT = os.environ.get("CODERS_VAULT") or os.path.expanduser(
-    "~/Documentos/coders-pos/coders-pos"
-)
+# Sem caminho padrao: o vault e privado e o caminho dele e configuracao local
+# de cada maquina. Fixar um valor aqui publicaria esse caminho no repo. Sem a
+# variavel o exportador aborta, em vez de gerar um content/ quase vazio sem
+# avisar.
+VAULT = os.environ.get("LLM_NOTES_VAULT")
 CONTENT = os.path.join(SITE, "content")
 # quartz/static/** e copiado para public/static/** pelo build, entao o JSON
 # fica acessivel por fetch() sem depender do roteamento de paginas.
 STATIC_DATA = os.path.join(SITE, "quartz", "static", "dados")
 TEMPLATES = os.path.join(SITE, "templates")
 
-M01 = "02 - Módulos/M01 - Funcionamento de Modelos de Linguagem"
-
 # Preenchido em main() com as notas que foram exportadas, para que o
 # reescritor de referencias saiba o que virou link e o que virou texto.
 pares_global = []
 
-# Pastas que entram no site, sem filtro de frontmatter.
-# Contexto de conteúdo: LLMs e engenharia. Fora: curso, diário, trabalhos.
-PUBLIC_DIRS = [
-    f"{M01}/02 Conceitos",
-    f"{M01}/03 Pesquisas",
-    f"{M01}/04 Labs",
-    "03 - Acervo",
-]
-
-# Arquivos publicados mesmo fora dessas pastas.
-PUBLIC_FILES = [
-    f"{M01}/07 Mapas/Mapa - Funcionamento de LLMs.md",
-]
-
-# Nunca publicar, mesmo dentro de PUBLIC_DIRS.
-NEVER = {
-    "Como ler um paper.md",   # metodo pessoal, nao conteudo
-    # O indice de papers e o plano de leitura do curso: traz a trilha dos 12
-    # modulos e o que cada um exige. E conteudo do curso, nao conteudo tecnico.
-    "Índice de papers.md",
-}
-
-# Pasta do site para cada pasta do vault. O valor e (slug, titulo, descricao):
-# o slug vira o caminho, o titulo e a descricao viram o index da pasta.
-PASTAS_SITE = {
-    f"{M01}/02 Conceitos": (
-        "conceitos",
-        "Conceitos",
-        "Uma ficha por termo. O que é, por que importa e onde costuma ser mal entendido.",
-    ),
-    f"{M01}/03 Pesquisas": (
-        "pesquisas",
-        "Pesquisas",
-        "Aprofundamentos com fonte primária: o que um paper resolveu, e o que é só otimização de constante.",
-    ),
-    f"{M01}/04 Labs": (
-        "labs",
-        "Labs",
-        "Experimentos com código que testam uma hipótese. Cada lab diz o que ele prova e onde falha.",
-    ),
-    "03 - Acervo": (
-        "papers",
-        "Papers",
-        "Resumos dos papers que sustentam as fichas de conceito, com o resultado principal de cada um.",
-    ),
-}
+# As notas numeradas viram a secao "Guias": o mesmo conteudo, sem a numeracao e
+# sem qualquer palavra que nomeie a origem. Fica em pasta propria porque o
+# titulo publico perde o prefixo numerado, e o link entre guias precisa resolver
+# para o titulo novo, nao para o nome do arquivo no vault.
+PASTA_GUIAS = ("guias", "Guias", "Temas escritos em prosa, do enquadramento à mecânica.")
 
 # Título e descrição do índice de cada pasta, injetados na build.
 INDICES_PASTA = {}
@@ -139,14 +139,16 @@ def normalizar_frontmatter(caminho_rel, dados):
     if isinstance(tags, str):
         tags = [tags]
     tags = [str(t).strip() for t in tags if str(t).strip()]
-    # Tags de modulo (m01, pos) e a tag generica do curso nao descrevem o
-    # conteudo tecnico e expoem a estrutura da turma. Fica so o que a nota e.
-    tags = [
-        t for t in tags
-        if not re.fullmatch(r"(m\d+|pos|modulo|módulo)", t, re.I)
-    ]
+    # Tags que descrevem a origem nao descrevem o conteudo tecnico. Fica so o
+    # que a nota e.
+    tags = [t for t in tags if not TAGS_DESCARTADAS.fullmatch(t)]
 
-    tipo = dados.get("tipo", "conceito")
+    # O `tipo` do vault nomeia a origem da nota; o publico nao. Sem essa troca
+    # o painel de propriedades entrega de onde ela veio, mesmo com o titulo
+    # ja limpo.
+    tipo = TIPOS.get(
+        str(dados.get("tipo", "")).strip().lower(), dados.get("tipo", "conceito")
+    )
 
     # o title do frontmatter vence o nome do arquivo, para os templates
     # (index, questoes) poderem ter um titulo propio
@@ -200,10 +202,10 @@ def gabarito_de_tabela(corpo):
     return mapa
 
 
-def questoes_formato_heading(texto, modulo, origem):
+def questoes_formato_heading(texto, banco, origem):
     """
-    Formato do M01: heading '### Qn · `D` · [[Aula ...]]' seguido da
-    pergunta em prosa.
+    Formato com heading: '### Qn · `D` · [[fonte]]' seguido da pergunta em
+    prosa.
 
     O gabarito vem num <details><summary>Gabarito</summary>. Ele e extraido
     para o campo `resposta` — deixar no corpo faria o gabarito aparecer
@@ -221,7 +223,7 @@ def questoes_formato_heading(texto, modulo, origem):
 
         num = int(m.group(1))
         nivel = {"F": "facil", "M": "media", "D": "dificil"}[m.group(2)]
-        aula = m.group(3).strip()
+        fonte = m.group(3).strip()
         i += 1
 
         # enunciado: paragrafos ate a proxima heading Q ou de secao.
@@ -243,11 +245,11 @@ def questoes_formato_heading(texto, modulo, origem):
         enunciado = limpar_enunciado(corpo_limpo)
 
         questoes.append({
-            "id": f"q{modulo}{num:02d}",
-            "modulo": modulo,
+            "id": f"q{banco}{num:02d}",
+            "banco": banco,
             "numero": num,
             "nivel": nivel,
-            "aula": aula,
+            "fonte": fonte,
             "enunciado": enunciado,
             "detalhes": extras_da_pergunta(corpo_limpo, enunciado),
             "resposta": resposta,
@@ -320,8 +322,8 @@ def extras_da_pergunta(corpo, enunciado_limpo):
     return extras
 
 
-def questoes_formato_numerada(corpo, modulo, origem):
-    """Formato do M00: lista '1. pergunta' com continuacoes indentadas."""
+def questoes_formato_numerada(corpo, banco, origem):
+    """Lista '1. pergunta' com continuacoes indentadas."""
     gabarito = gabarito_de_tabela(corpo)
     linhas = corpo.split("\n")
     questoes = []
@@ -353,11 +355,11 @@ def questoes_formato_numerada(corpo, modulo, origem):
             i += 1
 
         questoes.append({
-            "id": f"q{modulo}{num:02d}",
-            "modulo": modulo,
+            "id": f"q{banco}{num:02d}",
+            "banco": banco,
             "numero": num,
             "nivel": "",
-            "aula": "",
+            "fonte": "",
             "enunciado": enunciado,
             "detalhes": extras,
             "resposta": gabarito.get(num, ""),
@@ -368,14 +370,9 @@ def questoes_formato_numerada(corpo, modulo, origem):
 
 
 def extrair_questoes():
-    """Exporta os dois bancos. M01 usa headings Qn; M00 usa lista numerada."""
-    caminhos = [
-        ("02 - Módulos/M00 - Fundamentos da IA Moderna/05 Perguntas/Banco de perguntas - M00.md", "m00"),
-        (f"{M01}/05 Perguntas/Banco de perguntas - M01.md", "m01"),
-    ]
-
+    """Exporta os bancos. Cada um usa um formato; ver `origem.BANCOS`."""
     todas = []
-    for caminho, modulo in caminhos:
+    for caminho, banco in BANCOS:
         full = os.path.join(VAULT, caminho)
         if not os.path.exists(full):
             print(f"  aviso: banco nao encontrado -> {caminho}", file=sys.stderr)
@@ -385,9 +382,9 @@ def extrair_questoes():
         dados, corpo = ler_frontmatter(texto)
         origem = os.path.splitext(os.path.basename(caminho))[0]
 
-        qs = questoes_formato_heading(corpo, modulo, origem)
+        qs = questoes_formato_heading(corpo, banco, origem)
         if not qs:
-            qs = questoes_formato_numerada(corpo, modulo, origem)
+            qs = questoes_formato_numerada(corpo, banco, origem)
 
         todas.extend(qs)
 
@@ -399,20 +396,7 @@ def extrair_questoes():
 
 
 # Termos que so aparecem em rodape de navegacao do Obsidian ou em prosa
-# interna do curso. Se sobrar um deles, o exportador corta a linha em vez de
-# publicar referencia a material que nao vai para o site.
-VAZAMENTOS = (
-    "00 - Painel",
-    "Revisão espaçada",
-    "Roadmap da Pós",
-    "Glossário da Pós",
-    "micro-capstone",
-    "Micro-Capstone",
-    "caders",
-    "01 - Diário",
-)
-
-
+# interna estao em `origem.VAZAMENTOS`.
 def limpar_checkboxes_vazios(corpo):
     """
     Checkbox sem rotulo nao serve para nada num site: e um "[ ]" vazio que
@@ -470,40 +454,8 @@ def limpar_rodape(corpo):
     return "\n".join(saida)
 
 
-# Titulo de secao que pressupoe um conteudo que o site nao tem (modulo,
-# disciplina). Sem isso, "as perguntas que um modulo deve responder" entrega
-# que existe uma Estrutura de curso por tras.
-# Titulo de secao que pressupoe um conteudo que o site nao tem (modulo,
-    # disciplina). Sem isso, "as perguntas que um modulo deve responder" entrega
-    # que existe uma estrutura de curso por tras.
-    #
-    # A secao "Lacunas" e um worksheet pessoal: checkboxes vazios para o autor
-    # preencher. Nao ha como preencher num site, entao a secao inteira sai em
-    # vez de virar "[ ] [ ]".
-    FORCA_NEUTRA = [
-        (r"^(\#{2,4}\s*)As \d+ perguntas que um m[oó]dulo de LLM deve responder",
-         r"\g<1>As perguntas que este site tenta responder"),
-        (r"^(\#{2,4}\s*)Lab para esperar", r"\g<1>Labs disponíveis"),
-    ]
-
-    # secao de worksheet: remove o titulo e tudo ate o proximo titulo
-    m = re.search(
-        r"\n##\s*Lacunas do mapa.*?(?=\n##\s|\n```|\Z)", corpo, re.S
-    )
-    if m:
-        corpo = corpo[: m.start()] + "\n" + corpo[m.end():]
-
-
-# Titulo de secao que pressupoe um conteudo que o site nao tem (modulo,
-# disciplina). Sem isso, "as perguntas que um modulo deve responder" entrega
-# que existe uma estrutura de curso por tras.
-FORCA_NEUTRA = [
-    (r"^(\#{2,4}\s*)As \d+ perguntas que um m[oó]dulo de LLM deve responder",
-     r"\g<1>As perguntas que este site tenta responder"),
-    (r"^(\#{2,4}\s*)Lab para esperar", r"\g<1>Labs disponíveis"),
-]
-
-
+# Titulos que pressupoeem uma estrutura que o site nao tem estao em
+# `origem.REGRAS_TITULO`.
 def ajustar_contagens(corpo):
     """
     O mapa diz "Conceitos-chave (18 fichas)", mas o bloco lista 20. Numero
@@ -534,16 +486,14 @@ def ajustar_contagens(corpo):
 
 def neutralizar_titulos(corpo):
     """
-    Troca titulos que entregam a estrutura do curso por equivalentes neutros.
-
-    "As 6 perguntas que um modulo de LLM deve responder" diz que existe um
-    modulo; no site, a pergunta e sobre o que o site cobre.
+    Troca por equivalentes neutros os titulos que entregam a estrutura de
+    origem. As regras estao em `origem.REGRAS_TITULO`.
 
     A secao "Lacunas do mapa" e worksheet pessoal — checkboxes vazios para o
-    autor preencher. Nao ha como preencher num site, entao a secao inteira sai
-    em vez de virar "[ ] [ ]".
+    autor preencher. Nao ha como preencher num site, entao a secao inteira sai em
+    vez de virar "[ ] [ ]".
     """
-    for padrao, troca in FORCA_NEUTRA:
+    for padrao, troca in REGRAS_TITULO:
         corpo = re.sub(padrao, troca, corpo, flags=re.M)
 
     m = re.search(r"\n##\s*Lacunas do mapa.*?(?=\n##\s|\n```|\Z)", corpo, re.S)
@@ -553,76 +503,69 @@ def neutralizar_titulos(corpo):
     return ajustar_contagens(corpo)
 
 
-def limpar_referencias_de_aula(corpo):
+def numeros_publicados(renomeia):
+    """Nome de arquivo no vault -> numero: {17: 'Tokens e por que eles custam'}."""
+    numeros = {}
+    for stem, titulo in renomeia.items():
+        m = RE_NUMERO_ARQUIVO.match(stem)
+        if m:
+            numeros[int(m.group(1))] = titulo
+    return numeros
+
+
+def resolver_referencias(corpo, por_numero):
     """
-    Troca referencias a aula por links para o conceito equivalente.
-    "ver aula 22" e "aula 17" existiam porque o numero identifica a fonte. Num
-    site publico o numero nao diz nada, e a coluna fica com um "aula" solto. O
-    leitor precisa do link para o conceito, que ja existe no site.
+    Troca referencias a uma nota numerada por link para a nota que cobre o
+    mesmo assunto.
+
+    "ver a nota 22" e "nota 17" existiam porque o numero identifica a fonte. Num
+    site publico o numero nao diz nada, e a coluna fica com a palavra solta. O
+    leitor precisa do link, que ja existe no site.
+
+    A prioridade e o guia: se a nota virou guia, o link vai para o guia, pelo
+    titulo publico. So as que nao viraram guia caem em `origem.NOTA_EQUIVALENTE`,
+    e ainda assim apenas quando o conceito existe no site.
     """
-    mapa = {
-        15: "Aula 15 - Boas-vindas - Como funcionam os LLMs",
-        16: "Aula 16 - O que é um LLM de verdade",
-        17: "Token",
-        18: "Embedding",
-        19: "Transformer",
-        20: "Temperatura",
-        21: "Logits",
-        22: "Prefill",
-        23: "Self-Attention",
-        24: "Janela de Contexto",
-        25: "Top-p Sampling",
-        26: "Fine-tuning",
-        27: "Modelo Base",
-    }
     publicados = {p[4] for p in pares_global}
 
     def sub(m):
         n = int(m.group(2))
-        alvo = mapa.get(n)
-        if not alvo:
+        if n in por_numero:
+            return f"[[{por_numero[n]}]]"
+        alvo = NOTA_EQUIVALENTE.get(n, "")
+        if not alvo or alvo not in publicados:
             return ""
-        if alvo in publicados:
-            return f"[[{alvo}]]"
-        return alvo.replace("Aula ", "")
+        return f"[[{alvo}]]"
 
-    # "com parêntese: (ver aula 22)", "(aula 21)"
-    corpo = re.sub(r"\(?\s*(?:ver\s+)?([Aa]ula)s?\s+(\d+)\)?", sub, corpo)
+    # "com parêntese: (ver nota 22)", "(nota 21)"
+    corpo = re.sub(RE_REFERENCIA_NUMERADA, sub, corpo)
 
     # Nao colapsa espacos: a indentacao carrega significado em mermaid
     # (mindmap depende dela para montar a hierarquia) e em listas de codigo.
     return corpo
 
 
-# "Perguntas de prova" e "Autoavaliacao" nomeiam a avaliacao do curso. O
-# conteudo (pergunta e resposta) e autoral e util; so o rotulo entrega de
-# onde vem. Vira "Autoavaliacao" em todos os casos.
+# Rotulos que nomeiam a avaliacao de origem. O conteudo (pergunta e resposta) e
+# autoral e util; so o rotulo entrega de onde vem. Padroes e trocas em
+# `origem.REGRAS_AVALIACAO`.
 def neutralizar_rotulo_de_avaliacao(corpo):
-    corpo = re.sub(
-        r"^(\#{2,4})\s*(?:Perguntas de prova|Prova|Autoavaliação|Autoavaliacao)\s*$",
-        r"\1 Autoavaliação",
-        corpo,
-        flags=re.M | re.I,
-    )
-    # "nesta trilha", "o modulo 01 descreve": a estrutura do curso aparecia
-    # no rotulo. O conteudo nao muda, so o nome do recorte.
-    corpo = re.sub(r"\bnesta trilha\b", "neste mapa", corpo, flags=re.I)
-    corpo = re.sub(r"\bo m[oó]dulo \d{2}\b", "o mapa", corpo, flags=re.I)
-    corpo = re.sub(r"\bperguntas de prova\b", "perguntas de avaliação", corpo, flags=re.I)
+    for padrao, troca in REGRAS_AVALIACAO:
+        flags = re.M | re.I if padrao.startswith("^") else re.I
+        corpo = re.sub(padrao, troca, corpo, flags=flags)
     return corpo
 
 
 def cortar_vazamento(corpo):
-    """Ultimo recurso: remove linhas que ainda citam material do curso."""
+    """Ultimo recurso: remove linhas que ainda citam material de origem."""
     linhas = []
     for l in corpo.split("\n"):
         if any(t in l for t in VAZAMENTOS):
             continue
-        # Bloco "Onde isso conecta" nos papers: a linha "- Aula:16 - ..." vira
-        # "- Aula: ..." depois que o wikilink e resolvido, e o numero solto
+        # Secao "Onde isso conecta" nos papers: a linha "- Nota:16 - ..." vira
+        # "- Nota: ..." depois que o wikilink e resolvido, e o numero solto
         # identifica a fonte. A linha seguinte (a pesquisa) ja cobre o
         # mesmo papel, entao a entrada inteira sai.
-        if re.match(r"^\s*[-*]?\s*Aula\s*:\s*", l, re.I):
+        if RE_ITEM_NUMERADO.match(l):
             continue
         linhas.append(l)
     return "\n".join(linhas)
@@ -717,8 +660,140 @@ def slug(texto):
     return texto or "nota"
 
 
+# --------------------------------------------------------------- guias
+# O aviso que abre a nota dizendo de onde ela saiu, e o rodape de data, estao
+# em `origem.RE_PROVENIENCIA` e `origem.RE_RODAPE`. O aviso sai inteiro, nao por
+# substituicao: reescrever deixaria a frase no lugar-comando, apontando para
+# algo que nao existe no site.
+def limpar_proveniencia(corpo):
+    """Remove o aviso de origem da nota e o rodape de data."""
+    linhas, saida, i = corpo.split("\n"), [], 0
+
+    while i < len(linhas):
+        l = linhas[i]
+        if RE_PROVENIENCIA.match(l):
+            while i < len(linhas) and linhas[i].startswith(">"):
+                i += 1
+            continue
+        if RE_RODAPE.match(l):
+            i += 1
+            continue
+        saida.append(l)
+        i += 1
+
+    saida = "\n".join(saida)
+    # o separador `---` que antecedia o rodape fica orfao no fim do arquivo
+    saida = re.sub(r"\n+---\s*\Z", "", saida)
+    return saida.rstrip() + "\n"
+
+
+def aplicar_regras_de_prosa(corpo):
+    """Remove da prosa o vocabulario de origem. Padroes em `origem.REGRAS_PROSA`."""
+    for padrao, troca in REGRAS_PROSA:
+        corpo = re.sub(padrao, troca, corpo, flags=re.M)
+    # as regras removem palavras e deixam espacos duplos onde havia frase
+    return re.sub(r"[ \t]{2,}", " ", corpo)
+
+
+def titulo_publico(corpo, stem):
+    """
+    Descobre o titulo publico da nota: o H1 sem o prefixo numerado.
+
+    O H1 e a fonte preferida porque traz a acentuacao e a pontuacao que o
+    nome do arquivo perdeu (o vault grava "O que e e nao e inteligencia
+    artificial", o H1 traz "O que é (e o que não é) inteligência artificial").
+    Sem H1, cai no nome do arquivo, tambem sem o prefixo. Padroes em
+    `origem.RE_NUMERO_H1` e `origem.RE_PREFIXO`.
+    """
+    m = RE_NUMERO_H1.search(corpo)
+    if m and m.group(1).strip():
+        return m.group(1).strip()
+    return RE_PREFIXO.sub("", stem).strip() or stem
+
+
+def reescrever_links_de_origem(corpo, renomeia):
+    """
+    Troca [[<nota numerada> - Tokens e por que eles custam]] por
+    [[Tokens e por que eles custam]] quando a nota virou guia.
+
+    Precisa rodar antes do `resolver`. Depois dele o wikilink ja virou texto
+    solto e o resto do nome fica orfao na frase, do tipo "nota 17
+    - Tokens e por que eles custam". Aqui o nome inteiro e resolvido de uma vez.
+
+    Wiki que aponta para nota que NAO virou guia fica como estava: o
+    `resolver` escolhe entre texto e conceito, como antes. Alias, secao e
+    bloco sao preservados, porque o nome so e substituido no comeco.
+    """
+
+    def sub(m):
+        dentro = m.group(1)
+        nome = re.split(r"[|#^]", dentro, maxsplit=1)[0].strip()
+        if nome in renomeia:
+            return f"[[{renomeia[nome]}{dentro[len(nome):]}]]"
+        return m.group(0)
+
+    return re.sub(r"\[\[([^\]]+)\]\]", sub, corpo)
+
+
+def coletar_guias():
+    """
+    Le as notas numeradas da allowlist e devolve (pares, renomeia).
+
+    `pares` tem o mesmo formato do resto do exportador. `renomeia` mapeia o
+    nome do arquivo no vault para o titulo publico, para que os wikilinks
+    entre as notas resolvam para o titulo novo.
+    """
+    pares, renomeia = [], {}
+
+    for pasta, numeros in NOTAS_PUBLICAS.items():
+        rel = PASTA_AULAS[pasta]
+        origem = os.path.join(VAULT, rel)
+        if not os.path.isdir(origem):
+            print(f"  aviso: pasta de notas nao encontrada -> {rel}", file=sys.stderr)
+            continue
+
+        por_numero = {}
+        for arquivo in os.listdir(origem):
+            m = RE_NUMERO_ARQUIVO.match(arquivo)
+            if m:
+                por_numero.setdefault(int(m.group(1)), arquivo)
+
+        for n in numeros:
+            arquivo = por_numero.get(n)
+            if not arquivo:
+                print(f"  aviso: nota {n:02d} nao encontrada em {rel}", file=sys.stderr)
+                continue
+
+            stem = os.path.splitext(arquivo)[0]
+            texto = open(os.path.join(origem, arquivo), encoding="utf-8").read()
+            dados, corpo = ler_frontmatter(texto)
+
+            titulo = titulo_publico(corpo, stem)
+            fm, _ = normalizar_frontmatter(os.path.join(rel, arquivo), dados)
+            # O title do frontmatter do vault e o nome com prefixo; aqui o
+            # titulo publico manda.
+            fm["title"] = titulo
+
+            pares.append((PASTA_GUIAS[0], f"{titulo}.md", fm, corpo, titulo))
+            renomeia[stem] = titulo
+
+    return pares, renomeia
+
+
 # --------------------------------------------------------------- main
 def main():
+    if not VAULT:
+        print(
+            "erro: LLM_NOTES_VAULT nao esta definida.\n"
+            "      aponte para a raiz do vault e rode de novo:\n"
+            "      LLM_NOTES_VAULT=/caminho/do/vault npm run sync",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    if not os.path.isdir(VAULT):
+        print(f"erro: vault nao encontrado -> {VAULT}", file=sys.stderr)
+        sys.exit(1)
+
     if os.path.isdir(CONTENT):
         shutil.rmtree(CONTENT)
     os.makedirs(CONTENT, exist_ok=True)
@@ -730,13 +805,13 @@ def main():
     #    resolver wikilinks depois que todos os titulos forem conhecidos.
     pares = []  # (subpasta, nome_arquivo, frontmatter, corpo)
 
-    for pasta in PUBLIC_DIRS:
+    for pasta in PUBLICA:
         origem = os.path.join(VAULT, pasta)
         if not os.path.isdir(origem):
             print(f"  aviso: pasta nao encontrada -> {pasta}", file=sys.stderr)
             continue
         for arquivo in sorted(os.listdir(origem)):
-            if not arquivo.endswith(".md") or arquivo in NEVER:
+            if not arquivo.endswith(".md") or arquivo in NUNCA:
                 continue
             src = os.path.join(origem, arquivo)
             texto = open(src, encoding="utf-8").read()
@@ -747,7 +822,7 @@ def main():
             INDICES_PASTA[destino_pasta[0]] = (destino_pasta[1], destino_pasta[2])
             pares.append((destino_pasta[0], arquivo, fm, corpo, nome))
 
-    for caminho in PUBLIC_FILES:
+    for caminho in PUBLICA_ARQUIVOS:
         src = os.path.join(VAULT, caminho)
         if not os.path.exists(src):
             continue
@@ -756,6 +831,13 @@ def main():
         fm, _ = normalizar_frontmatter(caminho, dados)
         pares.append(("mapa", os.path.basename(caminho), fm, corpo,
                       os.path.splitext(os.path.basename(caminho))[0]))
+
+    # as notas de origem entram depois das pastas, para que o mapa de renomeia
+    # ja esteja pronto quando os wikilinks forem resolvidos
+    guias, guias_renomeia = coletar_guias()
+    pares.extend(guias)
+    guias_numeros = numeros_publicados(guias_renomeia)
+    INDICES_PASTA[PASTA_GUIAS[0]] = (PASTA_GUIAS[1], PASTA_GUIAS[2])
 
     # templates/ entram como estao: tem wikilinks [[Token]] e precisa resolver
     for arquivo in sorted(os.listdir(TEMPLATES)) if os.path.isdir(TEMPLATES) else []:
@@ -770,34 +852,24 @@ def main():
     published = {p[4] for p in pares}
     pares_global[:] = pares
 
-    # Rótulo de módulo em heading solto ("## Ordem de leitura para o M01").
-    # A seção em si é útil, o rótulo é que entrega do curso. Some só o
-    # código, e o conectivo antes dele, para a frase não ficar capenga.
-    def sem_modulo(corpo):
-        return re.sub(
-            r"^(\#{2,4}\s.*?)\s+(?:para|do|da|de)?\s*M0[0123]\b",
-            r"\1",
-            corpo,
-            flags=re.M,
-        )
-
     def resolver(corpo):
         """Wikilink para nota nao publicada vira texto simples."""
         def sub(m):
             alvo = m.group(1).split("|")[-1].strip()
             if alvo in published:
                 return m.group(0)
-            nome = m.group(1).split("|")[0].strip()
-            nome = re.sub(r"^Aula\s+(\d+).*", r"aula \1", nome)
-            return nome
+            return achatar_nome(m.group(1).split("|")[0].strip())
         return re.sub(r"\[\[([^\]]+)\]\]", sub, corpo)
 
     for sub, arquivo, fm, corpo, _ in pares:
         destino = os.path.join(CONTENT, sub, arquivo) if sub else os.path.join(CONTENT, arquivo)
         os.makedirs(os.path.dirname(destino), exist_ok=True)
-        limpo = resolver(neutralizar_titulos(limpar_checkboxes_vazios(limpar_rodape(sem_modulo(corpo)))))
+        # o codigo do material de origem no titulo da secao sai aqui
+        base = reescrever_links_de_origem(RE_CODIGO_NO_TITULO.sub(r"\1", corpo), guias_renomeia)
+        base = aplicar_regras_de_prosa(limpar_proveniencia(base))
+        limpo = resolver(neutralizar_titulos(limpar_checkboxes_vazios(limpar_rodape(base))))
         limpo = injetar_correcao_mermaid(limpo)
-        limpo = limpar_referencias_de_aula(limpo)
+        limpo = resolver_referencias(limpo, guias_numeros)
         limpo = neutralizar_rotulo_de_avaliacao(limpo)
         with open(destino, "w", encoding="utf-8") as f:
             f.write(render_yaml(fm) + "\n\n" + cortar_vazamento(limpo))
@@ -820,35 +892,31 @@ def main():
     # 3. questoes
     questoes = extrair_questoes()
 
-    # `aula` traz o titulo e a numeracao do curso; `origem` traz o nome do
-    # arquivo do banco, que tambem identifica o curso. Nenhum dos dois vai
-    # para o payload. `modulo` ja basta para filtrar.
+    # `fonte` traz a numeracao da nota de origem e `origem` o nome do arquivo
+    # do banco. Os dois identificam de onde o material veio, entao nenhum vai
+    # para o payload.
     publicas = [
-        {k: v for k, v in q.items() if k not in ("aula", "origem")}
+        {k: v for k, v in q.items() if k not in ("fonte", "origem")}
         for q in questoes
     ]
 
-    # O codigo do modulo no vault (m00, m01) expoe a estrutura do curso. No
-    # site vira rotulo neutro, suficiente para filtrar.
-    rotulos = {"m00": "fundamentos", "m01": "modelos de linguagem"}
-
-    # Questao que cita o entregavel do curso pelo nome. O enunciado faz
-    # sentido sem a referencia, entao o termo e normalizado.
-    termos = {
-        "micro-capstone": "documento de decisão",
-        "microcapstone": "documento de decisão",
-        "Micro-Capstone": "documento de decisão",
-    }
-
+    # O codigo do banco expoe a estrutura de origem. No site vira rotulo
+    # neutro, e o campo tambem: `banco` nao diz nada para o leitor. Rotulos em
+    # `origem.ROTULOS_TEMA`.
     for q in publicas:
-        q["modulo"] = rotulos.get(q["modulo"], q["modulo"])
-        for termo, troca in termos.items():
+        codigo = q.pop("banco", "")
+        q["tema"] = ROTULOS_TEMA.get(codigo, codigo)
+
+    # Enunciado que cita pelo nome o material de origem: faz sentido sem a
+    # referencia, entao o termo e normalizado. Ver `origem.TERMOS_ENUNCIADO`.
+    for q in publicas:
+        for termo, troca in TERMOS_ENUNCIADO.items():
             if termo in q["enunciado"]:
                 q["enunciado"] = q["enunciado"].replace(termo, troca)
 
     payload = {
         "gerado_em": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "origem": "bancos de perguntas do vault de estudo",
+        "origem": "bancos de questões do vault de estudo",
         "total": len(publicas),
         "com_resposta": sum(1 for q in publicas if q["resposta"]),
         "questoes": publicas,
@@ -866,9 +934,10 @@ def main():
                 achatados += 1
 
     print(f"  {len(exportados)} paginas exportadas")
+    print(f"  {len(guias)} guias em content/{PASTA_GUIAS[0]}/")
     print(f"  {len(questoes)} questoes -> quartz/static/dados/questions.json")
     print(f"  {payload['com_resposta']} com gabarito")
-    print(f"  {achatados} links para notas do curso convertidos em texto")
+    print(f"  {achatados} links para notas nao publicadas convertidos em texto")
 
 
 if __name__ == "__main__":

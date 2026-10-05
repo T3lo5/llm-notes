@@ -13,100 +13,100 @@ date: "2026-10-14"
 
 ```mermaid
 flowchart TD
-    A["Texto do usuário"] --> B["Tokenizador<br/>BPE / Unigram"]
-    B --> C["IDs + posições"]
-    C --> D["Embeddings<br/>ID -> vetor denso"]
-    D --> E["N blocos Transformer"]
-    E --> E1["Self-Attention causal<br/>softmax(QK^T/sqrt(d_k))V"]
-    E --> E2["MLP / SwiGLU"]
-    E1 --> F["Residual + RMSNorm"]
-    E2 --> F
-    F -->|"repite N vezes"| E
-    F --> G["Projeção final<br/>-> logits sobre V tokens"]
-    G --> H["Temperatura"]
-    H --> I["Top-k / Top-p / min-p"]
-    I --> J["Penalidades"]
-    J --> K["Softmax"]
-    K --> L{"Amostrar token"}
-    L --> M["EOS ou max_tokens?"]
-    M -->|nao| C
-    M -->|sim| N["Detokenizador"]
-    N --> A
+ A["Texto do usuário"] --> B["Tokenizador<br/>BPE / Unigram"]
+ B --> C["IDs + posições"]
+ C --> D["Embeddings<br/>ID -> vetor denso"]
+ D --> E["N blocos Transformer"]
+ E --> E1["Self-Attention causal<br/>softmax(QK^T/sqrt(d_k))V"]
+ E --> E2["MLP / SwiGLU"]
+ E1 --> F["Residual + RMSNorm"]
+ E2 --> F
+ F -->|"repite N vezes"| E
+ F --> G["Projeção final<br/>-> logits sobre V tokens"]
+ G --> H["Temperatura"]
+ H --> I["Top-k / Top-p / min-p"]
+ I --> J["Penalidades"]
+ J --> K["Softmax"]
+ K --> L{"Amostrar token"}
+ L --> M["EOS ou max_tokens?"]
+ M -->|nao| C
+ M -->|sim| N["Detokenizador"]
+ N --> A
 ```
 
 ## Áreas temáticas
 
 ```mermaid
 mindmap
-  root((Funcionamento<br/>de LLMs))
-    Representacao
-      Token
-      Subpalavra / BPE
-      Embedding
-      Cosseno
-      Positional Encoding / RoPE
-    Arquitetura
-      Transformer
-      Self-Attention
-      Multi-head
-      Mascara causal
-      RMSNorm
-      SwiGLU
-      MLP
-    Inferencia
-      Prefill
-      Decode
-      KV Cache
-      TTFT vs tokens/s
-      Quantizacao
-      Speculative decoding
-    Amostragem
-      Logits
-      Temperatura
-      Top-k
-      Top-p
-      Min-p
-      Greedy vs beam
-      Penalidades
-    Engenharia
-      Janela de contexto
-      Prompt engineering
-      Lost in the middle
-      Prompt injection
-      RAG
-      Alucinacao
-      Avaliacao
+ root((Funcionamento<br/>de LLMs))
+ Representacao
+ Token
+ Subpalavra / BPE
+ Embedding
+ Cosseno
+ Positional Encoding / RoPE
+ Arquitetura
+ Transformer
+ Self-Attention
+ Multi-head
+ Mascara causal
+ RMSNorm
+ SwiGLU
+ MLP
+ Inferencia
+ Prefill
+ Decode
+ KV Cache
+ TTFT vs tokens/s
+ Quantizacao
+ Speculative decoding
+ Amostragem
+ Logits
+ Temperatura
+ Top-k
+ Top-p
+ Min-p
+ Greedy vs beam
+ Penalidades
+ Engenharia
+ Janela de contexto
+ Prompt engineering
+ Lost in the middle
+ Prompt injection
+ RAG
+ Alucinacao
+ Avaliacao
 ```
 
 ## Relações que valem memorizar
 
 ```mermaid
 graph LR
-    T["Tokenização"] -->|"mais tokens = mais caro<br/>e mais lento"| J["Janela de Contexto"]
-    J -->|"cabe tudo aqui"| R["RAG"]
-    J --> L["Lost in the Middle"]
-    E["Embeddings"] --> R
-    E -->|"cosseno"| B["Busca Semântica"]
-    B -->|"candidatos"| RR["Reranking"]
-    RR --> R
-    R --> A["Alucinação"]
-    K["KV Cache"] -->|"memória no decode"| P["Prefill vs Decode"]
-    LG["Logits"] --> TEM["Temperatura"]
-    TEM --> TP["Top-p"]
-    TP -->|"amostra"| OUT["Saída não determinística"]
-    NF["Não-associatividade FP"] -->|"batch muda tudo"| OUT
+ T["Tokenização"] -->|"mais tokens = mais caro<br/>e mais lento"| J["Janela de Contexto"]
+ J -->|"cabe tudo aqui"| R["RAG"]
+ J --> L["Lost in the Middle"]
+ E["Embeddings"] --> R
+ E -->|"cosseno"| B["Busca Semântica"]
+ B -->|"candidatos"| RR["Reranking"]
+ RR --> R
+ R --> A["Alucinação"]
+ K["KV Cache"] -->|"memória no decode"| P["Prefill vs Decode"]
+ LG["Logits"] --> TEM["Temperatura"]
+ TEM --> TP["Top-p"]
+ TP -->|"amostra"| OUT["Saída não determinística"]
+ NF["Não-associatividade FP"] -->|"batch muda tudo"| OUT
 ```
 
 ## As perguntas que este site tenta responder
 
 | # | Pergunta | Onde está |
 | --- | --- | --- |
-| 1 | Como o texto vira tokens, e por isso custa dinheiro? |[[Token]] |
-| 2 | Como o significado vira geometria? |[[Embedding]] |
-| 3 | Como cada token "lê" o contexto inteiro? |[[Transformer]] |
-| 4 | Por que a mesma pergunta dá respostas diferentes? |[[Temperatura]] |
-| 5 | Como um token vira o próximo token? |[[Self-Attention]] |
-| 6 | Por que a ordem no prompt importa? |[[Janela de Contexto]] |
+| 1 | Como o texto vira tokens, e por isso custa dinheiro? | [[Tokens e por que eles custam]] |
+| 2 | Como o significado vira geometria? | [[Embeddings: transformando texto em vetores]] |
+| 3 | Como cada token "lê" o contexto inteiro? | [[Transformers, de um jeito simples]] |
+| 4 | Por que a mesma pergunta dá respostas diferentes? | [[Por que a resposta do modelo muda]] |
+| 5 | Como um token vira o próximo token? | [[Como o modelo gera respostas, token a token]] |
+| 6 | Por que a ordem no prompt importa? | [[Sensibilidade de prompt: ordem importa]] |
 
 ## Conceitos-chave (20 neste mapa)
 
@@ -120,10 +120,10 @@ graph LR
 
 ```mermaid
 flowchart LR
-    L1["Lab 01<br/>tokens e custo"] --> L2["Lab 02<br/>embeddings"]
-    L2 --> L3["Lab 03<br/>atenção"]
-    L3 --> L4["Lab 04<br/>sampling"]
-    L4 --> Q["Banco de perguntas"]
+ L1["Lab 01<br/>tokens e custo"] --> L2["Lab 02<br/>embeddings"]
+ L2 --> L3["Lab 03<br/>atenção"]
+ L3 --> L4["Lab 04<br/>sampling"]
+ L4 --> Q["Banco de questões"]
 ```
 
 <script>

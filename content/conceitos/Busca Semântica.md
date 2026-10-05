@@ -40,12 +40,12 @@ Reranking é o passo que mais melhora qualidade por custo: embeddings são ótim
 - **Avalie na sua tarefa**, com seus casos, não na média do leaderboard.
 
 ## Autoavaliação
-1. **P:** Por que embeddings e BM25 são complementsares e não redundantes? **R:** porque os erros são estruturalmente opostos: o embedding não tem representação de arbitrário/literal, o BM25 não tem paráfrase.
+1. **P:** Por que embeddings e BM25 são complementares e não redundantes? **R:** porque os erros são estruturalmente opostos: o embedding não tem representação de arbitrário/literal, o BM25 não tem paráfrase.
 2. **P:** Quando reranking não compensa? **R:** quando o recall da busca vetorial já é alto e o corpus é pequeno; a etapa extra vira latência sem ganho.
 
 ## Onde vi isso
 
-- Visto em:[[Embedding]]
+- Visto em: [[Embeddings: transformando texto em vetores]]
 
 ## Ver também
 

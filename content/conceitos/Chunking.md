@@ -40,7 +40,7 @@ Alternativa melhor: **chunking semântico por seção** (agrupar por heading) ou
 
 ## Onde vi isso
 
-- Visto em:[[Embedding]]
+- Visto em: [[Embeddings: transformando texto em vetores]]
 - Aprofundamento: [[Pesquisa - Embeddings e busca semântica]]
 
 ## Ver também

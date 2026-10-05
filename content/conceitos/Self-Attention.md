@@ -49,7 +49,7 @@ O passo 4 é o coração: cada token renova o próprio significado usando o cont
 
 ## Onde vi isso
 
-- Visto em:[[Transformer]]
+- Visto em: [[Transformers, de um jeito simples]]
 
 ## Ver também
 

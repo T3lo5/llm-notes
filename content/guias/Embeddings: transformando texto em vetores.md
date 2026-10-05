@@ -1,0 +1,192 @@
+---
+title: "Embeddings: transformando texto em vetores"
+tags:
+  - "embeddings"
+tipo: "guia"
+date: "2026-10-01"
+---
+
+# Embeddings: transformando texto em vetores
+
+> **Meta:** explicar por que um vetor denso representa significado, por que o cosseno é a métrica padrão, e onde os embeddings quebram.
+
+## Resumo em 3 frases
+
+1. Um embedding é um vetor denso treinado para que a **distância geométrica** entre vetores corresponda à similaridade de significado — a hipótese distribicional (Harris 1954) formalizada.
+2. Denso vence one-hot em generalização e custo; esparso (BM25) vence em correspondência literal. Buscas reais usam **os dois** — busca híbrida.
+3. A similaridade não é um fato do texto: é uma escolha do modelo treinado. Trocar o modelo de embedding invalida o índice inteiro.
+
+## One-hot vs. denso
+
+| | One-hot | Embedding denso |
+| --- | --- | --- |
+| Dimensão | tamanho do vocabulário (~100k) | 384–4096 |
+| Esparsidade | quase tudo zero | denso |
+| "Feliz" ≈ "contente"? | sim (mesma posição) | não por acaso — **por treino** |
+| "Cachorro" ≈ "cão"? | não | **sim**, se o treino achar isso |
+| Custo de busca | alto | baixo |
+
+O ponto do "não por acaso" é o essencial: a similaridade entre "feliz" e "contento" **não é dada** — ela é aprendida. O modelo de embedding é quem **decide** o que é parecido.
+
+## word2vec e a hipótese distribucional
+
+> *"Palavras que aparecem em contextos parecidos têm significados parecidos."* — Harris (1954); formalizado por Firth (1957).
+
+- **Skip-gram** — da palavra central, prever as vizinhas. Bom para palavras raras (cada ocorrência gera vários exemplos).
+- **CBOW** — das vizinhas, prever a palavra central. Mais rápido, enviesado contra termos raros.
+- **Negative sampling** (Mikolov et al., 2013) — o truque que tornou viável: em vez de classificar a palavra certa entre 100 mil, o modelo só distingue "esse par apareceu" de "esse par foi sorteado". Classificador binário, converge rápido.
+
+**GloVe** (Pennington et al., 2014) parte de uma matriz de coocorrência explícita e fatora.
+
+Efeito colateral famoso: em um espaço bem treinado, aritmética vira semântica —
+
+```
+vetor("rei") - vetor("homem") + vetor("mulher") ≈ vetor("rainha")
+```
+
+Esse vetor é o que se chamava embedding "estático": um vetor por palavra, sem depender de contexto. "banana" é o mesmo vetor em qualquer frase. É uma limitação real, não um detalhe menor.
+
+## De palavra para frase: SBERT
+
+Média dos embeddings das palavras falha em frases porque **ordem e negação importam**: "não é bom" não é a média de "não" e "bom".
+
+**Sentence-BERT (Reimers & Gurevych, 2019)** treina uma **rede siamesa**: duas instâncias do encoder com pesos compartilhados produzem um vetor fixo cada. A comparação passa a ser **um único cosseno**, em vez de rodar o modelo inteiro sobre cada par.
+
+O resultado prático reportado no paper: achar o par mais similar em 10 mil sentenças cai de horas para segundos, mantendo a acurácia. É o que viabilizou busca semântica em escala de produção.
+
+Treinamento: **contrastive** sobre triplas (âncora, positivo, negativo), com **hard negatives** — negativos já muito similares por busca lexical, que forçam o modelo a discriminar diferença de sentido real em vez de só "coisa parecida = coisa igual". É a diferença entre recuperação densa robusta e embedding decorativo.
+
+## Métrica de similaridade
+
+$$\text{cos}(a,b)=\frac{a\cdot b}{\|a\|\|b\|}$$
+
+**Cosseno** é o padrão porque é **invariante à norma**: mede só o ângulo. Um documento longo e um curto com o mesmo conteúdo têm cosseno ≈ 1.
+
+- **Produto escalar** mistura direção e magnitude. Alguns modelos usam magnitude de forma intencional (frequência) — por isso ele aparece em índices de produção.
+- **Euclidiana** não fica entre 0 e 1, o que atrapalha limiares interpretáveis.
+
+## Denso vs. esparso — e por que RAG usa os dois
+
+| Caso | BM25 (esparso) | Embedding (denso) |
+| --- | --- | --- |
+| "contrato 8842-A" | ✅ match literal exato | ❌ ruído — dígitos são arbitrários |
+| Nome próprio | ✅ se indexado | ⚠️ falha silenciosa |
+| Paráfrase ("encerrar contrato" ↔ "termo de rescisão") | ❌ falha estrutural | ✅ por construção |
+
+Daí a **busca híbrida**: combinar os dois e fundir os ranqueamentos (RRF). Não é ornamento, é a resposta ao fato de que cada método tem um ponto cego estrutural.
+
+## Onde isso entra: RAG
+
+```mermaid
+flowchart LR
+ A[Documentos] --> B[Chunking<br/>com sobreposição]
+ B --> C[Embedding de cada chunk]
+ C --> D[Índice vetorial<br/>HNSW / IVF]
+ Q[Query] --> E[Embedding da query]
+ E --> D
+ D --> F[Top-k candidatos]
+ F --> G[Reranking<br/>cross-encoder]
+ G --> H[Contexto → LLM]
+```
+
+- **Chunking** — cortar em pedaços de algumas centenas de tokens, com sobreposição para não partir ideia ao meio. Decisão de arquitetura, não detalhe.
+- **Índice** — kNN exato (força bruta, ok para milhares), IVF (particiona por k-means), **HNSW** (grafo hierárquico, padrão atual).
+- **Reranking** — embeddings são ótimos em *recall* e imprecisos no ranking fino. Um cross-encoder (que vê query e documento juntos) reordena os 50–100 candidatos. Etapa cheap que resolve a fraqueza cara.
+
+## Avaliação
+
+**MTEB** (Muennighoff et al., 2022): 8 tarefas, 58 datasets, 112 idiomas. A distinção que importa:
+
+- **STS** — "esses dois textos significam a mesma coisa?"
+- **Retrieval** — "qual chunk responde a esta pergunta?"
+
+Um modelo pode ser excelente em um e ruim no outro. **Avalie na sua tarefa, não na média do leaderboard.** Agregar dilui exatamente o contraste que decide entre embedding e busca híbrida.
+
+## Limitações (para citar em trabalho)
+
+1. **Viés herdado** — estereótipos dos corpora aparecem no espaço vetorial e vazam para o resultado da busca.
+2. **Ordem se perde** — o chunk é tratado como conjunto; negação e estrutura sintática se diluem.
+3. **Similaridade é escolha, não fato** — trocar de modelo de embedding exige **reindexar tudo**; embeddings de modelos diferentes não convivem no mesmo índice.
+4. **Domínio** — embedding genérico degrada em jargão técnico sem retreino.
+
+## Perguntas para validar
+
+1. Se eu fizer PCA nas embeddings para "acelerar a busca", por que a recuperação pode piorar?
+2. Em um sistema que precisa responder "qual o número do contrato 8842-A?", embedding resolve? BM25 resolve?
+3. Por que trocar o modelo de embedding exige reindexação, e não basta recalcular as queries?
+4. O que um hard negative faz que um negativo aleatório não faz?
+
+## Referências
+
+- Mikolov et al., *Efficient Estimation of Word Representations in Vector Space* — https://arxiv.org/abs/1301.3781
+- Mikolov et al., *Distributed Representations of Words and Phrases* (negative sampling) — https://arxiv.org/abs/1310.4546
+- Pennington, Socher & Manning, *GloVe* — https://aclanthology.org/D14-1162/
+- Reimers & Gurevych, *Sentence-BERT* — https://arxiv.org/abs/1908.10084
+- Karpukhin et al., *Dense Passage Retrieval (DPR)* — https://arxiv.org/abs/2004.04906
+- Muennighoff et al., *MTEB* — https://arxiv.org/abs/2210.07316
+- Malkov & Yashunin, *HNSW* — https://arxiv.org/abs/1603.09320
+
+## Ver também
+
+- [[Pesquisa - Embeddings e busca semântica]] · [[Lab 02 - Embeddings e similaridade]] · [[RAG]]
+
+<script>
+// Correcao do Mermaid no Quartz 5.0.0.
+//
+// O Quartz le `innerText` do <code class="mermaid"> para alimentar o Mermaid.
+// Em parte dos diagramas esse innerText chega vazio e o render sai como
+// <svg><g></g></svg>, sem erro no console. Reproduzido nos 4 blocos do mapa,
+// dos quais so o mindmap renderizava.
+//
+// A correcao espera o SVG existir antes de medir: rodar antes faz o script
+// ver zero diagramas e sair cedo. O timeout cobre o caso em que o Mermaid
+// nem carregou (CDN bloqueado), para nao esperar para sempre.
+(() => {
+  const CDN =
+    "https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs";
+
+  const vazios = () =>
+    [...document.querySelectorAll("code.mermaid")].filter((n) => {
+      const svg = n.querySelector("svg");
+      return svg && svg.querySelectorAll("path,rect,polygon,circle").length === 0;
+    });
+
+  const fonte = (n) =>
+    (n.getAttribute("data-clipboard") || "")
+      .replace(/^"|"$/g, "")
+      .replace(/\\"/g, '"')
+      .replace(/\\n/g, "\n")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/\\\\/g, "\\");
+
+  const corrigir = (alvo) => {
+    import(CDN)
+      .then((m) => {
+        m.default.initialize({ startOnLoad: false, securityLevel: "loose" });
+        return Promise.all(
+          alvo.map(async (n, i) => {
+            try {
+              const { svg } = await m.default.render("corrige-" + i, fonte(n));
+              n.innerHTML = svg;
+            } catch (e) {
+              console.warn("mermaid: falhou um diagrama", fonte(n).slice(0, 40), e);
+            }
+          })
+        );
+      })
+      .catch((e) => console.warn("mermaid: CDN indisponivel", e));
+  };
+
+  // Tenta varias vezes: o SVG do Quartz pode aparecer depois do DOMContentLoaded.
+  let tentativas = 0;
+  const tentar = () => {
+    const alvo = vazios();
+    if (alvo.length > 0) return corrigir(alvo);
+    if (tentativas++ < 20) setTimeout(tentar, 500);
+  };
+
+  if (document.readyState === "complete") setTimeout(tentar, 1500);
+  else window.addEventListener("load", () => setTimeout(tentar, 1500));
+})();
+</script>

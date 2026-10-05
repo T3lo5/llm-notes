@@ -34,7 +34,7 @@ Restrições derivam disso:
 
 > "Vou recuperar 30 chunks e colar todos no prompt."
 
-Cada chunk é token de entrada cobrado. Trinta chunks quiets transforms a consulta em uma fatura. O número de chunks é uma decisão de arquitetura, não um parâmetro de default.
+Cada chunk é token de entrada cobrado. Trinta chunks quietos transformam a consulta em uma fatura. O número de chunks é uma decisão de arquitetura, não um parâmetro de default.
 
 ## Autoavaliação
 1. **P:** O que ocupa a janela: só a entrada ou entrada e saída? **R:** as duas. Se o limite é 128k e o prompt tem 127k, há ~1k para a resposta.
@@ -42,7 +42,7 @@ Cada chunk é token de entrada cobrado. Trinta chunks quiets transforms a consul
 
 ## Onde vi isso
 
-- Visto em:15 - Boas-vindas - Como funcionam os LLMs,[[Janela de Contexto]]
+- Visto em:, [[Sensibilidade de prompt: ordem importa]]
 
 ## Ver também
 

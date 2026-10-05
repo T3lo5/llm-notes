@@ -37,13 +37,13 @@ aparece linkada. Nenhum texto aqui é copiado de material de terceiros.
 
 ```
 vault (Obsidian)
-   │  scripts/exportar.py
-   ▼
-content/                          notas com frontmatter normalizado
-quartz/static/dados/questions.json  banco de questões
-   │  npx quartz build
-   ▼
-public/                           site estático
+ │ scripts/exportar.py
+ ▼
+content/ notas com frontmatter normalizado
+quartz/static/dados/questions.json banco de questões
+ │ npx quartz build
+ ▼
+public/ site estático
 ```
 
 O comando é `npm run sync`. Ele exporta, valida e faz o build. Ver o README do

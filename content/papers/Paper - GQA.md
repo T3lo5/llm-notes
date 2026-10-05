@@ -9,7 +9,7 @@ date: "2026-10-21"
 
 # Paper — GQA: Training Generalized Multi-Query Transformer Models
 
-> **Por que estou lendo isso:** porque responde uma pergunta prática que a[[Transformer]] deixa em aberto — por que reduzir cabeças de chave/valor acelera tanto o decode.
+> **Por que estou lendo isso:** porque responde uma pergunta prática que a[[Transformers, de um jeito simples]] deixa em aberto — por que reduzir cabeças de chave/valor acelera tanto o decode.
 
 ## Ficha
 

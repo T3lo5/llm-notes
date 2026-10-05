@@ -27,7 +27,7 @@ date: "2026-10-14"
 2. **Método:** treinar centenas de modelos (de 70M a ~16B parâmetros) e ajustar a forma da lei de escala com o método correto.
 3. **Resultado:** para compute **ótimo**, o número de tokens de treino deve escalar **na mesma proporção** que o número de parâmetros. Modelos grandes estavam sendo *undertrained*.
 4. **Custo:** Chinchilla (70B, 1.4T tokens) supera Gopher (280B, 300B tokens) com muito menos compute de inferência.
-5. **Conclusão:** aScaling da indústria foi reorientada — a partir daí, o padrão passou a ser "dados primeiro".
+5. **Conclusão:** a scaling da indústria foi reorientada — a partir daí, o padrão passou a ser "dados primeiro".
 
 ## O que eu levo embora
 
