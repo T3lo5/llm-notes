@@ -61,7 +61,7 @@ As atualizações de baixo posto capturam a maior parte da variação de pesos e
 
 ## Ver também
 
-- [[Fine-tuning]] · [[Fine-tuning: ajustando os pesos]] · [[RAG]] · [[Paper - Chinchilla]]
+- [[Fine-tuning]] · [[Fine-tuning e customização]] · [[RAG]] · [[Paper - Chinchilla]]
 
 ---
 *Ficha criada em 2026-10-01*

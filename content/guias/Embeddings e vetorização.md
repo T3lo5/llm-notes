@@ -1,12 +1,12 @@
 ---
-title: "Embeddings: transformando texto em vetores"
+title: "Embeddings e vetorização"
 tags:
   - "embeddings"
 tipo: "guia"
 date: "2026-10-01"
 ---
 
-# Embeddings: transformando texto em vetores
+# Embeddings e vetorização
 
 > **Meta:** explicar por que um vetor denso representa significado, por que o cosseno é a métrica padrão, e onde os embeddings quebram.
 

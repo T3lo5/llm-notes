@@ -75,4 +75,4 @@ O motivo econômico: IA é cara **por chamada** e barata **por unidade de trabal
 
 ## Ver também
 
-- [[Quando não usar inteligência artificial]] · Framework de decisao estrategica · [[Framework de decisão estratégica]]
+- [[Quando não usar inteligência artificial]] · [[Framework de decisao estrategica]] · [[Framework de decisão estratégica]]

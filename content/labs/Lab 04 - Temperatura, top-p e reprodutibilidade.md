@@ -161,7 +161,7 @@ python lab04_sampling.py
 
 - [ ] A entropia dobra quando a temperatura dobra?
 - [ ] Em $T=0.7$, top-p mantém mais ou menos candidatos que top-k=3? Por quê?
-- [ ] Se eu precisar de saída idêntica em produção, o que ainda pode quebrar? (resposta: **fonte numérica** —[[Por que a resposta do modelo muda]]
+- [ ] Se eu precisar de saída idêntica em produção, o que ainda pode quebrar? (resposta: **fonte numérica** —[[Temperatura e previsibilidade]]
 
 ## Extensão
 

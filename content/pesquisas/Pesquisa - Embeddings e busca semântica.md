@@ -133,7 +133,7 @@ for i in rank:
 
 ## Ver também
 
-- [[Embeddings: transformando texto em vetores]] · [[Embedding]] · [[Busca Semântica]] · [[Lab 02 - Embeddings e similaridade]]
+- [[Embeddings e vetorização]] · [[Embedding]] · [[Busca Semântica]] · [[Lab 02 - Embeddings e similaridade]]
 
 ---
 *Atualizado em 2026-09-30*

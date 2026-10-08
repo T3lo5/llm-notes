@@ -822,14 +822,14 @@ def main():
             INDICES_PASTA[destino_pasta[0]] = (destino_pasta[1], destino_pasta[2])
             pares.append((destino_pasta[0], arquivo, fm, corpo, nome))
 
-    for caminho in PUBLICA_ARQUIVOS:
+    for caminho, sub in PUBLICA_ARQUIVOS:
         src = os.path.join(VAULT, caminho)
         if not os.path.exists(src):
             continue
         texto = open(src, encoding="utf-8").read()
         dados, corpo = ler_frontmatter(texto)
         fm, _ = normalizar_frontmatter(caminho, dados)
-        pares.append(("mapa", os.path.basename(caminho), fm, corpo,
+        pares.append((sub, os.path.basename(caminho), fm, corpo,
                       os.path.splitext(os.path.basename(caminho))[0]))
 
     # as notas de origem entram depois das pastas, para que o mapa de renomeia

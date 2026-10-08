@@ -3,7 +3,7 @@ title: "Banco de questões"
 tags:
   - "exercicios"
   - "revisao"
-description: "45 questões de fundamentos e funcionamento de LLMs, com nível de dificuldade e tema de origem."
+description: "61 questões de fundamentos e funcionamento de LLMs, com nível de dificuldade e tema de origem."
 tipo: "pagina"
 ---
 
@@ -251,7 +251,7 @@ interesse está no esforço, não na resposta.
  ' <div class="quiz-resposta" hidden>' +
  (q.resposta
  ? md(q.resposta)
- : '<p class="quiz-sem-resposta">Ainda sem gabarito no vault.</p>') +
+ : '<p class="quiz-sem-resposta">Ainda sem gabarito no repositório.</p>') +
  (q.origem ? '<p class="quiz-origem">' + esc(q.origem) + "</p>" : "") +
  "</div>",
  "</li>",

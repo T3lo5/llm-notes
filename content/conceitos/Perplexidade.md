@@ -39,7 +39,7 @@ Leitura: "das $V$ possibilidades do vocabulário, o modelo está efetivamente es
 
 ## Onde vi isso
 
-- Visto em: [[Como o modelo gera respostas, token a token]]
+- Visto em: [[Nota Técnica - Geração token a token]]
 
 ## Ver também
 

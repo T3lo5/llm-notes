@@ -38,7 +38,7 @@ Usar $k$ fixo sem considerar a distribuição. Com $k=50$ e o modelo muito confi
 
 ## Onde vi isso
 
-- Visto em: [[Por que a resposta do modelo muda]]
+- Visto em: [[Temperatura e previsibilidade]]
 
 ## Ver também
 

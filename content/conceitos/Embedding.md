@@ -59,7 +59,7 @@ Por isso **busca híbrida** é o padrão real: ver [[Busca Semântica]].
 
 ## Onde vi isso
 
-- Visto em: [[Embeddings: transformando texto em vetores]]
+- Visto em: [[Embeddings e vetorização]]
 - Aprofundamento: [[Pesquisa - Embeddings e busca semântica]]
 
 ## Ver também

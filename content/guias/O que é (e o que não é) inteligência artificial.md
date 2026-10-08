@@ -28,7 +28,7 @@ Inteligência Artificial → o campo
  └─ (fora de ML) Sistemas baseados em regras / Expert Systems
 ```
 
-Um **LLM** (ver [[O que é um LLM, de verdade]]) é um caso específico: ML supervisionado, com objetivo de prever o próximo token, em escala enorme.
+Um **LLM** (ver [[O que é um LLM]]) é um caso específico: ML supervisionado, com objetivo de prever o próximo token, em escala enorme.
 
 Quando alguém diz "IA" num projeto, essas três camadas estão misturadas — e quase sempre o que se quer é a terceira.
 
@@ -59,7 +59,7 @@ O marketing usa "IA" onde caberia "classificador". Se o sistema só faz uma cois
 
 - **Não é consciente** nem entende o que faz — ela calcula a continuação mais provável de um texto.
 - **Não é fonte de verdade.** Não tem consulta a nada; tem estatística comprimida nos pesos.
-- **Não é determinística.** A mesma entrada pode gerar saídas diferentes (ver [[Por que a resposta do modelo muda]]).
+- **Não é determinística.** A mesma entrada pode gerar saídas diferentes (ver [[Temperatura e previsibilidade]]).
 - **Não generaliza fora do treino** de forma confiável. Ela acerta raciocínio; não há garantia de que acerte.
 - **Não substitui o domínio.** Quem define se a resposta está boa é alguém que entende o assunto — não o modelo.
 
@@ -70,7 +70,7 @@ Prometer "IA que resolve o problema X" quando o sistema faz 80% do problema X ge
 1. **Operacional:** revisão humana constante, que consome o ganho.
 2. **Estratégica:** quando o ganho não aparece, o projeto é declarado fracasso — e a conclusão errada é "IA não funciona neste caso".
 
-Ver Antipatrones de adocao de IA.
+Ver [[Antipatrones de adocao de IA]].
 
 ## Perguntas para validar
 

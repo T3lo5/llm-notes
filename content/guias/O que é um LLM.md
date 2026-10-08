@@ -1,12 +1,12 @@
 ---
-title: "O que é um LLM, de verdade"
+title: "O que é um LLM"
 tags:
   - "llm"
 tipo: "guia"
 date: "2026-10-01"
 ---
 
-# O que é um LLM, de verdade
+# O que é um LLM
 
 > **Meta:** dar a definição formal de LLM, listar o que ele *não* é, e explicar por que a tarefa "qual token vem a seguir" é suficiente para produzir comportamento que parece compreensão.
 
@@ -22,7 +22,7 @@ $$p_\theta(x_{t+1} \mid x_{1:t})$$
 
 - $x_{1:t}$ — os tokens já presentes
 - $\theta$ — os parâmetros (os pesos)
-- A saída é uma **distribuição** sobre o vocabulário inteiro, não um token. A escolha é feita na etapa de amostragem ([[Como o modelo gera respostas, token a token]]).
+- A saída é uma **distribuição** sobre o vocabulário inteiro, não um token. A escolha é feita na etapa de amostragem ([[Nota Técnica - Geração token a token]]).
 
 Treinado por **máxima verossimilhança**, que equivale a minimizar a entropia cruzada. Ponto crucial: **a única coisa que o modelo aprende é a distribuição de continuação de texto**. Não existe, no objetivo de treino, nenhum termo que diga "seja verdadeiro".
 
@@ -30,12 +30,12 @@ Treinado por **máxima verossimilhança**, que equivale a minimizar a entropia c
 
 | Peça | O que faz | Onde é detalhada |
 | ------------------ | ---------------------------------------- | --------------------------------------------------------- |
-| Tokenizer | Texto ↔ inteiros (BPE/Unigram) | [[Tokens e por que eles custam]] |
-| Embeddings | Inteiro → vetor denso | [[Embeddings: transformando texto em vetores]] |
-| Blocos Transformer | Refina cada vetor usando o contexto todo | [[Transformers, de um jeito simples]] |
-| Projeção final | Vetor → logits sobre o vocabulário | [[Como o modelo gera respostas, token a token]] |
-| Sampler | Logits → token escolhido | [[Por que a resposta do modelo muda]] |
-| Detokenizador | Inteiros → texto | [[Tokens e por que eles custam]] |
+| Tokenizer | Texto ↔ inteiros (BPE/Unigram) | [[Tokens: o significado dos números]] |
+| Embeddings | Inteiro → vetor denso | [[Embeddings e vetorização]] |
+| Blocos Transformer | Refina cada vetor usando o contexto todo | [[Arquitetura Transformers e Attention]] |
+| Projeção final | Vetor → logits sobre o vocabulário | [[Nota Técnica - Geração token a token]] |
+| Sampler | Logits → token escolhido | [[Temperatura e previsibilidade]] |
+| Detokenizador | Inteiros → texto | [[Tokens: o significado dos números]] |
 
 ### Parâmetros e memória de inferência
 
@@ -100,7 +100,7 @@ Mitigações, em ordem de custo crescente:
 - **Não tem memória persistente.** Estado = pesos + janela de contexto. Nada sobrevive à chamada sem mecanismo externo.
 - **Não verifica verdade.** Não há "consulta ao oráculo" em momento algum.
 - **Não raciocina de forma confiável.** Pode acertar raciocínio; não tem garantia de que acerte. Saída plausível ≠ saída correta.
-- **Não é determinístico.** Ver [[Por que a resposta do modelo muda]].
+- **Não é determinístico.** Ver [[Temperatura e previsibilidade]].
 
 ## Perguntas para validar
 

@@ -63,7 +63,7 @@ Usar fine-tuning para ensinar fato é caro e desatualiza. Usar RAG para ensinar 
 
 ## Onde vi isso
 
-- Visto em: [[O que é um LLM, de verdade]], [[Embeddings: transformando texto em vetores]]
+- Visto em: [[O que é um LLM]], [[Embeddings e vetorização]]
 
 ## Ver também
 

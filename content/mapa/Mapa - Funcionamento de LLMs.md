@@ -101,12 +101,12 @@ graph LR
 
 | # | Pergunta | Onde está |
 | --- | --- | --- |
-| 1 | Como o texto vira tokens, e por isso custa dinheiro? | [[Tokens e por que eles custam]] |
-| 2 | Como o significado vira geometria? | [[Embeddings: transformando texto em vetores]] |
-| 3 | Como cada token "lê" o contexto inteiro? | [[Transformers, de um jeito simples]] |
-| 4 | Por que a mesma pergunta dá respostas diferentes? | [[Por que a resposta do modelo muda]] |
-| 5 | Como um token vira o próximo token? | [[Como o modelo gera respostas, token a token]] |
-| 6 | Por que a ordem no prompt importa? | [[Sensibilidade de prompt: ordem importa]] |
+| 1 | Como o texto vira tokens, e por isso custa dinheiro? | [[Tokens: o significado dos números]] |
+| 2 | Como o significado vira geometria? | [[Embeddings e vetorização]] |
+| 3 | Como cada token "lê" o contexto inteiro? | [[Arquitetura Transformers e Attention]] |
+| 4 | Por que a mesma pergunta dá respostas diferentes? | [[Temperatura e previsibilidade]] |
+| 5 | Como um token vira o próximo token? | [[Nota Técnica - Geração token a token]] |
+| 6 | Por que a ordem no prompt importa? | [[Engenharia de prompt e contexto]] |
 
 ## Conceitos-chave (20 neste mapa)
 

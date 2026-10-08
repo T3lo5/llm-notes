@@ -44,7 +44,7 @@ def softmax(z, T=1.0):
 
 ## Onde vi isso
 
-- Visto em: [[Por que a resposta do modelo muda]], [[Como o modelo gera respostas, token a token]]
+- Visto em: [[Temperatura e previsibilidade]], [[Nota Técnica - Geração token a token]]
 
 ## Ver também
 

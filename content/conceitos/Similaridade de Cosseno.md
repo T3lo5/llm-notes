@@ -47,7 +47,6 @@ def cos(a, b):
 
 ## Onde vi isso
 
-- Visto em: [[Embeddings: transformando texto em vetores]]
 
 ## Ver também
 

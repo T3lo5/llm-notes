@@ -47,7 +47,7 @@ Isto é contraintuitivo e importante: Retrieved contexto não é neutro. Context
 
 ## Onde vi isso
 
-- Visto em: [[Sensibilidade de prompt: ordem importa]]
+- Visto em: [[Engenharia de prompt e contexto]]
 
 ## Ver também
 

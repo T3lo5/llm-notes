@@ -1,12 +1,12 @@
 ---
-title: "Transformers, de um jeito simples"
+title: "Arquitetura Transformers e Attention"
 tags:
   - "transformers"
 tipo: "guia"
 date: "2026-10-01"
 ---
 
-# Transformers, de um jeito simples
+# Arquitetura Transformers e Attention
 
 > **Meta:** explicar o mecanismo de self-attention, por que a posição precisa ser injetada, e o que mudou entre o paper de 2017 e os LLMs que você usa hoje.
 

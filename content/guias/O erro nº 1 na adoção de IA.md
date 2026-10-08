@@ -69,4 +69,4 @@ Teste rápido: **se você remover a palavra "IA" da proposta, o projeto ainda fa
 
 ## Ver também
 
-- [[Que problemas a IA resolve]] · Antipatrones de adocao de IA · [[Projeto: avaliação de caso de uso de IA]]
+- [[Que problemas a IA resolve]] · [[Antipatrones de adocao de IA]] · [[Projeto: avaliação de caso de uso de IA]]

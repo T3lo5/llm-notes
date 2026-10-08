@@ -45,7 +45,7 @@ Reranking é o passo que mais melhora qualidade por custo: embeddings são ótim
 
 ## Onde vi isso
 
-- Visto em: [[Embeddings: transformando texto em vetores]]
+- Visto em: [[Embeddings e vetorização]]
 
 ## Ver também
 

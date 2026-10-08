@@ -1,12 +1,12 @@
 ---
-title: "Sensibilidade de prompt: ordem importa"
+title: "Engenharia de prompt e contexto"
 tags:
   - "prompt"
 tipo: "guia"
 date: "2026-10-01"
 ---
 
-# Sensibilidade de prompt: ordem importa
+# Engenharia de prompt e contexto
 
 > **Meta:** explicar por que a posição e a clareza da informação no prompt mudam a qualidade da resposta, e como encontrar o equilíbrio entre um bom prompt e o custo dos tokens.
 
@@ -32,7 +32,7 @@ A ordem importa. A **clareza** também. E as duas competem com o **custo**.
 
 ### A conta
 
-Todo token de entrada é cobrado. Com janela de contexto grande, o prompt repetido em milhares de chamadas domina o custo — ver [[Tokens e por que eles custam]].
+Todo token de entrada é cobrado. Com janela de contexto grande, o prompt repetido em milhares de chamadas domina o custo — ver [[Tokens: o significado dos números]].
 
 ```
 custo por chamada ≈ tokens de entrada × preço de entrada + tokens de saída × preço de saída
@@ -172,4 +172,4 @@ Um prompt pode ganhar em qualidade e perder em custo — às vezes é melhor tro
 
 ## Ver também
 
-- [[Pesquisa - Sensibilidade de prompt e posição]] · [[Como o modelo gera respostas, token a token]] · [[Lost in the Middle]]
+- [[Pesquisa - Sensibilidade de prompt e posição]] · [[Nota Técnica - Geração token a token]] · [[Lost in the Middle]]

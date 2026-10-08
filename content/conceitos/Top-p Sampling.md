@@ -45,7 +45,7 @@ def top_p_filter(p, top_p=0.9):
 
 ## Onde vi isso
 
-- Visto em: [[Por que a resposta do modelo muda]]
+- Visto em: [[Temperatura e previsibilidade]]
 
 ## Ver também
 

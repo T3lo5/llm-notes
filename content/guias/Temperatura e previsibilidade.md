@@ -1,12 +1,12 @@
 ---
-title: "Por que a resposta do modelo muda"
+title: "Temperatura e previsibilidade"
 tags:
   - "decodificacao"
 tipo: "guia"
 date: "2026-10-01"
 ---
 
-# Por que a resposta do modelo muda
+# Temperatura e previsibilidade
 
 > **Meta:** explicar por que a mesma pergunta gera respostas diferentes, e distinguir a fonte **estatística** (sorteio) da fonte **numérica** (ponto flutuante em GPU).
 
@@ -97,4 +97,4 @@ Determinismo de decodificação é um objetivo de **infraestrutura**, não uma p
 
 ## Ver também
 
-- [[Pesquisa - Amostragem e reprodutibilidade]] · [[Lab 04 - Temperatura, top-p e reprodutibilidade]] · [[Como o modelo gera respostas, token a token]]
+- [[Pesquisa - Amostragem e reprodutibilidade]] · [[Lab 04 - Temperatura, top-p e reprodutibilidade]] · [[Nota Técnica - Geração token a token]]

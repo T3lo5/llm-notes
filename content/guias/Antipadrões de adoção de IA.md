@@ -69,4 +69,4 @@ Antes de aprovar um projeto de IA, procure o sintoma na coluna 2. Um achado é u
 
 ## Ver também
 
-- Antipatrones de adocao de IA · [[O erro nº 1 na adoção de IA]] · [[Como a IA gera valor de negócio]]
+- [[Antipatrones de adocao de IA]] · [[O erro nº 1 na adoção de IA]] · [[Como a IA gera valor de negócio]]

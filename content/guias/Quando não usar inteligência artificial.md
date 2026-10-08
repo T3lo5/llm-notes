@@ -73,4 +73,4 @@ Antes de culpar a tecnologia, verifique:
 
 ## Ver também
 
-- [[Que problemas a IA resolve]] · Antipatrones de adocao de IA · Framework de decisao estrategica
+- [[Que problemas a IA resolve]] · [[Antipatrones de adocao de IA]] · [[Framework de decisao estrategica]]

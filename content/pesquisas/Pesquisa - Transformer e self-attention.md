@@ -141,7 +141,7 @@ assert np.allclose(W.sum(axis=1), 1.0)
 
 ## Ver também
 
-- [[Transformers, de um jeito simples]] · [[Transformer]] · [[Self-Attention]] · [[KV Cache]]
+- [[Arquitetura Transformers e Attention]] · [[Transformer]] · [[Self-Attention]] · [[KV Cache]]
 
 ---
 *Atualizado em 2026-09-30*

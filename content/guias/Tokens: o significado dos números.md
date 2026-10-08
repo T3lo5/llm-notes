@@ -1,12 +1,12 @@
 ---
-title: "Tokens e por que eles custam"
+title: "Tokens: o significado dos números"
 tags:
   - "tokens"
 tipo: "guia"
 date: "2026-10-01"
 ---
 
-# Tokens e por que eles custam
+# Tokens: o significado dos números
 
 > **Meta:** explicar por que o modelo segmenta texto em subpalavras, e por que a mesma frase custa uma quantidade diferente de dinheiro dependendo do idioma e do que você enfiou na janela.
 
@@ -70,7 +70,7 @@ O billing é por **1 milhão de tokens**, separado para entrada e saída. Tudo q
 Dois efeitos que passam despercebidos:
 
 - **Conversas longas custam superlinearmente.** A cada turno o histórico inteiro é reenviado. Em N turnos, o total de tokens de entrada acumula ~N(N+1)/2. É o principal custo oculto de agentes conversacionais.
-- **Prompt caching** cobre prefixos repetidos (system prompt + exemplos) por desconto. Se seu system prompt é fixo, colocar o conteúdo variável **depois** dele é o que permite o cache. Ordem do prompt tem impacto financeiro, não só de qualidade (ver [[Sensibilidade de prompt: ordem importa]]).
+- **Prompt caching** cobre prefixos repetidos (system prompt + exemplos) por desconto. Se seu system prompt é fixo, colocar o conteúdo variável **depois** dele é o que permite o cache. Ordem do prompt tem impacto financeiro, não só de qualidade (ver [[Engenharia de prompt e contexto]]).
 
 > Preços variam por modelo, por região e por data. **Sempre confirme em** `platform.openai.com/docs/pricing` **antes de colocar número em slide ou trabalho.** Não memorize tabela de preço — ela envelhece.
 

@@ -179,7 +179,7 @@ assert generate(seed=1, T=0) == generate(seed=999, T=0)
 
 ## Ver também
 
-- [[Por que a resposta do modelo muda]] · [[Temperatura]] · [[Top-p Sampling]] · [[Lab 04 - Temperatura, top-p e reprodutibilidade]]
+- [[Temperatura e previsibilidade]] · [[Temperatura]] · [[Top-p Sampling]] · [[Lab 04 - Temperatura, top-p e reprodutibilidade]]
 
 ---
 *Atualizado em 2026-09-30*

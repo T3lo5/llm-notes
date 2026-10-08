@@ -11,14 +11,14 @@ Gerado com [Quartz 5](https://quartz.jzhao.xyz). Deploy via GitHub Pages, sem cu
 ```
 vault Obsidian
    │  scripts/exportar.py  +  scripts/origem.py (não versionado)
-   ├─► content/conceitos/      24 fichas de conceito
-   ├─► content/guias/          18 guias em prosa
-   ├─► content/pesquisas/       6 pesquisas
-   ├─► content/labs/            5 labs com código
+   ├─► content/conceitos/      38 fichas de conceito
+   ├─► content/guias/          19 guias em prosa + a nota técnica
+   ├─► content/pesquisas/      10 pesquisas
+   ├─► content/labs/            9 labs com código
    ├─► content/papers/          7 fichas de paper
-   ├─► content/mapa/            mapa conceitual
+   ├─► content/mapa/            2 mapas conceituais
    ├─► content/{index,questoes,sobre}.md
-   └─► quartz/static/dados/questions.json   45 questões
+   └─► quartz/static/dados/questions.json   61 questões
         │  npx quartz build
         ▼
       public/                    site estático

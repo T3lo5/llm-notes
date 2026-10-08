@@ -77,4 +77,4 @@ Cada modalidade tem seu **encoder** e sua resolução. O transformer_shared rece
 
 ## Ver também
 
-- [[O que é um LLM, de verdade]] · [[Embedding]] · [[Janela de Contexto]] · [[Paper - InstructGPT]]
+- [[O que é um LLM]] · [[Embedding]] · [[Janela de Contexto]] · [[Paper - InstructGPT]]

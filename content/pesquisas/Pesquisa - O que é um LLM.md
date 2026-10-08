@@ -138,7 +138,7 @@ def gerar(prompt, modelo, T=0.7, max_tokens=100):
 
 ## Ver também
 
-- [[O que é um LLM, de verdade]] · [[Modelo Base]] · [[RAG]] · [[Alucinação]]
+- [[O que é um LLM]] · [[Modelo Base]] · [[RAG]] · [[Alucinação]]
 
 ---
 *Atualizado em 2026-09-30*

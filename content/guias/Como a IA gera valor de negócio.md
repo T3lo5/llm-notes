@@ -71,7 +71,7 @@ Três camadas de ganho, e é comum confundir a primeira com a terceira:
 | Funciona para uma pessoa, não para a equipe | não foi desenhado para o processo real |
 | O piloto funciona, a escala não | custo por unidade cresce ou supervisão explode |
 
-Ver Antipatrones de adocao de IA — o terceiro sintoma é o "automação sem redesenho".
+Ver [[Antipatrones de adocao de IA]] — o terceiro sintoma é o "automação sem redesenho".
 
 ## Perguntas para validar
 
@@ -81,4 +81,4 @@ Ver Antipatrones de adocao de IA — o terceiro sintoma é o "automação sem re
 
 ## Ver também
 
-- [[Framework de decisão estratégica]] · Antipatrones de adocao de IA · [[Projeto: avaliação de caso de uso de IA]]
+- [[Framework de decisão estratégica]] · [[Antipatrones de adocao de IA]] · [[Projeto: avaliação de caso de uso de IA]]

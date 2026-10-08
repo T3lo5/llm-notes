@@ -44,7 +44,7 @@ O decode é limitado por **banda de memória** (ler pesos + KV cache), não por 
 
 ## Onde vi isso
 
-- Visto em: [[Como o modelo gera respostas, token a token]]
+- Visto em: [[Nota Técnica - Geração token a token]]
 
 ## Ver também
 

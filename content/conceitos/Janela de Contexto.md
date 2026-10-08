@@ -42,7 +42,7 @@ Cada chunk é token de entrada cobrado. Trinta chunks quietos transformam a cons
 
 ## Onde vi isso
 
-- Visto em:, [[Sensibilidade de prompt: ordem importa]]
+- Visto em: [[Modelos de Linguagem: como funcionam]], [[Engenharia de prompt e contexto]]
 
 ## Ver também
 

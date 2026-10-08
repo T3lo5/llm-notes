@@ -1,8 +1,8 @@
 {
-  "gerado_em": "2026-10-05T13:59:54+00:00",
+  "gerado_em": "2026-10-08T20:18:35+00:00",
   "origem": "bancos de questões do vault de estudo",
-  "total": 45,
-  "com_resposta": 20,
+  "total": 61,
+  "com_resposta": 36,
   "questoes": [
     {
       "id": "qm0001",
@@ -258,7 +258,7 @@
       "id": "qm0026",
       "numero": 26,
       "nivel": "",
-      "enunciado": "Quais são as cinco seções do documento de decisão do documento de decisão?",
+      "enunciado": "Quais são as cinco seções do documento de decisão?",
       "detalhes": [],
       "resposta": "",
       "seq": 26,
@@ -453,6 +453,196 @@
       "resposta": "- **RAG** — conhecimento factual novo/atualizado, que precisa ser citado e atualizado sem re-treinar. Custo: tokens de entrada por consulta.\n- **Fine-tuning** — tom, formato e estrutura estáveis, ou tarefa nova com muitos exemplos rotulados. **Não** para ensinar fatos: é caro, desatualiza, e não dá citação.\n- **Ferramentas** — capacidade nova: cálculo, acesso a rede, execução de código. Torna a resposta verificável.\nA regra: escolha pela **natureza da necessidade** (fato / formato / capacidade), não pela moda.",
       "seq": 45,
       "tema": "modelos de linguagem"
+    },
+    {
+      "id": "qpratica01",
+      "numero": 1,
+      "nivel": "facil",
+      "enunciado": "Em uma frase: o que mudou no fluxo de quem desenvolve com IA — e qual ponto virou o gargalo do trabalho?",
+      "detalhes": [
+        "**P.** Em uma frase: o que mudou no fluxo de quem desenvolve com IA — e qual",
+        "ponto virou o gargalo do trabalho?"
+      ],
+      "resposta": "Gerar código ficou barato; o gargalo virou especificar, revisar e confiar no\nque foi gerado. A responsabilidade pela correção continua humana.",
+      "seq": 46,
+      "tema": "prática com IA"
+    },
+    {
+      "id": "qpratica02",
+      "numero": 2,
+      "nivel": "media",
+      "enunciado": "Cite três riscos concretos de desenvolver com IA e um controle prático para cada.",
+      "detalhes": [
+        "**P.** Cite três riscos concretos de desenvolver com IA e um controle prático",
+        "para cada."
+      ],
+      "resposta": "Três de: alucinação de API inexistente → testes/linters antes da revisão;\nsecret vazado em prompt → `.env` fora do git e do contexto; prompt injection\nem conteúdo lido pelo agente → permissões e sandbox; código que ninguém\nentende → diffs pequenos e revisão humana a cada passo.",
+      "seq": 47,
+      "tema": "prática com IA"
+    },
+    {
+      "id": "qpratica03",
+      "numero": 3,
+      "nivel": "facil",
+      "enunciado": "Quais são as 4 partes de um prompt completo? Exemplifique as quatro para a tarefa \"resumir um e-mail\".",
+      "detalhes": [
+        "**P.** Quais são as 4 partes de um prompt completo? Exemplifique as quatro para",
+        "a tarefa \"resumir um e-mail\"."
+      ],
+      "resposta": "Papel (\"você é assessor executivo\"), tarefa (\"resuma o e-mail\"), contexto (\"leitura\nno celular, 30 segundos\"), formato (\"exatamente 3 bullets de até 12 palavras\").",
+      "seq": 48,
+      "tema": "prática com IA"
+    },
+    {
+      "id": "qpratica04",
+      "numero": 4,
+      "nivel": "media",
+      "enunciado": "Por que \"não seja prolixo\" é um prompt fraco? Reescreva-o.",
+      "detalhes": [],
+      "resposta": "Negação diz o que evitar, não o que fazer — o modelo fica sem ação-alvo.\nReescrita: \"responda em exatamente 3 bullets, cada um com no máximo 12 palavras\".",
+      "seq": 49,
+      "tema": "prática com IA"
+    },
+    {
+      "id": "qpratica05",
+      "numero": 5,
+      "nivel": "facil",
+      "enunciado": "O que o SDD afirma — em uma frase — e qual artefato é a fonte de verdade?",
+      "detalhes": [
+        "**P.** O que o SDD afirma — em uma frase — e qual artefato é a fonte de",
+        "verdade?"
+      ],
+      "resposta": "A especificação é escrita, revisada e versionada antes do código, e o código é\nderivado dela. A spec (com critérios de aceite e fora de escopo) é o contrato.",
+      "seq": 50,
+      "tema": "prática com IA"
+    },
+    {
+      "id": "qpratica06",
+      "numero": 6,
+      "nivel": "dificil",
+      "enunciado": "A spec e a implementação divergiram. O que corrigir primeiro — e por quê?",
+      "detalhes": [],
+      "resposta": "A spec primeiro. Se a implementação \"venceu\", foi decisão e não acidente —\nregistra-se a mudança na spec, no mesmo commit, senão o artefato vira mentira\ndocumentada e a próxima revisão perde o referencial.",
+      "seq": 51,
+      "tema": "prática com IA"
+    },
+    {
+      "id": "qpratica07",
+      "numero": 7,
+      "nivel": "facil",
+      "enunciado": "Nomeie as 5 peças mínimas de um ambiente de IA e a função de cada.",
+      "detalhes": [],
+      "resposta": "Terminal/CLI (onde o agente vive), autenticação de modelo (quem paga a conta),\ncliente do agente (conversa e edita arquivos), repositório (rede de segurança —\ngit desfaz), verificação (testes/lint/build — prova que está certo).",
+      "seq": 52,
+      "tema": "prática com IA"
+    },
+    {
+      "id": "qpratica08",
+      "numero": 8,
+      "nivel": "media",
+      "enunciado": "Por que o commit de segurança e a verificação de baseline vêm antes da primeira prompt? O que se perde sem isso?",
+      "detalhes": [
+        "**P.** Por que o commit de segurança e a verificação de baseline vêm antes da",
+        "primeira prompt? O que se perde sem isso?"
+      ],
+      "resposta": "Com baseline verde e ponto de retorno, qualquer vermelho novo é atribuível à\nmudança da IA. Sem isso não se distingue bug pré-existente de regressão — a\nrevisão vira opinião em vez de verificação.",
+      "seq": 53,
+      "tema": "prática com IA"
+    },
+    {
+      "id": "qpratica09",
+      "numero": 9,
+      "nivel": "facil",
+      "enunciado": "O que é o OpenCode e o que significa BYOK?",
+      "detalhes": [],
+      "resposta": "Agente de programação de código aberto que roda no terminal (lê, edita, executa\ncomandos no projeto). BYOK — *bring your own key*: o software é aberto e\ngrátis; a conta de modelo é do seu provedor (pago, tier grátis ou local).",
+      "seq": 54,
+      "tema": "prática com IA"
+    },
+    {
+      "id": "qpratica10",
+      "numero": 10,
+      "nivel": "media",
+      "enunciado": "Descreva o loop do agente (ler → agir → observar) e por que o primeiro pedido certo é pequeno e verificável.",
+      "detalhes": [
+        "**P.** Descreva o loop do agente (ler → agir → observar) e por que o primeiro",
+        "pedido certo é pequeno e verificável."
+      ],
+      "resposta": "Ele lê o contexto, escolhe uma ação, executa e observa o resultado, repetindo\naté a meta. Começar com tarefa pequena e verificável calibra permissões e\nconfiança antes de dar ao agente algo grande para quebrar.",
+      "seq": 55,
+      "tema": "prática com IA"
+    },
+    {
+      "id": "qpratica11",
+      "numero": 11,
+      "nivel": "facil",
+      "enunciado": "O que é uma skill e como ela difere de um prompt?",
+      "detalhes": [],
+      "resposta": "Skill é pacote no filesystem (instruções + recursos) carregado sob demanda.\nPrompt é a conversa do momento; skill é conhecimento reutilizável, versionado\nno git e compartilhável com o time.",
+      "seq": 56,
+      "tema": "prática com IA"
+    },
+    {
+      "id": "qpratica12",
+      "numero": 12,
+      "nivel": "media",
+      "enunciado": "Explique as 3 camadas da progressive disclosure e o que cada uma economiza.",
+      "detalhes": [
+        "**P.** Explique as 3 camadas da progressive disclosure e o que cada uma",
+        "economiza."
+      ],
+      "resposta": "Metadata (~100 tokens, sempre carregada), instruções do SKILL.md (<5k, só quando\ndispara), recursos/scripts (custo zero até serem referenciados; script roda por\nbash e só o output entra no contexto).",
+      "seq": 57,
+      "tema": "prática com IA"
+    },
+    {
+      "id": "qpratica13",
+      "numero": 13,
+      "nivel": "facil",
+      "enunciado": "O que é o N8N? E qual a diferença de papel entre um workflow e um agente?",
+      "detalhes": [
+        "**P.** O que é o N8N? E qual a diferença de papel entre um workflow e um",
+        "agente?"
+      ],
+      "resposta": "Automação de workflows como grafo de nós (fair-code, self-host grátis). Workflow\norquestra etapas determinísticas (buscar → filtrar → gravar); agente decide com\nraciocínio e linguagem (o que fazer e com qual ferramenta).",
+      "seq": 58,
+      "tema": "prática com IA"
+    },
+    {
+      "id": "qpratica14",
+      "numero": 14,
+      "nivel": "dificil",
+      "enunciado": "No projeto, a Amazon bloqueou a requisição automatizada. Por que isso era previsível na spec — e o que faz o caminho de erro existir num workflow?",
+      "detalhes": [
+        "**P.** No projeto, a Amazon bloqueou a requisição automatizada. Por que isso",
+        "era previsível na spec — e o que faz o caminho de erro existir num workflow?"
+      ],
+      "resposta": "Todo caminho de dado externo assume falha e bloqueio: anti-bot/CAPTCHA entra\ncomo risco (e a solução — proxy de scraping — na spec, junto do fora de escopo).\nO caminho de erro é nó desenhado de antemão (retry, alerta): erro vira item com\nmotivo, inspecionável — não afterthought.",
+      "seq": 59,
+      "tema": "prática com IA"
+    },
+    {
+      "id": "qpratica15",
+      "numero": 15,
+      "nivel": "facil",
+      "enunciado": "O que é o Mastra e quais suas 4 primitivas?",
+      "detalhes": [],
+      "resposta": "Framework TypeScript para construir agentes de IA. Primitivas: Agent (modelo +\ninstruções + ferramentas), Tools (ações tipadas), Workflow (passos\ndeterminísticos), Memória/RAG (contexto entre turnos e conhecimento).",
+      "seq": 60,
+      "tema": "prática com IA"
+    },
+    {
+      "id": "qpratica16",
+      "numero": 16,
+      "nivel": "dificil",
+      "enunciado": "Por que \"plain object tool definitions silently fail\" importa? O que o schema compra?",
+      "detalhes": [
+        "**P.** Por que \"plain object tool definitions silently fail\" importa? O que o",
+        "schema compra?"
+      ],
+      "resposta": "Tool mal declarada não levanta erro — silencia e simplesmente nunca roda; por\nisso createTool com id, description, inputSchema (zod) e execute é obrigatório.\nO schema fecha o domínio do argumento: entrada inválida mora na fronteira,\nantes do efeito colateral — alucinação de parâmetros vira erro de validação.",
+      "seq": 61,
+      "tema": "prática com IA"
     }
   ]
 }

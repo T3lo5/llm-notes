@@ -1,5 +1,5 @@
 ---
-title: "Respostas diferentes para perguntas iguais"
+title: "Ambiguidade e riscos na IA"
 tags:
   - "prompt"
   - "avaliacao"
@@ -7,7 +7,7 @@ tipo: "guia"
 date: "2026-10-06"
 ---
 
-# Respostas diferentes para perguntas iguais
+# Ambiguidade e riscos na IA
 
 > **Meta:** entender por que a mesma pergunta produz respostas diferentes, e como isso depende da **formulação** e do **contexto** — e não de aleatoriedade Pura.
 
@@ -41,7 +41,7 @@ A segunda é a que interessa aqui, porque é a que está sob seu controle no mom
 
 ## Contexto muda mais que a pergunta
 
-O mesmo texto perguntado em contextos diferentes gera respostas diferentes, porque o **contexto é a fonte de verdade** — ver [[O que é um LLM, de verdade]].
+O mesmo texto perguntado em contextos diferentes gera respostas diferentes, porque o **contexto é a fonte de verdade** — ver [[O que é um LLM]].
 
 - Pergunta sem documento → responde a partir dos parâmetros (pode alucinar)
 - Pergunta com o documento que confirma → segue o documento
@@ -53,9 +53,9 @@ Três regras para não tirar conclusão de uma amostra:
 
 1. **Fixe a entrada** antes de comparar abordagens.
 2. **Rode várias vezes** com a mesma entrada e temperatura 0 (ver [[Lab 04 - Temperatura, top-p e reprodutibilidade]]).
-3. **Avalie em conjunto**, não por impressão de uma resposta — é o que o formaliza.
+3. **Avalie em conjunto**, não por impressão de uma resposta — é o que o documento de decisão formaliza.
 
-> A[[Como o modelo gera respostas, token a token]] mostra por que isso importa: se cada execução é um caminho diferente no espaço de tokens, comparar respostas exige controlar o caminho.
+> A[[Temperatura e previsibilidade]] mostra por que isso importa: se cada execução é um caminho diferente no espaço de tokens, comparar respostas exige controlar o caminho.
 
 ## Perguntas para validar
 
@@ -65,4 +65,4 @@ Três regras para não tirar conclusão de uma amostra:
 
 ## Ver também
 
-- [[Como o modelo gera respostas, token a token]] · [[Sensibilidade de prompt: ordem importa]] · [[Temperatura]] · [[Alucinação]]
+- [[Nota Técnica - Geração token a token]] · [[Engenharia de prompt e contexto]] · [[Temperatura]] · [[Alucinação]]

@@ -38,7 +38,7 @@ InstructGPT mostrou que o modelo de 1,3B alinhado era preferido ao de 175B não 
 
 ## Onde vi isso
 
-- Visto em: [[O que é um LLM, de verdade]]
+- Visto em: [[O que é um LLM]]
 
 ## Ver também
 

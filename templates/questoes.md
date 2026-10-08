@@ -1,6 +1,6 @@
 ---
 title: Banco de questões
-description: 45 questões de fundamentos e funcionamento de LLMs, com nível de dificuldade e tema de origem.
+description: 61 questões de fundamentos e funcionamento de LLMs, com nível de dificuldade e tema de origem.
 tags:
   - exercicios
   - revisao

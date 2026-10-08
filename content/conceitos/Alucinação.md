@@ -50,7 +50,7 @@ Contexto fundamentado reduz; não elimina. E contexto **errado** piora (ver [[Lo
 
 ## Onde vi isso
 
-- Visto em: [[O que é um LLM, de verdade]]
+- Visto em: [[O que é um LLM]]
 
 ## Ver também
 

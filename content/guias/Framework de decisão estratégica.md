@@ -63,7 +63,7 @@ Critério de abandono: <condição observável> até <data>.
 
 O **critério de abandono** é a parte que quase sempre falta. Sem ele, o projeto nunca morre — e projeto que nunca morre consome a organização.
 
-Ver Antipatrones de adocao de IA para o antipadrão exato do piloto eterno.
+Ver [[Antipatrones de adocao de IA]] para o antipadrão exato do piloto eterno.
 
 ## Aplicação
 
@@ -79,4 +79,4 @@ O framework está aplicado ao seu caso, escrito na [[Projeto: avaliação de cas
 
 ## Ver também
 
-- Framework de decisao estrategica · [[Que problemas a IA resolve]] · [[Como a IA gera valor de negócio]]
+- [[Framework de decisao estrategica]] · [[Que problemas a IA resolve]] · [[Como a IA gera valor de negócio]]

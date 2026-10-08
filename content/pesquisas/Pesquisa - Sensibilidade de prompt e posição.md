@@ -160,7 +160,7 @@ Checklist de revisão de prompt:
 
 ## Ver também
 
-- [[Sensibilidade de prompt: ordem importa]] · [[Lost in the Middle]] · [[RAG]] · [[Prompt Injection]]
+- [[Engenharia de prompt e contexto]] · [[Lost in the Middle]] · [[RAG]] · [[Prompt Injection]]
 
 ---
 *Atualizado em 2026-09-30*

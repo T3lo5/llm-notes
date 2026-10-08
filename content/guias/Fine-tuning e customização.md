@@ -1,5 +1,5 @@
 ---
-title: "Fine-tuning: ajustando os pesos"
+title: "Fine-tuning e customização"
 tags:
   - "fine-tuning"
   - "lora"
@@ -8,7 +8,7 @@ tipo: "guia"
 date: "2026-10-06"
 ---
 
-# Fine-tuning: ajustando os pesos
+# Fine-tuning e customização
 
 > **Meta:** entender o que é fine-tuning, quais técnicas existem, e como decidir entre fine-tuning e prompt engineering.
 

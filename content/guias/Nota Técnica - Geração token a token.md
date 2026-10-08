@@ -1,12 +1,12 @@
 ---
-title: "Como o modelo gera respostas, token a token"
+title: "Nota Técnica - Geração token a token"
 tags:
   - "decodificacao"
 tipo: "guia"
 date: "2026-10-01"
 ---
 
-# Como o modelo gera respostas, token a token
+# Nota Técnica — Geração token a token
 
 > **Meta:** entender como a IA enxerga e contextualiza um token, percorrendo token a token até a resposta completa por aproximação — e por que a resposta não é fixa, mas probabilística.
 
@@ -49,7 +49,7 @@ Três consequências que decorrem disso:
 | **Não há revisão retroativa** | o modelo não volta e troca um token ruim já gerado |
 | **O início carrega mais peso** | os primeiros tokens definem o caminho (ver [[Lost in the Middle]]) |
 
-> É por isso que "o mesmo prompt gera respostas diferentes" não é defeito: é consequência de a geração ser um caminho amostrado em um espaço de possibilidades. Ver [[Respostas diferentes para perguntas iguais]].
+> É por isso que "o mesmo prompt gera respostas diferentes" não é defeito: é consequência de a geração ser um caminho amostrado em um espaço de possibilidades. Ver [[Ambiguidade e riscos na IA]].
 
 ## O loop
 
@@ -148,4 +148,4 @@ Modelo **draft** pequeno gera $k$ candidatos em paralelo; modelo **target** gran
 
 ## Ver também
 
-- [[Pesquisa - Amostragem e reprodutibilidade]] · [[Lab 04 - Temperatura, top-p e reprodutibilidade]] · [[Por que a resposta do modelo muda]]
+- [[Pesquisa - Amostragem e reprodutibilidade]] · [[Lab 04 - Temperatura, top-p e reprodutibilidade]] · [[Temperatura e previsibilidade]]

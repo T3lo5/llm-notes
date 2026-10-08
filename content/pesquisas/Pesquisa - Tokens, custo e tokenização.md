@@ -145,7 +145,7 @@ def count_tokens(text: str, model: str = "gpt-4o") -> int:
 
 ## Ver também
 
-- [[Tokens e por que eles custam]] · [[Token]] · [[Lab 01 - Contando tokens e medindo custo]]
+- [[Tokens: o significado dos números]] · [[Token]] · [[Lab 01 - Contando tokens e medindo custo]]
 
 ---
 *Atualizado em 2026-09-30*
