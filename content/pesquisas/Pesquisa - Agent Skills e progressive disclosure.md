@@ -43,9 +43,9 @@ stdout. Determinismo e economia no mesmo artefato.
 
 ```markdown
 ---
-name: pdf-processing # ≤64 chars, minúsculas/números/hífen
-description: Extract text and tables from PDF # ≤1024 chars; O QUE + QUANDO
- # ("Use when the user mentions...")
+name: pdf-processing                          # ≤64 chars, minúsculas/números/hífen
+description: Extract text and tables from PDF  # ≤1024 chars; O QUE + QUANDO
+                                               # ("Use when the user mentions...")
 ---
 # PDF Processing
 ## Quick start ...
@@ -53,18 +53,18 @@ description: Extract text and tables from PDF # ≤1024 chars; O QUE + QUANDO
 
 - `name`: restrito (sem "anthropic"/"claude", sem XML) — é identificador.
 - `description`: **obrigatória e semântica** — se ela não contém o gatilho
- (sinônimos do que o usuário digita), a skill é um arquivo lindo que nunca abre.
+  (sinônimos do que o usuário digita), a skill é um arquivo lindo que nunca abre.
 - Struct: diretório = skill; arquivos irmãos são os recursos do nível 3.
 
 ### Onde roda (e o que isso implica)
 
 - **Claude API**: skills sobem por `/v1/skills`, rodam em container **sem rede e
- sem instalação de pacotes** — dependências precisam vir pré-instaladas.
+  sem instalação de pacotes** — dependências precisam vir pré-instaladas.
 - **Claude Code**: skills são **filesystem-based** em `~/.claude/skills/`
- (pessoal) ou `.claude/skills/` (projeto) — versionáveis com o repositório.
+  (pessoal) ou `.claude/skills/` (projeto) — versionáveis com o repositório.
 - **claude.ai**: upload de zip; Pro/Max/Team/Enterprise com code execution.
 - **Cross-surface não sincroniza** — skill subida na API não aparece no Claude
- Code. Cada superfície tem seu depósito.
+  Code. Cada superfície tem seu depósito.
 
 ### Segurança — a parte que todo mundo ignora
 
@@ -78,56 +78,56 @@ dados sensíveis. **Skill é código com permissão**, não documento.
 ## Detalhes técnicos
 
 - **Descoberta**: no startup, o `description` de cada skill vai junto do system
- prompt; o modelo decide disparar com base no pare entre pedido e descrição —
- ativação é **busca semântica sobre a descrição**, não keyword exata (daí
- testar com sinônimos — ver [[Lab 02 - Escrevendo uma skill que ativa]]).
+  prompt; o modelo decide disparar com base no pare entre pedido e descrição —
+  ativação é **busca semântica sobre a descrição**, não keyword exata (daí
+  testar com sinônimos — ver [[Lab 02 - Escrevendo uma skill que ativa]]).
 - **Templates vs scripts**: instrução flexível = markdown; operação
- determinística = script (só output entra); fato de consulta = arquivo de
- referência. Colocar fato em markdown é gastar tokens com texto que o modelo
- já "sabe peneirar"; colocar lógica em script é travar o que não deve variar.
+  determinística = script (só output entra); fato de consulta = arquivo de
+  referência. Colocar fato em markdown é gastar tokens com texto que o modelo
+  já "sabe peneirar"; colocar lógica em script é travar o que não deve variar.
 - **Composição**: skills combinam — mas cada combinação disputa o nível 1; 200
- skills genéricas = ruído de discovery. Granularidade fina vence amplitude.
+  skills genéricas = ruído de discovery. Granularidade fina vence amplitude.
 
 ## Limitações e riscos
 
 - **Ativação é probabilística.** Descrição ruim = nunca dispara; descrição
- larga demais = dispara fora de hora (dois modos de falha, mesma causa).
+  larga demais = dispara fora de hora (dois modos de falha, mesma causa).
 - **Skills não sincronizam entre superfícies** — manter duas cópias é drift
- garantido.
+  garantido.
 - **Ambiente restrito na API**: sem rede, sem `pip install` — a skill que assume
- internet quebra silenciosamente lá e funciona no Claude Code.
+  internet quebra silenciosamente lá e funciona no Claude Code.
 - **Fonte única.** A arquitetura é da Anthropic; OpenCode e outros implementam
- formatos parecidos mas não idênticos — conferir a docs do agente alvo
- ([[OpenCode]]).
+  formatos parecidos mas não idênticos — conferir a docs do agente alvo
+  ([[OpenCode]]).
 - **ZDR não cobre Agent Skills** (aviso da própria docs) — dado sensível em
- skill é retenção de dado sensível.
+  skill é retenção de dado sensível.
 
 ## O que isso muda na minha prática
 
 1. **Description é contrato de ativação** — escrever "Use ao <gatilho concreto>",
- nunca o nome da tarefa.
+   nunca o nome da tarefa.
 2. **Três camadas de instrução do agente**: regra sempre-ativa (piso, barato),
- comando/slash (invocação deliberada), skill (especializado sob demanda).
- Encaixar cada tipo no seu lugar — misturar tudo no system prompt é perder a
- progressive disclosure.
+   comando/slash (invocação deliberada), skill (especializado sob demanda).
+   Encaixar cada tipo no seu lugar — misturar tudo no system prompt é perder a
+   progressive disclosure.
 3. Script para o determinístico (linters, formatadores), markdown para o
- julgamento.
+   julgamento.
 4. Auditar skill de terceiros como instalaria binário de terceiros.
 
 ## Fontes
 
 - https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview — visão
- geral oficial: níveis, requisitos, segurança, limitações.
+  geral oficial: níveis, requisitos, segurança, limitações.
 - https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
- — post de engenharia: arquitetura e aplicações.
+  — post de engenharia: arquitetura e aplicações.
 - https://github.com/anthropics/skills — repositório de skills open-source.
 
 ## Perguntas abertas
 
 - Granularidade ótima: 1 skill por capacidade estreita ou skill-padrão com
- seções? A docs diz "como um guia de onboarding" — onboarding de quanto?
+  seções? A docs diz "como um guia de onboarding" — onboarding de quanto?
 - Skills vs **MCP**: conhecimento (skill) vs capability remota (MCP) — onde
- exatamente está a fronteira?
+  exatamente está a fronteira?
 - Como testar ativação em CI — a skill é cobertura de qual suíte?
 
 ## Ver também

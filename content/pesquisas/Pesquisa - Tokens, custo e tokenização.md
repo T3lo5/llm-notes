@@ -97,8 +97,8 @@ pt = "O processamento de linguagem natural é um campo Fascinante da inteligênc
 en = "Natural language processing is a fascinating field of artificial intelligence."
 
 for nome, txt in [("pt", pt), ("en", en)]:
- toks = enc.encode(txt)
- print(f"{nome}: {len(toks)} tokens | {len(txt.split())} palavras | {len(toks)/len(txt.split()):.2f} tok/palavra")
+    toks = enc.encode(txt)
+    print(f"{nome}: {len(toks)} tokens | {len(txt.split())} palavras | {len(toks)/len(txt.split()):.2f} tok/palavra")
 
 # O tokenizer também é reversível:
 assert enc.decode(enc.encode(pt)) == pt
@@ -108,11 +108,11 @@ Função de contagem para um sistema real — **sempre parametrizada pelo modelo
 
 ```python
 def count_tokens(text: str, model: str = "gpt-4o") -> int:
- try:
- enc = tiktoken.encoding_for_model(model)
- except KeyError:
- enc = tiktoken.get_encoding("o200k_base")
- return len(enc.encode(text))
+    try:
+        enc = tiktoken.encoding_for_model(model)
+    except KeyError:
+        enc = tiktoken.get_encoding("o200k_base")
+    return len(enc.encode(text))
 ```
 
 ## Limitações e riscos

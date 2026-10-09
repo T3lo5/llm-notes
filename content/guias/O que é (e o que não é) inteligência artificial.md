@@ -20,12 +20,12 @@ date: "2026-10-08"
 ## A taxonomia
 
 ```
-Inteligência Artificial → o campo
- └─ Machine Learning → aprende a partir de dados, sem regras escritas à mão
- ├─ Aprendizado supervisionado
- ├─ Aprendizado não supervisionado
- └─ Aprendizado por reforço
- └─ (fora de ML) Sistemas baseados em regras / Expert Systems
+Inteligência Artificial          → o campo
+  └─ Machine Learning             → aprende a partir de dados, sem regras escritas à mão
+       ├─ Aprendizado supervisionado
+       ├─ Aprendizado não supervisionado
+       └─ Aprendizado por reforço
+  └─ (fora de ML) Sistemas baseados em regras / Expert Systems
 ```
 
 Um **LLM** (ver [[O que é um LLM]]) é um caso específico: ML supervisionado, com objetivo de prever o próximo token, em escala enorme.

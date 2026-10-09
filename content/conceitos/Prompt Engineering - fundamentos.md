@@ -39,19 +39,19 @@ Na prática soma-se: **exemplos** (few-shot) quando o formato é difícil, e **r
 ## Ideias-chave
 
 - **Instruções positivas funcionam melhor** que negações: "responda em 3 bullets" vence
- "não seja prolixo" — o modelo não sabe o que *fazer* no lugar do proibido.
+  "não seja prolixo" — o modelo não sabe o que *fazer* no lugar do proibido.
 - **Contexto explícito, tarefa isolada.** Misturar tarefa e contexto numa frase só é a
- causa nº 1 de resposta genérica — delimitadores (tags, aspas, `---`) separam camadas.
+  causa nº 1 de resposta genérica — delimitadores (tags, aspas, `---`) separam camadas.
 - **Formato declarado é meio caminho.** Pedir JSON com schema, ou bullet com limite de
- palavras, elimina a etapa manual de "consertar a resposta".
+  palavras, elimina a etapa manual de "consertar a resposta".
 - **O prompt vive dentro de um sistema.** System prompt define regras permanentes; a
- mensagem do usuário é a tarefa do momento — misturar os dois enfraquece ambos.
+  mensagem do usuário é a tarefa do momento — misturar os dois enfraquece ambos.
 - **Sensibilidade não é defeito, é propriedade.** A mesma pergunta com palavras
- diferentes dá respostas diferentes — daí a importância de
- [[Pesquisa - Sensibilidade de prompt e posição]] e de testar variações.
+  diferentes dá respostas diferentes — daí a importância de
+  [[Pesquisa - Sensibilidade de prompt e posição]] e de testar variações.
 - **Perigos correlatos:** o modelo obedece instruções vindas *de dentro dos dados*
- ([[Prompt Injection]]), confia demais em padrão confiante ([[Alucinação]]) e esquece
- o meio do contexto longo ([[Lost in the Middle]]).
+  ([[Prompt Injection]]), confia demais em padrão confiante ([[Alucinação]]) e esquece
+  o meio do contexto longo ([[Lost in the Middle]]).
 
 ## Na prática — o checklist de revisão
 

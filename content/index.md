@@ -89,10 +89,10 @@ contradiz o paper ou a documentação, o paper ganha. Os labs foram executados
 localmente, mas os números hardware-dependem — leia a conclusão de cada um.
 
 <style>
- .home-grade { margin: 2rem 0; }
- .home-coluna { }
- @media (min-width: 700px) {
- .home-grade > .home-coluna { display: inline-block; width: 46%; vertical-align: top; padding-right: 3%; }
- }
- .home-grade h2 { margin-top: 1.5rem; }
+  .home-grade { margin: 2rem 0; }
+  .home-coluna { }
+  @media (min-width: 700px) {
+    .home-grade > .home-coluna { display: inline-block; width: 46%; vertical-align: top; padding-right: 3%; }
+  }
+  .home-grade h2 { margin-top: 1.5rem; }
 </style>

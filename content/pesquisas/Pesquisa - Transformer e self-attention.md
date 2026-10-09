@@ -77,20 +77,20 @@ Em vez de **adicionar** um vetor de posição, RoPE **rotaciona** $Q$ e $K$ por 
 import numpy as np
 
 def softmax(x, axis=-1):
- x = x - x.max(axis=axis, keepdims=True) # estabilidade numérica
- e = np.exp(x)
- return e / e.sum(axis=axis, keepdims=True)
+    x = x - x.max(axis=axis, keepdims=True)   # estabilidade numérica
+    e = np.exp(x)
+    return e / e.sum(axis=axis, keepdims=True)
 
 def self_attention(Q, K, V, mask=None):
- """
- Q, K, V: (n, d_k) — n tokens, d_k dimensão por cabeça
- mask: (n, n) booleano, True = bloquear (ex.: causal)
- """
- scores = Q @ K.T / np.sqrt(Q.shape[-1]) # scaling por sqrt(d_k)
- if mask is not None:
- scores = np.where(mask, -np.inf, scores)
- W = softmax(scores) # (n, n) attention weights
- return W @ V, W # saída e pesos
+    """
+    Q, K, V: (n, d_k) — n tokens, d_k dimensão por cabeça
+    mask: (n, n) booleano, True = bloquear (ex.: causal)
+    """
+    scores = Q @ K.T / np.sqrt(Q.shape[-1])     # scaling por sqrt(d_k)
+    if mask is not None:
+        scores = np.where(mask, -np.inf, scores)
+    W = softmax(scores)                          # (n, n) attention weights
+    return W @ V, W                              # saída e pesos
 
 # Máscara causal: token i só vê tokens <= i
 causal = np.tril(np.ones((n, n), dtype=bool))

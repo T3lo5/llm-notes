@@ -22,11 +22,11 @@ date: "2026-10-08"
 A estrutura é sempre a mesma:
 
 ```
-volume alto × tarefa recorrente × entrada não estruturada × erro tolerável
- ↓
- transformar texto em algo estruturado
- ↓
- consultável, acionável, automatizável
+volume alto  ×  tarefa recorrente  ×  entrada não estruturada  ×  erro tolerável
+                    ↓
+      transformar texto em algo estruturado
+                    ↓
+        consultável, acionável, automatizável
 ```
 
 O denominador comum é **volume de texto não estruturado**. É por isso que IA aparece tanto em suporte, jurídico, vendas, saúde e documentação: são domínios com muito texto e pouca estrutura.

@@ -41,6 +41,12 @@ configuration:
         dark: "#23231f"
         secondary: "#1f5f4e"
         tertiary: "#8a7a4f"
+        # highlight e obrigatorio: sem ele o CSS sai `--highlight: undefined`,
+        # o plugin do Mermaid passa esse valor como edgeLabelBackground e o
+        # render inteiro cai com "Unsupported color format: undefined" —
+        # diagrama vazio, sem erro na pagina.
+        highlight: "#dfe9e5"
+        textHighlight: "#ffe9a8"
       darkMode:
         light: "#1b1b19"
         lightgray: "#3a3a36"
@@ -49,6 +55,8 @@ configuration:
         dark: "#f5f4f0"
         secondary: "#7fc4a5"
         tertiary: "#c8b073"
+        highlight: "#2e3a35"
+        textHighlight: "#8a7a4f88"
   icon: "brain"
   banner: "Notas de estudo sobre LLMs, transformers e engenharia de contexto."
   footer:

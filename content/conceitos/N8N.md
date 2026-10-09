@@ -40,32 +40,32 @@ customizado feito em [[Mastra]].
 ## Ideias-chave
 
 - **Workflow = contrato de dados.** Cada nó **entra com um shape e sai com outro** —
- a maior parte dos bugs de N8N é shape inesperado, não lógica. Inspecionar a saída de
- cada nó é o primeiro instinto.
+  a maior parte dos bugs de N8N é shape inesperado, não lógica. Inspecionar a saída de
+  cada nó é o primeiro instinto.
 - **Tratamento de erro é nó, não afterthought.** Retry com backoff, caminho `on error`,
- alerta — automação sem caminho de falha falha em silêncio, que é o pior modo.
+  alerta — automação sem caminho de falha falha em silêncio, que é o pior modo.
 - **Integrações reais têm atrito real.** No projeto, a Amazon bloqueava requisição
- automatizada (anti-bot/CAPTCHA) e a solução foi um serviço de scraper intermediário —
- lição: **todo caminho de dados externos assume falha e bloqueio**, e prever
- isso é parte do desenho (ver [[Spec-Driven Development]] — o "fora de escopo" e os
- riscos vão na spec).
+  automatizada (anti-bot/CAPTCHA) e a solução foi um serviço de scraper intermediário —
+  lição: **todo caminho de dados externos assume falha e bloqueio**, e prever
+  isso é parte do desenho (ver [[Spec-Driven Development]] — o "fora de escopo" e os
+  riscos vão na spec).
 - **Rate limit e custo:** cada chamada de nó de IA consome tokens ([[Token]]) —
- cachear e filtrar *antes* do nó de modelo é a diferença entre barato e caro.
+  cachear e filtrar *antes* do nó de modelo é a diferença entre barato e caro.
 - **N8N orquestra, o agente decide.** Fluxos determinísticos (buscar → filtrar →
- gravar) ficam no N8N; raciocínio e linguagem ficam no agente [[Mastra]] — separar os
- dois deixa o sistema testável.
+  gravar) ficam no N8N; raciocínio e linguagem ficam no agente [[Mastra]] — separar os
+  dois deixa o sistema testável.
 - **Self-hosted = sua responsabilidade.** Rodar local traz custo zero e controle;
- também traz atualização, backup e segurança do servidor de execução.
+  também traz atualização, backup e segurança do servidor de execução.
 
 ## Na prática — o fluxo do projeto
 
 ```text
 [cron: a cada X]
- → nó HTTP: busca produto (com proxy anti-bot)
- → nó IF: produto novo?
- → nó IA: gera descrição/resumo (chamada de modelo)
- → nó DB: insere produto
- → erro? → retry → webhook de alerta
+   → nó HTTP: busca produto (com proxy anti-bot)
+   → nó IF: produto novo?
+   → nó IA: gera descrição/resumo (chamada de modelo)
+   → nó DB: insere produto
+   → erro? → retry → webhook de alerta
 ```
 
 ## Autoavaliação

@@ -34,16 +34,16 @@ O repositório não é uma opinião — é um toolkit executável que instala co
 `/speckit-implement`, `/speckit-converge`). Três observações importam:
 
 1. **SDD é o processo, os comandos são skills.** Cada `/speckit-*` é uma instrução
- empacotada que o agente carrega quando invocada — o mesmo mecanismo descrito em
- [[Agent Skills]]. A spec vive em arquivos no repositório (`.specify/`,
- `specs/`), não na conversa.
+   empacotada que o agente carrega quando invocada — o mesmo mecanismo descrito em
+   [[Agent Skills]]. A spec vive em arquivos no repositório (`.specify/`,
+   `specs/`), não na conversa.
 2. **O ciclo tem loop de convergência.** `implement → converge` se repete até o
- relatório dizer **Converged** — ou seja, o método assume que a primeira
- implementação NÃO bate com a spec e formaliza o ciclo de correção.
+   relatório dizer **Converged** — ou seja, o método assume que a primeira
+   implementação NÃO bate com a spec e formaliza o ciclo de correção.
 3. **Não é o único processo.** O toolkit traz bug fixing (`assess → fix → test`) e
- idea assessment (`intake → research → define → shape → decide`) como entradas
- independentes — a avaliação de ideia com evidência antes de escrever código é
- SDD no sentido mais amplo: **decisão documentada antes de execução**.
+   idea assessment (`intake → research → define → shape → decide`) como entradas
+   independentes — a avaliação de ideia com evidência antes de escrever código é
+   SDD no sentido mais amplo: **decisão documentada antes de execução**.
 
 ### Por que isso ganhou força agora (e não em 2015)
 
@@ -51,11 +51,11 @@ Spec-first não é novo (foi moda como "design by contract", depois "user storie
 bem escritas"). O que mudou é **quem executa**:
 
 - Antes: spec documentada → humano implementa aos poucos → divergências aparecem
- baratas, no dia a dia.
+  baratas, no dia a dia.
 - Agente: spec ausente → o agente **preenche lacunas com suposições plausíveis** —
- e suposição plausível é o pior tipo de erro: passa revisão de olho-grosso.
+  e suposição plausível é o pior tipo de erro: passa revisão de olho-grosso.
 - Com spec: a lacuna vira *pergunta antes da geração*, quando corrigir custa uma
- linha de markdown.
+  linha de markdown.
 
 O custo de gerar código despencou; o custo de **revisar** não. A spec é o
 dispositivo de revisão posicionado o mais cedo possível. Ver
@@ -79,55 +79,55 @@ agente é uma spec de micro-escala — mesma disciplina, outra granularidade (ve
 ## Detalhes técnicos
 
 - **Estrutura típica do spec-kit**: `.specify/memory/` (constitution e templates),
- `specs/<feature>/` com `spec.md`, `plan.md`, `tasks.md`, `research.md`,
- `data-model.md` — tudo markdown diffável.
+  `specs/<feature>/` com `spec.md`, `plan.md`, `tasks.md`, `research.md`,
+  `data-model.md` — tudo markdown diffável.
 - **Constitution** = princípios estáveis do projeto (qualidade de código, testes,
- manutenibilidade), escritos **uma vez** e relidos a cada feature — é o
- "semântico" da spec; o resto é sintático.
+  manutenibilidade), escritos **uma vez** e relidos a cada feature — é o
+  "semântico" da spec; o resto é sintático.
 - **Convergence report** é artefato: o ciclo só para quando a implementação
- responde a cada critério — paralelo humano do nosso checklist de autoavaliação.
+  responde a cada critério — paralelo humano do nosso checklist de autoavaliação.
 - Integrações: Copilot, Cursor, Claude Code, opencode — o processo é
- agnóstico de agente (justamente porque o processo mora em arquivos).
+  agnóstico de agente (justamente porque o processo mora em arquivos).
 
 ## Limitações e riscos
 
 - **Spec vira ficção se ninguém revisa.** O artefato barato de escrever também é
- o barato de deixar desatualizado — o vínculo commit-a-commit é o único antídoto.
+  o barato de deixar desatualizado — o vínculo commit-a-commit é o único antídoto.
 - **Overhead em tarefa de 10 minutos.** Spec completo para corrigir typo é teatro;
- a régua é: *mudança reversível + verificável em 1 minuto → sem spec*.
+  a régua é: *mudança reversível + verificável em 1 minuto → sem spec*.
 - **Converge pode loopar.** Sem critério de parada (quantas rodadas? quem
- aprova?), o agente converge contra a própria spec — a spec precisa de dono
- humano.
+  aprova?), o agente converge contra a própria spec — a spec precisa de dono
+  humano.
 - **Não substitui descoberta.** Requisito desconhecido não se escreve antes de
- ver; spikes e protótipos continuam legítimos — desde que a descoberta
- atualize a spec antes do próximo ciclo.
+  ver; spikes e protótipos continuam legítimos — desde que a descoberta
+  atualize a spec antes do próximo ciclo.
 
 ## O que isso muda na minha prática
 
 1. Escrever a spec **antes** de abrir o agente — 3 blocos: problema, critérios,
- fora de escopo.
+   fora de escopo.
 2. Tratar o system prompt como spec (revisável, versionada).
 3. Fechar o ciclo: divergência spec × implementação corrige **a spec primeiro** —
- se a implementação "venceu", foi decisão, não acidente; registre.
+   se a implementação "venceu", foi decisão, não acidente; registre.
 4. Aplicar o padrão ao lab: [[Lab 03 - Workflow N8N mínimo]] e
- [[Lab 04 - Agente Mastra com tools]] começam com a pergunta, não com o código.
+   [[Lab 04 - Agente Mastra com tools]] começam com a pergunta, não com o código.
 
 ## Fontes
 
 - https://github.com/github/spec-kit — repositório oficial (MIT): processos,
- comandos, templates.
+  comandos, templates.
 - https://github.com/github/spec-kit/blob/main/spec-driven.md — metodologia SDD
- completa em um documento.
+  completa em um documento.
 - https://github.github.com/spec-kit/concepts/sdd.html — filosofia do SDD.
 
 ## Perguntas abertas
 
 - Spec markdown vs **spec executável** (critérios como testes): quando o código do
- critério vence a prosa do critério?
+  critério vence a prosa do critério?
 - Como escrever spec para **código legado** sem transformar a auditoria em
- projeto de meses?
+  projeto de meses?
 - O converge do spec-kit é o mesmo que "definition of done" com retry — ou
- muda algo essencial?
+  muda algo essencial?
 
 ## Ver também
 

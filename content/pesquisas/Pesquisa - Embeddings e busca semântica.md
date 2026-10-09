@@ -33,7 +33,7 @@ Embeddings aprendem a **geometria do significado** a partir da hipótese distrib
 Efeito colateral: aritmética vetorial vira semântica.
 
 ```python
-# rei - homem + mulher ≈ rainha (ilustrativo, não exato)
+# rei - homem + mulher ≈ rainha  (ilustrativo, não exato)
 v_rei = model.encode("rei"); v_homem = model.encode("homem")
 v_mulher = model.encode("mulher"); v_rainha = model.encode("rainha")
 
@@ -88,17 +88,17 @@ A distinção que importa para projeto:
 from sentence_transformers import SentenceTransformer
 import numpy as np
 
-model = SentenceTransformer("all-MiniLM-L6-v2") # 384 dims, rápido
+model = SentenceTransformer("all-MiniLM-L6-v2")  # 384 dims, rápido
 corpus = ["o cachorro latiu", "o cachorro dormiu",
- "o servidor caiu", "o contrato foi encerrado"]
+          "o servidor caiu", "o contrato foi encerrado"]
 
-E = model.encode(corpus, normalize_embeddings=True) # normaliza -> cosseno = dot
+E = model.encode(corpus, normalize_embeddings=True)   # normaliza -> cosseno = dot
 q = model.encode("o cachorro fez barulho", normalize_embeddings=True)
 
 scores = E @ q
 rank = np.argsort(-scores)
 for i in rank:
- print(f"{scores[i]:.3f} {corpus[i]}")
+    print(f"{scores[i]:.3f}  {corpus[i]}")
 ```
 
 ## Limitações e riscos

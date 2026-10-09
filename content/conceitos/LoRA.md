@@ -22,7 +22,7 @@ Ajustar todos os pesos de um modelo de 7B–70B parâmetros exige GPU, tempo e d
 Em vez de aprender a atualização ΔW inteira (mesma dimensão de W), aprende-se uma fatoração de **baixo posto**:
 
 ```
-ΔW = B · A A ∈ ℝ^(r×k) B ∈ ℝ^(d×r) com r << min(d, k)
+ΔW = B · A          A ∈ ℝ^(r×k)   B ∈ ℝ^(d×r)     com r << min(d, k)
 ```
 
 Os pesos originais **congelam**. Só A e B treinam — uma fração minúscula dos parâmetros.

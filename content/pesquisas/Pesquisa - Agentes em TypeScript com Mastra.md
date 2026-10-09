@@ -35,19 +35,19 @@ import { createTool } from '@mastra/core/tools'
 import { z } from 'zod'
 
 export const weatherTool = createTool({
- id: 'get-weather',
- description: 'Get current weather for a location',
- inputSchema: z.object({ location: z.string().describe('City name') }),
- execute: async ({ location }) => { /* ... */ },
+  id: 'get-weather',
+  description: 'Get current weather for a location',
+  inputSchema: z.object({ location: z.string().describe('City name') }),
+  execute: async ({ location }) => { /* ... */ },
 })
 
 // 2. Agent — constructor { id, name, instructions, model, tools }
 import { Agent } from '@mastra/core/agent'
 export const weatherAgent = new Agent({
- id: 'weather-agent', name: 'Weather Agent',
- instructions: `You are a helpful weather assistant...`,
- model: 'openai/gpt-5-mini', // string provider/model — sem import de provider
- tools: { weatherTool },
+  id: 'weather-agent', name: 'Weather Agent',
+  instructions: `You are a helpful weather assistant...`,
+  model: 'openai/gpt-5-mini',        // string provider/model — sem import de provider
+  tools: { weatherTool },
 })
 
 // 3. Registro — ponto de entrada único
@@ -62,17 +62,17 @@ Quatro detalhes que a docs enfatiza **como correção de desatualização** (sin
 que o ecossistema muda rápido):
 
 1. **`createTool()` com `id`, `description`, `inputSchema` (zod), `execute`** —
- *"plain object tool definitions silently fail to execute"*. A ferramenta
- declarada errado não quebra: **some**. O framework prefere falha silenciosa a
- exceção — motivo mais forte ainda para seguir o contrato à risca.
+   *"plain object tool definitions silently fail to execute"*. A ferramenta
+   declarada errado não quebra: **some**. O framework prefere falha silenciosa a
+   exceção — motivo mais forte ainda para seguir o contrato à risca.
 2. **`execute(inputData, context)`** — assinatura única; `context` traz
- `requestContext`, `tracingContext`, `abortSignal` (cancelamento = controle de
- custo e de laço).
+   `requestContext`, `tracingContext`, `abortSignal` (cancelamento = controle de
+   custo e de laço).
 3. **`model` é string `provider/model`** — `openai/gpt-5-mini`, não
- `provider:model`, não objeto. O framework procura a env var do provider
- (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`...).
+   `provider:model`, não objeto. O framework procura a env var do provider
+   (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`...).
 4. **Node 22.18+ roda TypeScript direto** — `node run.mjs` com imports locais
- terminados em `.ts`; sem build step para prototipar.
+   terminados em `.ts`; sem build step para prototipar.
 
 ### O que o framework resolve que o loop caseiro não
 
@@ -93,48 +93,48 @@ fluxo; Mastra decide o que fazer e com qual ferramenta** — ver [[N8N]] e
 ```bash
 npm install @mastra/core@latest zod@latest typescript@latest @types/node@latest mastra@latest
 # tsconfig: ES2022, moduleResolution bundler, strict
-# npm create mastra@latest → scaffold completo com workspace e tools
+# npm create mastra@latest  → scaffold completo com workspace e tools
 ```
 
 ## Detalhes técnicos
 
 - **zod como contrato**: `.describe()` em cada campo vira doc para o modelo —
- o schema É o prompt da ferramenta. Campo ambíguo = escolha errada mesmo
- com schema válido.
+  o schema É o prompt da ferramenta. Campo ambíguo = escolha errada mesmo
+  com schema válido.
 - **`description` da tool = decisão do modelo** — paralelo exato da `description`
- de skill ([[Agent Skills]]): dizer o que faz **e quando usar**.
+  de skill ([[Agent Skills]]): dizer o que faz **e quando usar**.
 - **`abortSignal`** no contexto: cancelamento propagado — base para timeouts de
- execução com custo limitado.
+  execução com custo limitado.
 - **Studio** (`mastra dev`): UI com traces de execução, mensagens, tokens — o
- "por que errou" vira investigação de passo, não de conversa.
+  "por que errou" vira investigação de passo, não de conversa.
 - **Skills para coding agents**: `npm create mastra@latest` instala skills do
- Mastra para o agente de código instalado — framework que se documenta para
- agentes usar.
+  Mastra para o agente de código instalado — framework que se documenta para
+  agentes usar.
 
 ## Limitações e riscos
 
 - **Velocidade de mudança**: a própria docs pede que se confie nela sobre dados
- de treino — API de framework de agente tem janela de validade curta; tratar
- código de agente como código de integração (adaptação barata esperada).
+  de treino — API de framework de agente tem janela de validade curta; tratar
+  código de agente como código de integração (adaptação barata esperada).
 - **Tools com efeito colateral** (gravar no banco) × **retry do modelo**: sem
- idempotência, a repetição duplica. `execute` deve ser seguro para rodar duas
- vezes.
+  idempotência, a repetição duplica. `execute` deve ser seguro para rodar duas
+  vezes.
 - **Custo de observabilidade**: trace completo de execução longa acumula —
- reter seletivo.
+  reter seletivo.
 - **Silent fail das tools**: objeto fora do padrão some — teste negativo
- obrigatório (ver [[Lab 04 - Agente Mastra com tools]]).
+  obrigatório (ver [[Lab 04 - Agente Mastra com tools]]).
 - **Framework ≠ garantia de segurança**: instruções frágilmente escritas +
- tool permissiva = prompt injection vira ação ([[Prompt Injection]]).
+  tool permissiva = prompt injection vira ação ([[Prompt Injection]]).
 
 ## O que isso muda na minha prática
 
 1. **Tool sempre `createTool` + zod + `execute` com `inputData` validado** — e
- teste negativo na suíte (payload inválido deve falhar **antes** do execute).
+   teste negativo na suíte (payload inválido deve falhar **antes** do execute).
 2. **`instructions` é spec do comportamento** — escrita como
- [[Spec-Driven Development]], não como anotação de conversa.
+   [[Spec-Driven Development]], não como anotação de conversa.
 3. **Trace antes de otimizar**: rodar com Studio e ler o passo que falhou.
 4. **Modelo por string** — trocar de modelo = trocar de env var; custo de
- experimentação zero.
+   experimentação zero.
 
 ## Fontes
 
@@ -145,10 +145,10 @@ npm install @mastra/core@latest zod@latest typescript@latest @types/node@latest 
 ## Perguntas abertas
 
 - Mastra vs **LangGraph** vs loop TypeScript de 50 linhas: em que tamanho de
- projeto o framework paga a curva de versão?
+  projeto o framework paga a curva de versão?
 - Como versionar `instructions` — commit como código ou fixture de teste?
 - Avaliação (evals) de agente: qual métrica mínima para dormir tranquilo com
- tool de escrita em produção?
+  tool de escrita em produção?
 
 ## Ver também
 

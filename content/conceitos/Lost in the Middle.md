@@ -15,12 +15,12 @@ date: "2026-10-01"
 
 ```
 desempenho
- │ ╱‾‾‾╲ ╱‾‾‾
- │ ╱ ╲ ╱
- │╱ ╲________________╱
- └──────────────────────────────────► posição da informação
- início fim
- (primacy) (recency)
+   │  ╱‾‾‾╲                    ╱‾‾‾
+   │ ╱     ╲                  ╱
+   │╱       ╲________________╱
+   └──────────────────────────────────► posição da informação
+     início                        fim
+   (primacy)                     (recency)
 ```
 
 - **Primacy bias** — o início do contexto é mais respeitado.

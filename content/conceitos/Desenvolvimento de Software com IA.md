@@ -25,29 +25,29 @@ gerar código despencou, e o gargalo virou revisar, especificar e confiar**.
 ## Por que importa (aqui e no projeto)
 
 - Foi o **tema de abertura deste projeto** — a abordagem parte da premissa de
- que este é o fluxo de trabalho padrão em 2026.
+  que este é o fluxo de trabalho padrão em 2026.
 - No projeto (plataforma de avaliação de produtos com Claude + N8N + Mastra), o código
- foi gerado com IA de ponta a ponta — por isso as regras de processo importam: sem
- elas, o resultado é *vibe coding* que ninguém consegue manter.
+  foi gerado com IA de ponta a ponta — por isso as regras de processo importam: sem
+  elas, o resultado é *vibe coding* que ninguém consegue manter.
 - É a base para [[Spec-Driven Development]], [[Agent Skills]] e [[OpenCode]] — estas notas mostram **as três alavancas** (processo, instruções, ferramenta).
 
 ## Ideias-chave
 
 - **Gerar barato ≠ confiar barato.** O que mudou é a razão custo/geração; a
- responsabilidade pela correção continua humana. Teste e revisão são o produto real.
+  responsabilidade pela correção continua humana. Teste e revisão são o produto real.
 - **Especificação vira artefato.** Quando um agente escreve o código, o que você
- *escreveu antes* (spec, critérios, testes) é o que garante que o resultado bate com o
- que você queria — ver [[Spec-Driven Development]].
+  *escreveu antes* (spec, critérios, testes) é o que garante que o resultado bate com o
+  que você queria — ver [[Spec-Driven Development]].
 - **Contexto é o recurso escasso.** A IA só é boa no que está no contexto: repositório,
- convenções, dependências. Isso conecta direto com [[Janela de Contexto]] e
- [[Lost in the Middle]] (estudados na D2).
+  convenções, dependências. Isso conecta direto com [[Janela de Contexto]] e
+  [[Lost in the Middle]] (estudados na D2).
 - **Humano no loop, em pontos definidos.** Não "revisar tudo no final": revisar em
- portões — spec aprovada, diffs pequenos, testes verdes.
+  portões — spec aprovada, diffs pequenos, testes verdes.
 - **Riscos concretos:** alucinação de APIs inexistentes (ver [[Alucinação]]), secrets
- vazados em prompt, prompt injection vinda de conteúdo externo que o agente lê
- (ver [[Prompt Injection]]), e código que funciona mas ninguém entende.
+  vazados em prompt, prompt injection vinda de conteúdo externo que o agente lê
+  (ver [[Prompt Injection]]), e código que funciona mas ninguém entende.
 - **Agente = ferramenta com permissão.** Ele lê/escreve arquivos e roda comandos; o
- desenho das permissões faz parte do processo, não é detalhe de configuração.
+  desenho das permissões faz parte do processo, não é detalhe de configuração.
 
 ## Na prática — o ciclo que funciona
 

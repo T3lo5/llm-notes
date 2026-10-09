@@ -17,9 +17,9 @@ date: "2026-10-01"
 import numpy as np
 
 def top_k_filter(p, k):
- keep = np.argsort(-p)[:k]
- m = np.zeros(len(p), dtype=bool); m[keep] = True
- return p * m / (p * m).sum()
+    keep = np.argsort(-p)[:k]
+    m = np.zeros(len(p), dtype=bool); m[keep] = True
+    return p * m / (p * m).sum()
 ```
 
 ## Quando ainda faz sentido

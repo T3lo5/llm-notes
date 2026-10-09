@@ -28,25 +28,25 @@ resultado está certo ou errado.
 ## Por que importa (aqui e no projeto)
 
 - Foi **item deste projeto** (fase "SDD — Spec-Driven Development") — o projeto é
- a demonstração de que spec-first e IA se complementam: a IA acelera a
- implementação, a spec segura a direção.
+  a demonstração de que spec-first e IA se complementam: a IA acelera a
+  implementação, a spec segura a direção.
 - É o antídoto processual contra o *vibe coding* descrito em
- [[Desenvolvimento de Software com IA]].
+  [[Desenvolvimento de Software com IA]].
 - Sem spec, a revisão de código gerado por IA vira opinião; **com spec, vira verificação**
- ("bate com os critérios 1, 2, 3?").
+  ("bate com os critérios 1, 2, 3?").
 
 ## O ciclo
 
 ```text
-1. SPEC o que e por quê: requisitos + critérios de aceite + fora de escopo
- ↓ (revisável por humanos — aqui ainda é barato mudar de ideia)
-2. PLANO como: arquivos, dependências, ordem de passos, riscos
- ↓
-3. TASKS fatias executáveis, cada uma com verificação (teste/lint)
- ↓
-4. IMPL. a IA executa tarefa a tarefa; humano aprova diffs
- ↓
-5. FEEDBACK divergência entre spec e realidade → atualiza a spec PRIMEIRO
+1. SPEC      o que e por quê: requisitos + critérios de aceite + fora de escopo
+   ↓         (revisável por humanos — aqui ainda é barato mudar de ideia)
+2. PLANO     como: arquivos, dependências, ordem de passos, riscos
+   ↓
+3. TASKS     fatias executáveis, cada uma com verificação (teste/lint)
+   ↓
+4. IMPL.     a IA executa tarefa a tarefa; humano aprova diffs
+   ↓
+5. FEEDBACK  divergência entre spec e realidade → atualiza a spec PRIMEIRO
 ```
 
 Ferramentas do ecossistema: o **spec-kit** do GitHub popularizou comandos
@@ -56,18 +56,18 @@ checklist de aceite.
 ## Ideias-chave
 
 - **Spec curta e testável vence spec gigante.** Uma spec que ninguém relê não governa
- nada; o valor está em critérios que respondem "como sei que está pronto?".
+  nada; o valor está em critérios que respondem "como sei que está pronto?".
 - **Critérios de aceite são asserts humanos.** "O usuário vê o preço antes de comprar"
- é verificável; "a UI deve ser boa" não é — o segundo não é spec, é desejo.
+  é verificável; "a UI deve ser boa" não é — o segundo não é spec, é desejo.
 - **A spec versiona junto com o código.** Mudou a implementação de forma intencional?
- A spec muda no mesmo commit — senão ela vira mentira documentada.
+  A spec muda no mesmo commit — senão ela vira mentira documentada.
 - **Fora de escopo é meia spec.** Metade dos problemas em projeto com IA vem de escopo
- que a IA *assumiu* sozinha; declarar o que não fazer fecha a porta.
+  que a IA *assumiu* sozinha; declarar o que não fazer fecha a porta.
 - **A spec é o prompt de maior alavancagem.** Um system prompt bem escrito é uma spec
- de micro-escala (ver [[Prompt Engineering - fundamentos]]) — a mesma disciplina, em
- outra granularidade.
+  de micro-escala (ver [[Prompt Engineering - fundamentos]]) — a mesma disciplina, em
+  outra granularidade.
 - **SDD não elimina descoberta**, ela a localiza: explorar com spike é bom; descobrir
- requisito no diff de produção é ruim.
+  requisito no diff de produção é ruim.
 
 ## Autoavaliação
 - [ ] Definir SDD em uma frase, sem citar ferramentas.

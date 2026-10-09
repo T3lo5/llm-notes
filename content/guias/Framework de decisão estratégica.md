@@ -55,7 +55,7 @@ Dê nota de 1 a 5 para cada dimensão. Serve para **comparar casos**, não para 
 Um framework de decisão deve terminar em **quatro números escritos**, não em uma opinião:
 
 ```
-Hipótese: Se <mudança>, então <métrica> vai de <antes> para <depois>.
+Hipótese:  Se <mudança>, então <métrica> vai de <antes> para <depois>.
 Experimento: <o menor teste possível>, prazo <N> dias.
 Custo-teto: <valor> / <horas>. Se passar, PARAR.
 Critério de abandono: <condição observável> até <data>.

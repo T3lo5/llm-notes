@@ -31,9 +31,9 @@ quando o trabalho aparece.
 
 ```text
 minha-skill/
-├── SKILL.md # nome + descrição (QUANDO usar) + instruções (COMO fazer)
-├── referências/ # docs, exemplos, padrões — carregados sob demanda
-└── scripts/ # utilitários executáveis que a skill invoca
+├── SKILL.md          # nome + descrição (QUANDO usar) + instruções (COMO fazer)
+├── referências/      # docs, exemplos, padrões — carregados sob demanda
+└── scripts/          # utilitários executáveis que a skill invoca
 ```
 
 **O campo mais importante é a `description`** — é ela que decide se a skill é ativada.
@@ -42,20 +42,20 @@ minha-skill/
 ## Ideias-chave
 
 - **Progressive disclosure:** o agente vê primeiro só *nome + descrição* (~palavras);
- o corpo entra no contexto quando a skill é chamada; os arquivos de apoio, quando
- referenciados. É **economia de contexto** aplicada — ver [[Janela de Contexto]].
+  o corpo entra no contexto quando a skill é chamada; os arquivos de apoio, quando
+  referenciados. É **economia de contexto** aplicada — ver [[Janela de Contexto]].
 - **Skill ≠ prompt:** prompt é a conversa do momento, skill é **conhecimento
- reutilizável e versionado no repositório** — vive no git, revisa como código, compartilha com o time.
+  reutilizável e versionado no repositório** — vive no git, revisa como código, compartilha com o time.
 - **Skill é a forma projetável do comportamento.** Onde o *vibe coding* repete
- preferências em cada sessão, a skill as transforma em ativo — o braço direito de
- [[Spec-Driven Development]] no nível da instrução.
+  preferências em cada sessão, a skill as transforma em ativo — o braço direito de
+  [[Spec-Driven Development]] no nível da instrução.
 - **Granularidade:** uma skill = uma capacidade ("escrever changelog", "gerar componentes
- no padrão X"). Skills gigantes falham em ativar; skills miradas ativam sempre.
+  no padrão X"). Skills gigantes falham em ativar; skills miradas ativam sempre.
 - **Descrição é contrato de ativação.** Frase genérica = skill esquecida; frase com
- gatilho concreto ("use ao criar componente React") = ativação confiável.
+  gatilho concreto ("use ao criar componente React") = ativação confiável.
 - **Combinam com comandos e regras:** comandos (slash) invocam de propósito; regras de
- projeto (ex.: `AGENTS.md`) são o piso sempre-ativo; skills são o especializado sob
- demanda — os três camadas de instrução de um agente.
+  projeto (ex.: `AGENTS.md`) são o piso sempre-ativo; skills são o especializado sob
+  demanda — os três camadas de instrução de um agente.
 
 ## Na prática — escrever uma skill que funciona
 

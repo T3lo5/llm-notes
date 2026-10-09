@@ -53,12 +53,12 @@ Liu et al. (*Lost in the Middle: How Language Models Use Long Contexts*, TACL 20
 
 ```
 desempenho
- │ ╱‾‾‾╲ ╱‾‾‾
- │ ╱ ╲ ╱
- │╱ ╲________________╱
- └──────────────────────────────────► posição da informação
- início fim
- (primacy) (recency)
+   │  ╱‾‾‾╲                    ╱‾‾‾
+   │ ╱     ╲                  ╱
+   │╱       ╲________________╱
+   └──────────────────────────────────► posição da informação
+     início                        fim
+   (primacy)                     (recency)
 ```
 
 - **Primacy bias** — o início do contexto é mais respeitado.
