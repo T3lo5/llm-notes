@@ -1,8 +1,8 @@
 {
-  "gerado_em": "2026-10-09T22:06:44+00:00",
+  "gerado_em": "2026-10-09T22:32:31+00:00",
   "origem": "bancos de questões do vault de estudo",
-  "total": 70,
-  "com_resposta": 45,
+  "total": 76,
+  "com_resposta": 51,
   "questoes": [
     {
       "id": "qm0001",
@@ -545,6 +545,66 @@
       "tema": "seleção de modelos"
     },
     {
+      "id": "qselecao10",
+      "numero": 10,
+      "nivel": "facil",
+      "enunciado": "O que é vendor lock-in em IA — e por que ele é uma decisão de arquitetura tomada no início do projeto?",
+      "detalhes": [],
+      "resposta": "É a dependência de um fornecedor cujo custo de troca ficou proibitivo: API proprietária, prompts calibrados num modelo, embeddings e fine-tuning presos nos pesos dele, dados no formato dele. É decisão de arquitetura e de início porque o custo de troca **cresce com o uso** — cada mês de dados, prompts e produto em volta do fornecedor soma trabalho de reescrita; projetar a troca depois custa muito mais do que permiti-la antes.",
+      "seq": 55,
+      "tema": "seleção de modelos"
+    },
+    {
+      "id": "qselecao11",
+      "numero": 11,
+      "nivel": "facil",
+      "enunciado": "Por que um leaderboard público não decide a escolha — e qual benchmark decide?",
+      "detalhes": [],
+      "resposta": "O leaderboard mede **média alheia** em tarefas alheias, com riscos de contaminação (dado que vazou no treino) e saturação — serve para triagem, descartar fracos. Quem decide é o **benchmark do seu domínio**: mesmo dataset para todos os modelos, casos reais da produção, repetição das execuções (decodificação é estocástica) e métrica ligada à função real do produto. Benchmark ruim leva a escolha ruim: a escolha herda os defeitos do teste.",
+      "seq": 56,
+      "tema": "seleção de modelos"
+    },
+    {
+      "id": "qselecao12",
+      "numero": 12,
+      "nivel": "media",
+      "enunciado": "Cite quatro alavancas contra o lock-in e explique por que a abstração (camada de acesso) sozinha não basta.",
+      "detalhes": [],
+      "resposta": "1. Interface única (Adapter/Port) — o produto fala com uma interface; a camada conhece os provedores.\n2. Anti-corruption layer — traduz a semântica do provedor para o modelo de domínio.\n3. Formatos portáveis — prompts genéricos por tarefa, vetores e histórico exportáveis.\n4. Evals de troca — suite que o substituto precisa passar.\nA abstração sozinha não basta porque os modelos **não se comportam igual**: a camada esconde o acoplamento, mas esconde a diferença de comportamento — sem evals de troca, \"trocar\" é suposição testada em produção.",
+      "seq": 57,
+      "tema": "seleção de modelos"
+    },
+    {
+      "id": "qselecao13",
+      "numero": 13,
+      "nivel": "media",
+      "enunciado": "Seu teste de 10 casos deu 90% (modelo A) e 80% (modelo B). Por que isso ainda não é uma comparação — e o que falta?",
+      "detalhes": [],
+      "resposta": "Falta estatística: 10 casos não separam 90% de 80% (a margem de erro engole a diferença); uma execução por caso mede sorte, porque a decodificação é estocástica; e os casos podem não refletir o uso real. O que falta: amostra maior e representativa do tráfego, **repetição** (várias execuções do mesmo caso), margem de erro explícita (intervalos que não se sobrepõem), métrica ligada à função real (formato, fidelidade, falhas) e os **mesmos** dados e versão de prompt para os dois modelos.",
+      "seq": 58,
+      "tema": "seleção de modelos"
+    },
+    {
+      "id": "qselecao14",
+      "numero": 14,
+      "nivel": "dificil",
+      "enunciado": "SaaS com 50k interações/dia (~90% FAQ, ~9% caso a caso, ~1% cobrança ou pedido formal). Desenhe a estratégia híbrida: o que define o gate, o que vai para o caro, e por que \"só caro\" quebra a margem enquanto \"só barato\" quebra a qualidade.",
+      "detalhes": [],
+      "resposta": "**Gate com critério escrito:** ação crítica por domínio (a lista explícita — cobrança/pedido formal), baixa confiança do barato ou falha no validador (schema), e custo do erro acima de N chamadas do caro (N é número). **Fluxo:** FAQ no barato; 9% com contexto ampliado no barato e escala se falhar; 1% no caro + revisão humana. **Por que os extremos falham:** \"só barato\" erra justamente nas ações onde erro vira reclamação/chargeback; \"só caro\" paga o teto de capacidade em 100% das consultas — na conta, ~10× o custo para ganhar qualidade que só 1% das interações paga. A híbrida entrega qualidade onde ela é paga e protege a margem onde ela não é notada.",
+      "seq": 59,
+      "tema": "seleção de modelos"
+    },
+    {
+      "id": "qselecao15",
+      "numero": 15,
+      "nivel": "dificil",
+      "enunciado": "Escreva a decisão final de um caso real seu, no formato completo: levantamento, modelos comparados, eval no domínio, conta no volume, plano de troca (lock-in) e data de revisão. Justifique com a conclusão da disciplina.",
+      "detalhes": [],
+      "resposta": "Formato esperado (com números do caso): **Levantamento** — tarefa, volume, orçamento, latência, tolerância a erro. **Comparação** — ≥2 candidatos no benchmark do domínio (dados reais, repetição, métrica da função real). **Conta** — custo/mês com preço in/out × volume real. **Plano de troca** — camada de acesso + evals que o substituto passa (sem isso, a escolha é lock-in). **Revisão** — data/gatilho (preço mudou, volume dobrou, modelo novo). A justificativa é a conclusão da disciplina: não se escolheu \"o melhor modelo\"; escolheu-se o certo para o contexto certo — com método (levantamento → critérios → trade-off), auditável, e com data de validade.",
+      "seq": 60,
+      "tema": "seleção de modelos"
+    },
+    {
       "id": "qpratica01",
       "numero": 1,
       "nivel": "facil",
@@ -554,7 +614,7 @@
         "ponto virou o gargalo do trabalho?"
       ],
       "resposta": "Gerar código ficou barato; o gargalo virou especificar, revisar e confiar no\nque foi gerado. A responsabilidade pela correção continua humana.",
-      "seq": 55,
+      "seq": 61,
       "tema": "prática com IA"
     },
     {
@@ -567,7 +627,7 @@
         "para cada."
       ],
       "resposta": "Três de: alucinação de API inexistente → testes/linters antes da revisão;\nsecret vazado em prompt → `.env` fora do git e do contexto; prompt injection\nem conteúdo lido pelo agente → permissões e sandbox; código que ninguém\nentende → diffs pequenos e revisão humana a cada passo.",
-      "seq": 56,
+      "seq": 62,
       "tema": "prática com IA"
     },
     {
@@ -580,7 +640,7 @@
         "a tarefa \"resumir um e-mail\"."
       ],
       "resposta": "Papel (\"você é assessor executivo\"), tarefa (\"resuma o e-mail\"), contexto (\"leitura\nno celular, 30 segundos\"), formato (\"exatamente 3 bullets de até 12 palavras\").",
-      "seq": 57,
+      "seq": 63,
       "tema": "prática com IA"
     },
     {
@@ -590,7 +650,7 @@
       "enunciado": "Por que \"não seja prolixo\" é um prompt fraco? Reescreva-o.",
       "detalhes": [],
       "resposta": "Negação diz o que evitar, não o que fazer — o modelo fica sem ação-alvo.\nReescrita: \"responda em exatamente 3 bullets, cada um com no máximo 12 palavras\".",
-      "seq": 58,
+      "seq": 64,
       "tema": "prática com IA"
     },
     {
@@ -603,7 +663,7 @@
         "verdade?"
       ],
       "resposta": "A especificação é escrita, revisada e versionada antes do código, e o código é\nderivado dela. A spec (com critérios de aceite e fora de escopo) é o contrato.",
-      "seq": 59,
+      "seq": 65,
       "tema": "prática com IA"
     },
     {
@@ -613,7 +673,7 @@
       "enunciado": "A spec e a implementação divergiram. O que corrigir primeiro — e por quê?",
       "detalhes": [],
       "resposta": "A spec primeiro. Se a implementação \"venceu\", foi decisão e não acidente —\nregistra-se a mudança na spec, no mesmo commit, senão o artefato vira mentira\ndocumentada e a próxima revisão perde o referencial.",
-      "seq": 60,
+      "seq": 66,
       "tema": "prática com IA"
     },
     {
@@ -623,7 +683,7 @@
       "enunciado": "Nomeie as 5 peças mínimas de um ambiente de IA e a função de cada.",
       "detalhes": [],
       "resposta": "Terminal/CLI (onde o agente vive), autenticação de modelo (quem paga a conta),\ncliente do agente (conversa e edita arquivos), repositório (rede de segurança —\ngit desfaz), verificação (testes/lint/build — prova que está certo).",
-      "seq": 61,
+      "seq": 67,
       "tema": "prática com IA"
     },
     {
@@ -636,7 +696,7 @@
         "primeira prompt? O que se perde sem isso?"
       ],
       "resposta": "Com baseline verde e ponto de retorno, qualquer vermelho novo é atribuível à\nmudança da IA. Sem isso não se distingue bug pré-existente de regressão — a\nrevisão vira opinião em vez de verificação.",
-      "seq": 62,
+      "seq": 68,
       "tema": "prática com IA"
     },
     {
@@ -646,7 +706,7 @@
       "enunciado": "O que é o OpenCode e o que significa BYOK?",
       "detalhes": [],
       "resposta": "Agente de programação de código aberto que roda no terminal (lê, edita, executa\ncomandos no projeto). BYOK — *bring your own key*: o software é aberto e\ngrátis; a conta de modelo é do seu provedor (pago, tier grátis ou local).",
-      "seq": 63,
+      "seq": 69,
       "tema": "prática com IA"
     },
     {
@@ -659,7 +719,7 @@
         "pedido certo é pequeno e verificável."
       ],
       "resposta": "Ele lê o contexto, escolhe uma ação, executa e observa o resultado, repetindo\naté a meta. Começar com tarefa pequena e verificável calibra permissões e\nconfiança antes de dar ao agente algo grande para quebrar.",
-      "seq": 64,
+      "seq": 70,
       "tema": "prática com IA"
     },
     {
@@ -669,7 +729,7 @@
       "enunciado": "O que é uma skill e como ela difere de um prompt?",
       "detalhes": [],
       "resposta": "Skill é pacote no filesystem (instruções + recursos) carregado sob demanda.\nPrompt é a conversa do momento; skill é conhecimento reutilizável, versionado\nno git e compartilhável com o time.",
-      "seq": 65,
+      "seq": 71,
       "tema": "prática com IA"
     },
     {
@@ -682,7 +742,7 @@
         "economiza."
       ],
       "resposta": "Metadata (~100 tokens, sempre carregada), instruções do SKILL.md (<5k, só quando\ndispara), recursos/scripts (custo zero até serem referenciados; script roda por\nbash e só o output entra no contexto).",
-      "seq": 66,
+      "seq": 72,
       "tema": "prática com IA"
     },
     {
@@ -695,7 +755,7 @@
         "agente?"
       ],
       "resposta": "Automação de workflows como grafo de nós (fair-code, self-host grátis). Workflow\norquestra etapas determinísticas (buscar → filtrar → gravar); agente decide com\nraciocínio e linguagem (o que fazer e com qual ferramenta).",
-      "seq": 67,
+      "seq": 73,
       "tema": "prática com IA"
     },
     {
@@ -708,7 +768,7 @@
         "era previsível na spec — e o que faz o caminho de erro existir num workflow?"
       ],
       "resposta": "Todo caminho de dado externo assume falha e bloqueio: anti-bot/CAPTCHA entra\ncomo risco (e a solução — proxy de scraping — na spec, junto do fora de escopo).\nO caminho de erro é nó desenhado de antemão (retry, alerta): erro vira item com\nmotivo, inspecionável — não afterthought.",
-      "seq": 68,
+      "seq": 74,
       "tema": "prática com IA"
     },
     {
@@ -718,7 +778,7 @@
       "enunciado": "O que é o Mastra e quais suas 4 primitivas?",
       "detalhes": [],
       "resposta": "Framework TypeScript para construir agentes de IA. Primitivas: Agent (modelo +\ninstruções + ferramentas), Tools (ações tipadas), Workflow (passos\ndeterminísticos), Memória/RAG (contexto entre turnos e conhecimento).",
-      "seq": 69,
+      "seq": 75,
       "tema": "prática com IA"
     },
     {
@@ -731,7 +791,7 @@
         "schema compra?"
       ],
       "resposta": "Tool mal declarada não levanta erro — silencia e simplesmente nunca roda; por\nisso createTool com id, description, inputSchema (zod) e execute é obrigatório.\nO schema fecha o domínio do argumento: entrada inválida mora na fronteira,\nantes do efeito colateral — alucinação de parâmetros vira erro de validação.",
-      "seq": 70,
+      "seq": 76,
       "tema": "prática com IA"
     }
   ]
