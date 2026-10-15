@@ -75,7 +75,7 @@ fonte da verdade é o vault, não este site.
 
 ## Praticar
 
-- [Banco de questões](/questoes) — 61 questões com nível de dificuldade e tema de origem.
+- [Banco de questões](/questoes) — 76 questões com nível de dificuldade e tema de origem.
 - [Guias](/guias) — os temas em prosa, do enquadramento à mecânica.
 - [Labs](/labs) — código executável sobre tokens, embeddings, atenção e sampling.
 - [Pesquisas](/pesquisas) — o que cada paper realmente mudou, e o que é só otimização de constante.
@@ -89,10 +89,10 @@ contradiz o paper ou a documentação, o paper ganha. Os labs foram executados
 localmente, mas os números hardware-dependem — leia a conclusão de cada um.
 
 <style>
- .home-grade { margin: 2rem 0; }
- .home-coluna { }
- @media (min-width: 700px) {
- .home-grade > .home-coluna { display: inline-block; width: 46%; vertical-align: top; padding-right: 3%; }
- }
- .home-grade h2 { margin-top: 1.5rem; }
+  .home-grade { margin: 2rem 0; }
+  .home-coluna { }
+  @media (min-width: 700px) {
+    .home-grade > .home-coluna { display: inline-block; width: 46%; vertical-align: top; padding-right: 3%; }
+  }
+  .home-grade h2 { margin-top: 1.5rem; }
 </style>

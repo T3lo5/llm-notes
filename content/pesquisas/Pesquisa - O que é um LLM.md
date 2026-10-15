@@ -97,17 +97,17 @@ Usar fine-tuning para ensinar fato é caro e desatualiza. Usar RAG para ensinar 
 ```python
 # O LLM inteiro, em pseudocódigo de 6 linhas.
 def gerar(prompt, modelo, T=0.7, max_tokens=100):
- tokens = tokenizer.encode(prompt)
- saida = []
- for _ in range(max_tokens):
- logits = modelo(tokens) # transformer: densa e paralela
- p = softmax(logits / T) # temperatura NOS LOGITS
- p = top_p_filter(p, 0.9) # trunca a cauda não confiável
- t = sample(p, rng) # <- ÚNICO ponto estocástico
- saida.append(t)
- if t == EOS: break
- tokens.append(t) # o token gerado volta ao contexto
- return tokenizer.decode(saida)
+    tokens = tokenizer.encode(prompt)
+    saida = []
+    for _ in range(max_tokens):
+        logits = modelo(tokens)                    # transformer: densa e paralela
+        p = softmax(logits / T)                   # temperatura NOS LOGITS
+        p = top_p_filter(p, 0.9)                  # trunca a cauda não confiável
+        t = sample(p, rng)                        # <- ÚNICO ponto estocástico
+        saida.append(t)
+        if t == EOS: break
+        tokens.append(t)                          # o token gerado volta ao contexto
+    return tokenizer.decode(saida)
 ```
 
 ## Limitações e riscos

@@ -43,7 +43,7 @@ O resultado é um vocabulário hierárquico: tokens como `pro`, `cess`, `amento`
 ```python
 import tiktoken
 
-enc = tiktoken.get_encoding("o200k_base") # ~200k tokens (GPT-4o)
+enc = tiktoken.get_encoding("o200k_base")   # ~200k tokens (GPT-4o)
 enc2 = tiktoken.get_encoding("cl100k_base") # GPT-4 / GPT-3.5
 
 pt = "O processamento de linguagem natural é um campo fascinante."

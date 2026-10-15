@@ -34,10 +34,10 @@ O passo 3 devolve uma **distribuição**, não um token. A escolha é feita na a
 A resposta **não é projetada de uma vez**. Ela é construída em passos, e cada passo muda o contexto dos próximos:
 
 ```
-passo 1: "A" → contexto mínimo, previsão mais genérica
+passo 1: "A"      → contexto mínimo, previsão mais genérica
 passo 2: "A" + "empresa" → agora o modelo pode especializar
 passo 3: "A empresa de"... → segue o padrão mais provável
- ...
+   ...
 passo n: "A empresa de e-commerce reduziu..." → fim
 ```
 

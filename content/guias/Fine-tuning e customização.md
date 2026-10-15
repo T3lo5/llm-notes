@@ -24,7 +24,7 @@ date: "2026-10-06"
 O modelo forward é uma cadeia de transformações:
 
 ```
-h → W₁h + b₁ → ativação → W₂h + b₂ → ... → logits
+h  →  W₁h + b₁  →  ativação  →  W₂h + b₂  →  ...  →  logits
 ```
 
 - **W** (pesos) — matrizes que transformam o vetor

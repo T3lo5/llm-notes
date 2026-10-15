@@ -37,29 +37,29 @@ de avaliação de produtos — o que conversa com o usuário e decide quais aç�
 ## Ideias-chave
 
 - **Ferramenta tipada = contrato.** Cada tool tem schema de entrada/saída (no ecossistema
- TS, tipagem/zod) — **contrato explícito reduz alucinação de parâmetros**, porque o
- modelo é obrigado a preencher uma forma válida (relaciona com [[Alucinação]]).
+  TS, tipagem/zod) — **contrato explícito reduz alucinação de parâmetros**, porque o
+  modelo é obrigado a preencher uma forma válida (relaciona com [[Alucinação]]).
 - **O agente escolhe, o workflow garante.** Deixar o LLM livre para qualquer sequência
- é imprevisível; envolver a tarefa num workflow com passos definidos ganha
- confiabilidade sem perder flexibilidade — é o mesmo espírito do [[Spec-Driven Development]].
+  é imprevisível; envolver a tarefa num workflow com passos definidos ganha
+  confiabilidade sem perder flexibilidade — é o mesmo espírito do [[Spec-Driven Development]].
 - **System prompt é spec do agente.** As instruções do agente (papel, limites, formato)
- são [[Prompt Engineering - fundamentos]] aplicada à produtividade.
+  são [[Prompt Engineering - fundamentos]] aplicada à produtividade.
 - **Observabilidade vem de fábrica.** Traços de cada execução (chamadas, tokens, latência)
- transformam "a IA errou" em "o passo 3 falhou" — debug vira investigação de fluxo.
+  transformam "a IA errou" em "o passo 3 falhou" — debug vira investigação de fluxo.
 - **Memória é custo e privacidade.** Lembrar tudo = contexto sempre crescente
- ([[Janela de Contexto]]) e dado guardado — reter o necessário, com janela e
- descarte definidos.
+  ([[Janela de Contexto]]) e dado guardado — reter o necessário, com janela e
+  descarte definidos.
 - **N8N × Mastra na mesma frase:** N8N **desenha e executa** a automação; Mastra
- **implementa o agente** que a automação chama. Integração via webhook/HTTP.
+  **implementa o agente** que a automação chama. Integração via webhook/HTTP.
 
 ## Na prática — esqueleto do agente do projeto
 
 ```ts
 const agente = new Agent({
- model: openai("gpt-4o-mini"), // 1. cérebro
- instructions: SYSTEM_DE_SPEC, // 2. spec do comportamento
- tools: { buscarProduto, inserirProduto }, // 3. ações tipadas
- memory: janelaDescartavel, // 4. contexto entre turnos
+  model: openai("gpt-4o-mini"),      // 1. cérebro
+  instructions: SYSTEM_DE_SPEC,       // 2. spec do comportamento
+  tools: { buscarProduto, inserirProduto },  // 3. ações tipadas
+  memory: janelaDescartavel,          // 4. contexto entre turnos
 });
 ```
 

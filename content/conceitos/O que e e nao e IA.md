@@ -14,12 +14,12 @@ date: "2026-10-08"
 ## A hierarquia
 
 ```
-Inteligência Artificial → o campo
- └─ Machine Learning → aprende de dados, sem regras escritas à mão
- ├─ supervisionado
- ├─ não supervisionado
- └─ por reforço
- └─ (fora de ML) Sistemas baseados em regras
+Inteligência Artificial          → o campo
+  └─ Machine Learning             → aprende de dados, sem regras escritas à mão
+       ├─ supervisionado
+       ├─ não supervisionado
+       └─ por reforço
+  └─ (fora de ML) Sistemas baseados em regras
 ```
 
 Um [[O que é um LLM]] é um caso específico: ML supervisionado, objetivo de prever o próximo token, em escala enorme.

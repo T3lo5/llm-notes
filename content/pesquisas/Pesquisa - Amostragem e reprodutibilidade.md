@@ -82,58 +82,58 @@ Implementação mínima e executável do pipeline completo:
 ```python
 import numpy as np
 
-V = 6 # vocabulário fictício
+V = 6   # vocabulário fictício
 
 def softmax(z, T=1.0):
- if T <= 0: # T=0 não divide: faz argmax
- p = np.zeros_like(z); p[np.argmax(z)] = 1.0
- return p
- z = z / T # TEMPERATURA NOS LOGITS, antes do softmax
- z = z - z.max() # estabilidade numérica
- e = np.exp(z)
- return e / e.sum()
+    if T <= 0:                       # T=0 não divide: faz argmax
+        p = np.zeros_like(z); p[np.argmax(z)] = 1.0
+        return p
+    z = z / T                        # TEMPERATURA NOS LOGITS, antes do softmax
+    z = z - z.max()                  # estabilidade numérica
+    e = np.exp(z)
+    return e / e.sum()
 
 def fake_model(prefix):
- """'Modelo' fictício: logits condicionados ao último token."""
- last = prefix[-1] if prefix else 0
- z = np.array([3.0, 2.2, 1.4, 0.6, -0.4, -1.0]) * (0.5 + 0.1 * last)
- return z
+    """'Modelo' fictício: logits condicionados ao último token."""
+    last = prefix[-1] if prefix else 0
+    z = np.array([3.0, 2.2, 1.4, 0.6, -0.4, -1.0]) * (0.5 + 0.1 * last)
+    return z
 
 def mask_top_k(p, k):
- keep = np.argsort(-p)[:k]
- m = np.zeros(V, dtype=bool); m[keep] = True
- return m
+    keep = np.argsort(-p)[:k]
+    m = np.zeros(V, dtype=bool); m[keep] = True
+    return m
 
 def mask_top_p(p, top_p):
- order = np.argsort(-p)
- cum = np.cumsum(p[order])
- k = int(np.searchsorted(cum, top_p) + 1)
- m = np.zeros(V, dtype=bool); m[order[:k]] = True
- return m
+    order = np.argsort(-p)
+    cum = np.cumsum(p[order])
+    k = int(np.searchsorted(cum, top_p) + 1)
+    m = np.zeros(V, dtype=bool); m[order[:k]] = True
+    return m
 
 def generate(steps=8, seed=7, T=1.0, k=None, top_p=None):
- rng = np.random.default_rng(seed)
- out = []
- for _ in range(steps):
- z = fake_model(out)
- if T <= 0:
- out.append(int(np.argmax(z))) # greedy: sem sorteio
- continue
- p = softmax(z, T)
- m = np.ones(V, dtype=bool)
- if k is not None: m &= mask_top_k(p, k)
- if top_p is not None: m &= mask_top_p(p, top_p)
- p = np.where(m, p, 0.0)
- p = p / p.sum() # renormaliza
- u = rng.random()
- idx = int(np.searchsorted(np.cumsum(p), u, side="right"))
- out.append(min(idx, V - 1))
- return out
+    rng = np.random.default_rng(seed)
+    out = []
+    for _ in range(steps):
+        z = fake_model(out)
+        if T <= 0:
+            out.append(int(np.argmax(z)))     # greedy: sem sorteio
+            continue
+        p = softmax(z, T)
+        m = np.ones(V, dtype=bool)
+        if k is not None:     m &= mask_top_k(p, k)
+        if top_p is not None: m &= mask_top_p(p, top_p)
+        p = np.where(m, p, 0.0)
+        p = p / p.sum()                            # renormaliza
+        u = rng.random()
+        idx = int(np.searchsorted(np.cumsum(p), u, side="right"))
+        out.append(min(idx, V - 1))
+    return out
 
-print("T=0 (greedy) :", generate(T=0))
-print("T=0.7 :", generate(T=0.7))
+print("T=0  (greedy) :", generate(T=0))
+print("T=0.7         :", generate(T=0.7))
 print("T=0.7 top_p=.9:", generate(T=0.7, top_p=0.9))
-print("seeds 1 e 2 :", generate(seed=1), generate(seed=2))
+print("seeds 1 e 2   :", generate(seed=1), generate(seed=2))
 
 # T=0 deve ser SEMPRE igual, independentemente do seed:
 assert generate(seed=1, T=0) == generate(seed=999, T=0)

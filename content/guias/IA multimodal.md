@@ -32,8 +32,8 @@ O ponto técnico que explica "não é boa em tudo":
 
 ```
 imagem ──▶ encoder visual ──┐
-texto ──▶ tokenizer ────────┼──▶ projeções no mesmo espaço ──▶ transformer
-áudio ──▶ encoder de áudio ─┘
+texto  ──▶ tokenizer ────────┼──▶ projeções no mesmo espaço ──▶ transformer
+áudio  ──▶ encoder de áudio ─┘
 ```
 
 Cada modalidade tem seu **encoder** e sua resolução. O transformer_shared recebe tudo como vetores. Mas:

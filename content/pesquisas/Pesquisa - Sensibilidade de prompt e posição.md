@@ -101,7 +101,7 @@ Não use conhecimento externo. Não faça suposições.
 </system>
 
 <context>
-[doc-7] {chunk mais relevante} <-- ponta superior
+[doc-7] {chunk mais relevante}      <-- ponta superior
 [doc-2] {segundo chunk}
 ...
 [doc-5] {último chunk}

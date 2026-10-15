@@ -61,11 +61,11 @@ Texto:
 ---"""
 
 texto = ("nossa ferramenta usa ia para achar problemas no codigo antes do deploy, "
- "ela revisa o diff e comenta, e vc pode testar gratis por 14 dias")
+         "ela revisa o diff e comenta, e vc pode testar gratis por 14 dias")
 
 for nome, prompt in [("vago", VAGO), ("estruturado", ESTRUTURADO.format(texto=texto))]:
- tokens = enc.encode(prompt)
- print(f"{nome:12s} {len(tokens):4d} tokens | {len(prompt):4d} chars")
+    tokens = enc.encode(prompt)
+    print(f"{nome:12s} {len(tokens):4d} tokens  |  {len(prompt):4d} chars")
 ```
 
 ## Como rodar
@@ -101,23 +101,23 @@ python3 lab01_anatomia_prompt.py
 ## Análise
 
 - **Custo**: o estruturado custa ~N× mais tokens — multiplique pelo preço do
- token (ver [[Token]]): o delta é centavos por chamada. A pergunta honesta é
- quantas rodadas de "não era isso que eu queria" o vago provoca.
+  token (ver [[Token]]): o delta é centavos por chamada. A pergunta honesta é
+  quantas rodadas de "não era isso que eu queria" o vago provoca.
 - **Variação**: mesmo *com* estrutura, a saída varia — a estrutura **reduz**
- a variação de *formato*, não a de conteúdo. Formato é o que dá
- deterministicidade barata (relaciona com [[Temperatura]]).
+  a variação de *formato*, não a de conteúdo. Formato é o que dá
+  deterministicidade barata (relaciona com [[Temperatura]]).
 - **O que a estrutura faz de fato**: isola as 4 camadas para que o modelo não
- misture tarefa com contexto — se a saída falhou, dá para apontar **qual**
- parte faltou. No vago, a falha é anônima.
+  misture tarefa com contexto — se a saída falhou, dá para apontar **qual**
+  parte faltou. No vago, a falha é anônima.
 
 ## Extensão (o que eu faria com mais tempo)
 
 - Automatizar a fase 2 com chamada de API e rubrica automática (contagem de
- frases por `re.split`) — 30 execuções, estatística de acerto real.
+  frases por `re.split`) — 30 execuções, estatística de acerto real.
 - Testar a 5ª parte: **exemplo** (few-shot) para formato mais difícil que
- "3 frases".
+  "3 frases".
 - Medir o efeito de pedir o formato **no fim vs no começo** do prompt (posição
- — ver [[Pesquisa - Sensibilidade de prompt e posição]]).
+  — ver [[Pesquisa - Sensibilidade de prompt e posição]]).
 
 ## Conceitos tocados
 
@@ -126,11 +126,11 @@ python3 lab01_anatomia_prompt.py
 ## Erros que cometi
 
 - Contar **caracteres** e achar que eram tokens — por isso a rubrica imprime
- os dois números (confundir os dois é o erro 1 deste lab).
+  os dois números (confundir os dois é o erro 1 deste lab).
 - Rodar as 3 execuções na **mesma conversa** e concluir que "não varia": o
- histórico já entregou o formato. Sessão limpa por envio, sempre.
+  histórico já entregou o formato. Sessão limpa por envio, sempre.
 - Enquadrar a hipótese como "resposta melhor" (subjetivo) em vez de "formato
- cumprido" (contável) — o lab só é conclusível com critério verificável.
+  cumprido" (contável) — o lab só é conclusível com critério verificável.
 
 ---
 *Lab criado em 2026-10-08*

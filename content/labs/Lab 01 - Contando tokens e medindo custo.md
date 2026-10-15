@@ -33,22 +33,22 @@ import tiktoken
 ENCODINGS = ["cl100k_base", "o200k_base"]
 
 TEXTOS = {
- "en": "Natural language processing is a fascinating field of artificial intelligence.",
- "pt": "O processamento de linguagem natural é um campo Fascinante da inteligência artificial.",
- "es": "El procesamiento de lenguaje natural es un campo fascinante de la inteligencia artificial.",
- "de": "Die Verarbeitung natürlicher Sprache ist ein faszinierendes Gebiet der künstlichen Intelligenz.",
- "ru": "Обработка естественного языка — это увлекательная область искусственного интеллекта.",
+    "en": "Natural language processing is a fascinating field of artificial intelligence.",
+    "pt": "O processamento de linguagem natural é um campo Fascinante da inteligência artificial.",
+    "es": "El procesamiento de lenguaje natural es un campo fascinante de la inteligencia artificial.",
+    "de": "Die Verarbeitung natürlicher Sprache ist ein faszinierendes Gebiet der künstlichen Intelligenz.",
+    "ru": "Обработка естественного языка — это увлекательная область искусственного интеллекта.",
 }
 
 print(f"{'enc':<14}{'idioma':<8}{'tokens':>8}{'palavras':>10}{'chars':>8}{'tok/palavra':>14}")
 print("-" * 62)
 for enc_name in ENCODINGS:
- enc = tiktoken.get_encoding(enc_name)
- for idioma, txt in TEXTOS.items():
- n_tok = len(enc.encode(txt))
- n_pal = len(txt.split())
- print(f"{enc_name:<14}{idioma:<8}{n_tok:>8}{n_pal:>10}{len(txt):>8}{n_tok/n_pal:>14.2f}")
- print()
+    enc = tiktoken.get_encoding(enc_name)
+    for idioma, txt in TEXTOS.items():
+        n_tok = len(enc.encode(txt))
+        n_pal = len(txt.split())
+        print(f"{enc_name:<14}{idioma:<8}{n_tok:>8}{n_pal:>10}{len(txt):>8}{n_tok/n_pal:>14.2f}")
+    print()
 
 # --- Verificação 1: o tokenizador é reversível ---
 enc = tiktoken.get_encoding("o200k_base")
@@ -59,16 +59,16 @@ print("✓ tokenização reversível")
 txt = TEXTOS["pt"]
 a = len(tiktoken.get_encoding("cl100k_base").encode(txt))
 b = len(tiktoken.get_encoding("o200k_base").encode(txt))
-print(f"cl100k={a} o200k={b} (mesmo texto, tokenizadores diferentes)")
+print(f"cl100k={a}  o200k={b}  (mesmo texto, tokenizadores diferentes)")
 
 # --- Verificação 3: custo de conversa longa ---
 print("\n--- custo acumulado de uma conversa ---")
 turnos = ["Turno de usuário e resposta, cerca de 300 tokens por turno."] * 20
 total_input = 0
 for i in range(1, len(turnos) + 1):
- # a cada turno o histórico inteiro (i blocos) é reenviado
- total_input += i * 300
- print(f"turno {i:>2}: entrada acumulada = {total_input:>7} tokens")
+    # a cada turno o histórico inteiro (i blocos) é reenviado
+    total_input += i * 300
+    print(f"turno {i:>2}: entrada acumulada = {total_input:>7} tokens")
 print(f"\nTotal: {total_input} tokens de entrada")
 print(f"Se cada chamada fosse isolada: {20 * 300} tokens")
 print(f"Overhead do histórico: {total_input / (20 * 300):.1f}x")

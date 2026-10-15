@@ -35,19 +35,19 @@ Prático — a parte chata que decide se o resto funciona.
 ## Ideias-chave
 
 - **Repositório antes de agente.** O primeiro comando não é pedir código, é garantir
- que um `git checkout` desfaz tudo — ver [[Desenvolvimento de Software com IA]].
+  que um `git checkout` desfaz tudo — ver [[Desenvolvimento de Software com IA]].
 - **Chave de API ≠ assinatura.** Nem todo acesso a modelo é pago: há camadas gratuitas,
- modelos abertos locais e provedores com tier grátis. O item "Não possui uma IA paga?"
- do projeto existe exatamente para isso — e o caminho indicado é o [[OpenCode]].
+  modelos abertos locais e provedores com tier grátis. O item "Não possui uma IA paga?"
+  do projeto existe exatamente para isso — e o caminho indicado é o [[OpenCode]].
 - **Custo mora no contexto, não na conversa.** Cada envio cobra os tokens do histórico
- (ver [[Token]] e [[Janela de Contexto]]) — ambiente bem configurado corta ruído, não
- corta qualidade.
+  (ver [[Token]] e [[Janela de Contexto]]) — ambiente bem configurado corta ruído, não
+  corta qualidade.
 - **Permissões são parte do ambiente.** Definir o que o agente pode executar sem
- perguntar (leitura, escrita, comandos) é configuração de segurança, não conforto.
+  perguntar (leitura, escrita, comandos) é configuração de segurança, não conforto.
 - **Segredos nunca entram no prompt.** `.env` no gitignore; se um segredo foi para o
- contexto do modelo, ele já vazou — relaciona com [[Prompt Injection]].
+  contexto do modelo, ele já vazou — relaciona com [[Prompt Injection]].
 - **Reprodutibilidade:** versões fixadas (lockfile, runtime) evitam "funciona na minha
- máquina" — o agente reproduz bugs do ambiente com a mesma facilidade que os seus.
+  máquina" — o agente reproduz bugs do ambiente com a mesma facilidade que os seus.
 
 ## Na prática — setup mínimo do zero
 
@@ -56,7 +56,7 @@ Prático — a parte chata que decide se o resto funciona.
 3. Instalar o cliente do agente — no projeto: [[OpenCode]].
 4. `git init` (ou clonar) + commit do estado atual.
 5. Rodar a **verificação de baseline** (testes/build verdes) **antes** da primeira
- interação — depois disso, qualquer vermelho veio da mudança.
+   interação — depois disso, qualquer vermelho veio da mudança.
 
 ## Autoavaliação
 - [ ] Nomear as 5 peças do ambiente e a função de cada uma.
