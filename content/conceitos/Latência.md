@@ -35,7 +35,7 @@ latência total = TTFT (prefill paralelo) + n_tokens × tempo_por_token (decode 
 | p50 | mediana — o caso típico | esconde a cauda |
 | **p99** | o caso ruim que define SLA | medir só p50 entrega previsão otimista |
 
-No MC2 medimos latência p50 por braço de prompt e o resultado contraintuitivo apareceu: prompt longo foi **mais rápido** que curto — a latência não é monotônica no tamanho do prompt, depende do modelo e do que o system_fingerprint expõe (ver [[Temperatura e previsibilidade]]).
+Em um experimento anterior medimos latência p50 por braço de prompt e o resultado contraintuitivo apareceu: prompt longo foi **mais rápido** que curto — a latência não é monotônica no tamanho do prompt, depende do modelo e do que o system_fingerprint expõe (ver [[Temperatura e previsibilidade]]).
 
 ## Confusões e aparências
 

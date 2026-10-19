@@ -29,7 +29,7 @@ date: "2026-10-16"
 | 24 | [[Critérios de seleção de IA]] | os 5 critérios: qualidade, custo, latência, confiabilidade, risco |
 | 25 | [[Trade-offs na escolha do modelo]] | a tabela caro × barato e a decisão sem achismo |
 
-Depois vêm vendor lock-in, benchmarks, estratégia híbrida, escolha final e o **MC3 — IA para SaaS (25/10)**.
+Depois vêm vendor lock-in, benchmarks, estratégia híbrida, escolha final e **o estudo de caso da disciplina**.
 
 ## O ponto de partida: o levantamento
 

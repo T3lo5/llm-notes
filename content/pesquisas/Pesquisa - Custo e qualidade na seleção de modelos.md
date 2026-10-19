@@ -76,7 +76,7 @@ O roteamento aprendido troca a regra por um modelo: `P(forte_vence | consulta) >
 
 ## O que isso muda na minha prática
 
-- [ ] Rodar um mini-benchmark com **2 modelos** (um frontier, um intermediário) no meu domínio antes de qualquer decisão (planejado para o MC3)
+- [ ] Rodar um mini-benchmark com **2 modelos** (um frontier, um intermediário) no meu domínio antes de qualquer decisão (planejado para o estudo de caso)
 - [ ] Montar a conta de custo com o **meu volume real**, não com o preço por token isolado
 - [ ] Escrever a decisão no formato "modelo + critérios + alternativa descartada + data de revisão"
 - [ ] Avaliar cascata com verificador de schema onde o volume justificar

@@ -11,7 +11,7 @@ date: "2026-10-14"
 	
 # Lab 05 — Rodando o experimento de sensibilidade de prompt
 
-> **O que este lab prova:** que o MC2 é executável. O script abaixo roda as 238 chamadas,
+> **O que este lab prova:** que o estudo de caso é executável. O script abaixo roda as 238 chamadas,
 > grava um CSV e **não inventa** nenhum resultado. Ele só executa e registra.
 
 ## Pergunta
@@ -46,7 +46,7 @@ export CF_REASONING_EFFORT=low
 ```python
 #!/usr/bin/env python3
 """
-MC2 - Análise de Comportamento de LLM para Atendimento Corporativo.
+estudo de caso - Análise de Comportamento de LLM para Atendimento Corporativo.
 Runner: executa as 7 estrategias sobre as 18 perguntas e grava um CSV.
 
 Endpoint compatível com a API OpenAI (OpenAI, Groq, Together, vLLM, Ollama).
@@ -475,14 +475,14 @@ def main():
               file=sys.stderr)
         print("   Resposta truncada é resposta incompleta: pontuar ela como se fosse",
               file=sys.stderr)
-        print("   completa contamina a §8 do MC2. Ajuste CF_MAXTOK e rerode estes.",
+        print("   completa contamina a §8 do estudo de caso. Ajuste CF_MAXTOK e rerode estes.",
               file=sys.stderr)
         print("   IDs: " + ", ".join(r["run_id"] for r in truncadas[:12]), file=sys.stderr)
     if falhas:
         print(f"FALHAS ({len(falhas)}): {falhas}", file=sys.stderr)
     if n == 0:
         print("\nNENHUMA chamada concluída — nada foi medido. "
-              "O CSV está vazio; NÃO use para preencher a §8 do MC2.", file=sys.stderr)
+              "O CSV está vazio; NÃO use para preencher a §8 do estudo de caso.", file=sys.stderr)
         sys.exit(3)
     if falhas:
         # arquivo parcial: conserva o que deu certo, mas nao se confunda com rodada completa
@@ -563,7 +563,7 @@ erro" e produzir uma tabela de resultados vazia que parece medida.
 2. **A pergunta vai como mensagem de usuário separada**, nunca colada no system. Se você
    colar, o teste de injeção (P15) deixa de existir.
 3. **`sleep(0.7)`** é cortesia de rate limit. Aumente se a API reclamar.
-4. **Apague a coluna `braco` antes de pontuar**, se for seguir a mitigação de L3 do MC2.
+4. **Apague a coluna `braco` antes de pontuar**, se for seguir a mitigação de L3 do estudo de caso.
 
 ## Conceitos tocados
 

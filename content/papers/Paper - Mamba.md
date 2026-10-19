@@ -70,7 +70,7 @@ SSMs lineares anteriores (como DSS) eram lineares mas **blindados**: a transiç�
 
 ## Rethinking
 
-> A pergunta para um pós em 2026 não é "Mamba venceu". É: **quantas otimizações de constante eu preciso acumular antes de mudar de paradigma?** E a resposta honesta é: depende do length distribution dos seus prompts, e isso se mede.
+> A pergunta de quem constrói com IA em 2026 não é "Mamba venceu". É: **quantas otimizações de constante eu preciso acumular antes de mudar de paradigma?** E a resposta honesta é: depende do length distribution dos seus prompts, e isso se mede.
 
 ## Notas de leitura
 
