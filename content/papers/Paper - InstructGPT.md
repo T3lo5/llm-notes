@@ -64,6 +64,8 @@ Os **rankings humanos** são a parte escassa. Quando a preferência é pareada (
 
 ## Onde isso conecta
 
+- Conceito: [[Modelo Base]] · [[Alucinação]]
+- Seção: [[O que é um LLM]]
 - Pesquisa: [[Pesquisa - O que é um LLM]]
 
 ## Rethinking

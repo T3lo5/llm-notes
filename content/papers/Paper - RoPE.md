@@ -72,6 +72,8 @@ Extrapolação além do comprimento de treino **não é perfeita**. A comunidade
 
 ## Onde isso conecta
 
+- Conceito: [[Positional Encoding]] · [[Self-Attention]] · [[Janela de Contexto]]
+- Seção: [[Arquitetura Transformers e Attention]]
 - Pesquisa: [[Pesquisa - Transformer e self-attention]]
 
 ## Rethinking

@@ -25,7 +25,7 @@ date: "2026-10-15"
 
 ## O mapa
 
-A[[Embeddings e vetorização]] mostrou *como* texto vira vetor. Esta aula mostra *o que fazer* com esses
+A[[Embeddings e vetorização]] mostrou *como* texto vira vetor. Esta seção mostra *o que fazer* com esses
 vetores: medir o quanto dois textos significam a mesma coisa. É a ponte entre
 "ter embeddings" e "buscar por similaridade" (o coração de qualquer RAG).
 
@@ -86,6 +86,7 @@ e o número discordarem no terceiro caso, o limiar de corte é onde olhar.
 - Anterior: [[Embeddings e vetorização]] — de onde vem o vetor.
 - Próxima: [[Arquitetura Transformers e Attention]] — como o contexto é
   processado antes de virar embedding.
+- Conceito central: [[Similaridade de Cosseno]] · [[Busca Semântica]] · [[RAG]]
 - Prática: [[Lab 02 - Embeddings e similaridade]]
 - Pesquisa: [[Pesquisa - Embeddings e busca semântica]]
 

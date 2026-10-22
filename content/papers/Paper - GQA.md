@@ -66,6 +66,8 @@ Conversão de MHA → GQA:
 
 ## Onde isso conecta
 
+- Conceito: [[KV Cache]] · [[Prefill]] · [[Self-Attention]]
+- Seção: [[Arquitetura Transformers e Attention]], [[Nota Técnica - Geração token a token]]
 - Pesquisa: [[Pesquisa - Transformer e self-attention]]
 
 ## Rethinking

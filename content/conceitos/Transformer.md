@@ -62,6 +62,7 @@ Os LLMs de chat são **decoder-only**.
 ## Onde vi isso
 
 - Visto em: [[Arquitetura Transformers e Attention]]
+- Aprofundamento: [[Pesquisa - Transformer e self-attention]] · [[Paper - Attention Is All You Need]]
 
 ## Ver também
 

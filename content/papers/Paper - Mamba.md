@@ -66,6 +66,8 @@ SSMs lineares anteriores (como DSS) eram lineares mas **blindados**: a transiç�
 
 ## Onde isso conecta
 
+- Conceito: [[Transformer]] · [[Self-Attention]] · [[KV Cache]] · [[Prefill]]
+- Seção: [[Arquitetura Transformers e Attention]]
 - Pesquisa: [[Pesquisa - Transformer e self-attention]]
 
 ## Rethinking

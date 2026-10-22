@@ -47,7 +47,7 @@ date: "2026-10-16"
 - **Multi-modelo vira o padrão**, não exceção — a arquitetura assume troca desde o início.
 - Revisão periódica deixa de ser esforço extra e vira rotina — o mercado se move mais rápido que o contrato.
 
-> **Conclusão da disciplina:** o "melhor modelo" é uma pergunta sem resposta; "qual modelo para **este** contexto" é uma pergunta com método. O que separa as duas é exatamente o trabalho das aulas anteriores.
+> **Conclusão da disciplina:** o "melhor modelo" é uma pergunta sem resposta; "qual modelo para **este** contexto" é uma pergunta com método. O que separa as duas é exatamente o trabalho das seções anteriores.
 
 ## Perguntas para validar
 

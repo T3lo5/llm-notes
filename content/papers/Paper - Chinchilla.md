@@ -69,6 +69,7 @@ O número "4×" vem do fato de que Chinchilla tem 4× menos parâmetros — o cu
 ## Onde isso conecta
 
 - Conceito: [[Modelo Base]]
+- Seção: [[O que é um LLM]]
 - Pesquisa: [[Pesquisa - O que é um LLM]]
 - Anterior: *Scaling Laws for Neural Language Models* — Kaplan et al., arXiv:2001.08361
 

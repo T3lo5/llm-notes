@@ -36,7 +36,7 @@ O mito tem duas faces:
 
 ## A consequência prática
 
-A aula fecha com o método: **levantamento antes, decisão depois**. Sem levantamento, a escolha vira opinião; com ele, vira trade-off documentado — que é o assunto das aulas Critérios de seleção de IA e Trade-offs na escolha do modelo.
+A seção fecha com o método: **levantamento antes, decisão depois**. Sem levantamento, a escolha vira opinião; com ele, vira trade-off documentado — que é o assunto das seções Critérios de seleção de IA e Trade-offs na escolha do modelo.
 
 | Situação | Mito diz | A análise diz |
 | --- | --- | --- |

@@ -19,7 +19,7 @@ date: "2026-10-01"
 
 ## O mapa
 
-Esta aula é o índice do módulo. Ela não pede que você saiba nada ainda — pede que você saiba o que *vai* saber.
+Esta seção é o índice do módulo. Ela não pede que você saiba nada ainda — pede que você saiba o que *vai* saber.
 
 ```mermaid
 flowchart TD
@@ -88,12 +88,6 @@ Responda agora, sem olhar, e confira depois:
 - Karpathy, A. — *The spelled-out intro to transformers* (YouTube). É praticamente a[[Arquitetura Transformers e Attention]] animada.
 - Alammar, J. — *The Illustrated Transformer* — https://jalammar.github.io/illustrated-transformer/
 - Jurafsky & Martin — *Speech and Language Processing*, cap. 3 (rascunho gratuito) — https://web.stanford.edu/~jurafsky/slp3/
-
-## Checklist de conclusão
-
-- [ ] Escrevi a frase-resumo do topo sem consultar
-- [ ] Sei explicar por que a etapa de amostragem torna o sistema estocástico
-- [ ] Consigo citar 3 mitos e responder por que são falsos
 
 <script>
 // Correcao do Mermaid no Quartz 5.0.0.

@@ -4,7 +4,7 @@ tags:
   - "conceito"
   - "avaliacao"
 tipo: "conceito"
-date: "2026-10-01"
+date: "2026-10-29"
 ---
 
 # Alucinação
@@ -51,10 +51,18 @@ Contexto fundamentado reduz; não elimina. E contexto **errado** piora (ver [[Lo
 ## Onde vi isso
 
 - Visto em: [[O que é um LLM]]
+- Revisado na prática em 2026-10-22.
+
+## Comportamentos vizinhos
+
+A alucinação não vem sozinha: a mesma rodada pode trazer **inconsistência** (a saída
+se contradiz), **ambiguidade** (pergunta mal especificada — geralmente prompt ruim) e
+**perda de contexto** (informação anterior ignorada). Fichas: [[Inconsistência]]
+[[Ambiguidade]] · [[Perda de Contexto]].
 
 ## Ver também
 
 - [[RAG]] · [[Janela de Contexto]] · [[Lost in the Middle]]
 
 ---
-*Atualizado em 2026-09-30*
+*Atualizado em 2026-10-22*

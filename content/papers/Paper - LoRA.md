@@ -67,6 +67,8 @@ LoRA vence adapters porque **não altera a arquitetura em inferência**.
 
 ## Onde isso conecta
 
+- Conceito: [[Modelo Base]] · [[RAG]]
+- Seção: [[O que é um LLM]]
 - Pesquisa: [[Pesquisa - O que é um LLM]]
 
 ## Rethinking

@@ -69,6 +69,8 @@ Eles **sabiam** que era um problema em 2017. Interessante ler isso e comparar co
 
 ## Onde isso conecta
 
+- Conceito: [[Self-Attention]] · [[Transformer]] · [[Positional Encoding]] · [[KV Cache]]
+- Seção: [[Arquitetura Transformers e Attention]]
 - Pesquisa: [[Pesquisa - Transformer e self-attention]]
 - Lab: o lab 03
 

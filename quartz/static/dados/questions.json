@@ -1,8 +1,8 @@
 {
-  "gerado_em": "2026-10-19T22:21:40+00:00",
+  "gerado_em": "2026-10-22T21:53:38+00:00",
   "origem": "bancos de questões do vault de estudo",
-  "total": 76,
-  "com_resposta": 51,
+  "total": 95,
+  "com_resposta": 70,
   "questoes": [
     {
       "id": "qm0001",
@@ -528,7 +528,7 @@
       "id": "qselecao08",
       "numero": 8,
       "nivel": "dificil",
-      "enunciado": "O líder da área diz: \"Todo mundo usa o modelo X agora, é o melhor, vamos migrar.\" Responda com análise — sem achismo, no formato da aula 25 (critérios + números + revisão).",
+      "enunciado": "O líder da área diz: \"Todo mundo usa o modelo X agora, é o melhor, vamos migrar.\" Responda com análise — sem achismo, no formato da seção 25 (critérios + números + revisão).",
       "detalhes": [],
       "resposta": "Pedir o que sustenta \"melhor\": **melhor para qual tarefa, em qual métrica, no nosso volume?** Montar a linha de decisão: qualidade = eval no nosso domínio (X vs. atual); custo = R$/1M × nosso volume/mês; latência = p95 medido; risco = o que muda se errar. \"Todo mundo\" é anedota (leaderboard único e marketing são fontes do mito). Se os números do X ganharem, a decisão é dele — com **data de revisão** (preço muda, modelo novo aparece); se não ganharem, fica o atual, e a resposta é auditável.",
       "seq": 53,
@@ -793,6 +793,257 @@
       "resposta": "Tool mal declarada não levanta erro — silencia e simplesmente nunca roda; por\nisso createTool com id, description, inputSchema (zod) e execute é obrigatório.\nO schema fecha o domínio do argumento: entrada inválida mora na fronteira,\nantes do efeito colateral — alucinação de parâmetros vira erro de validação.",
       "seq": 76,
       "tema": "prática com IA"
+    },
+    {
+      "id": "qriscos01",
+      "numero": 1,
+      "nivel": "facil",
+      "enunciado": "Por que em IA a falha é tratada como **taxa** e não como exceção? O que muda na forma de testar e de proteger o sistema?",
+      "detalhes": [
+        "**P.** Por que em IA a falha é tratada como **taxa** e não como exceção? O que muda na",
+        "forma de testar e de proteger o sistema?"
+      ],
+      "resposta": "Porque o modelo estima a **continuação mais provável** do texto, não a resposta\nverdadeira: o erro é esperado e mensurável, não um bug pontual. Muda o teste (entrada\nparecida → saída variável, cobertura por distribuição e cauda, não por caso fixo) e muda a\nproteção (camadas: fonte real, validação de saída, guardrails, humano no crítico e\n[[Evals]] contínuos). \"Testar mais\" não elimina o erro; mede e contém.",
+      "seq": 77,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos02",
+      "numero": 2,
+      "nivel": "facil",
+      "enunciado": "Defina alucinação em uma frase e explique por que o **tom confiante** da resposta não é evidência de que ela está correta.",
+      "detalhes": [
+        "**P.** Defina alucinação em uma frase e explique por que o **tom confiante** da resposta",
+        "não é evidência de que ela está correta."
+      ],
+      "resposta": "Alucinação é a IA **inventar informação** e entregá-la com aparência de resposta correta\n(plausível, bem escrita, segura) — mas imprecisa ou falsa. O tom confiante é **estilo**\nde linguagem, não probabilidade calibrada: o modelo não tem sinal interno de dúvida\nconfiável, porque foi treinado para gerar texto plausível, não para distinguir verdade de\ninvenção.",
+      "seq": 78,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos03",
+      "numero": 3,
+      "nivel": "media",
+      "enunciado": "Defina inconsistência e mostre por que ela **não é** o mesmo que alucinação. Dê um exemplo em que a resposta está factualmente correta e ainda assim é inconsistente.",
+      "detalhes": [
+        "**P.** Defina inconsistência e mostre por que ela **não é** o mesmo que alucinação. Dê um",
+        "exemplo em que a resposta está factualmente correta e ainda assim é inconsistente."
+      ],
+      "resposta": "Inconsistência é a **mesma entrada** (mesma pergunta, contexto e dado) produzir saídas\ndiferentes entre execuções, ou uma saída que se contradiz internamente. Não é alucinação:\no fato pode estar certo nas duas vezes. Exemplo: segunda-feira o relatório diz \"total:\nR$ 42.300\" e terça, mesmo CSV, diz \"R$ 38.900\" — o segundo número não é inventado, é\noutro critério de agregação. Causas: amostragem/[[Temperatura]], contexto diferente,\nversão de modelo/prompt e [[Ambiguidade]] não resolvida.",
+      "seq": 79,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos04",
+      "numero": 4,
+      "nivel": "media",
+      "enunciado": "Por que ambiguidade é descrita como \"geralmente causada por prompt ruim\"? E por que \"escrever um prompt mais longo\" não é a correção?",
+      "detalhes": [
+        "**P.** Por que ambiguidade é descrita como \"geralmente causada por prompt ruim\"? E por que",
+        "\"escrever um prompt mais longo\" não é a correção?"
+      ],
+      "resposta": "Porque o pedido **não determina** qual resposta é a correta: \"resumo das vendas\" pode ser\ntotal do mês, média por venda, comparação com o mês anterior ou texto executivo — todas\nleituras válidas. O modelo escolhe uma (a continuação mais provável) e segue. Prompt mais\nlongo sem **critério de correção** só adiciona texto; o que corrige é definir contrato\n(objetivo, público, formato, o que não fazer), dar exemplo de saída, usar schema e mandar\nperguntar quando faltar dado crítico.",
+      "seq": 80,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos05",
+      "numero": 5,
+      "nivel": "media",
+      "enunciado": "Explique os **dois mecanismos** de perda de contexto vistos no guia de alucinação e por que aumentar a janela não resolve o problema.",
+      "detalhes": [
+        "**P.** Explique os **dois mecanismos** de perda de contexto vistos no guia de alucinação e por que",
+        "aumentar a janela não resolve o problema."
+      ],
+      "resposta": "(1) **Limite de janela:** o contexto passa do máximo e o mais antigo é cortado\n([[Janela de Contexto]]). (2) **Atenção no meio:** a informação está dentro da janela, mas\nno meio de um contexto longo é menos usada que o começo e o fim ([[Lost in the Middle]]).\nAumentar a janela só resolve o primeiro; no segundo, mais texto significa mais ruído\ncompetindo com a evidência. A correção é arquitetura de contexto: reancorar instruções,\nposicionar o crítico no começo/fim, resumir, recuperar sob demanda e manter estado\nexplícito.",
+      "seq": 81,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos06",
+      "numero": 6,
+      "nivel": "media",
+      "enunciado": "Liste as cinco camadas de controle do guia de moderação e diga qual erro cada uma pega.",
+      "detalhes": [],
+      "resposta": "| Camada | Erro que pega |\n| --- | --- |\n| **Grounding** | alucinação factual — resposta sem lastro no dado real |\n| **Validação de saída** | saída quebrada: schema, tipo, range, citação inexistente |\n| **Guardrails** | conteúdo proibido, PII, [[Prompt Injection]], tópico fora de escopo |\n| **Human-in-the-loop** | residual caro que nenhuma regra pegou |\n| **Evals** | regressão silenciosa — mede se as outras camadas seguram |\nA ordem importa: grounding → validação → humano → evals.",
+      "seq": 82,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos07",
+      "numero": 7,
+      "nivel": "media",
+      "enunciado": "Classifique cada sintoma como **alucinação**, **inconsistência**, **ambiguidade** ou **perda de contexto**: a) o agente cita uma função `sample_frac` do pandas que não existe; b) a mesma consulta de preço retorna R$ 199 hoje e R$ 189 amanhã, com o mesmo dado; c) você pede \"média de vendas por mês\" e recebe o total do mês; d) você disse \"valores em centavos\" no início e o agente divide por 100 na mensagem 30.",
+      "detalhes": [
+        "**P.** Classifique cada sintoma como **alucinação**, **inconsistência**, **ambiguidade**",
+        "ou **perda de contexto**:",
+        "a) o agente cita uma função `sample_frac` do pandas que não existe;",
+        "b) a mesma consulta de preço retorna R$ 199 hoje e R$ 189 amanhã, com o mesmo dado;",
+        "c) você pede \"média de vendas por mês\" e recebe o total do mês;",
+        "d) você disse \"valores em centavos\" no início e o agente divide por 100 na mensagem 30."
+      ],
+      "resposta": "a) **Alucinação** — fato/API inventado, plausível e falso.\nb) **Inconsistência** — mesma entrada, saída diferente (pode não haver erro factual).\nc) **Ambiguidade** — o pedido admitia mais de uma leitura; o modelo escolheu uma.\nd) **Perda de contexto** — a regra existia, mas deixou de ser usada (janela ou meio).",
+      "seq": 83,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos08",
+      "numero": 8,
+      "nivel": "dificil",
+      "enunciado": "Um script gerado pela IA usa `df.sample_frac(0.1)`. Como você descobre que é alucinação **antes** de produção, e quais dois controles teriam evitado o problema?",
+      "detalhes": [
+        "**P.** Um script gerado pela IA usa `df.sample_frac(0.1)`. Como você descobre que é",
+        "alucinação **antes** de produção, e quais dois controles teriam evitado o problema?"
+      ],
+      "resposta": "Descoberta: **executar** o código em ambiente de teste (o erro aparece como\n`AttributeError` em runtime) e **conferir a API na documentação real** — o método existe\nno dplyr (R), não no pandas. Controles: (1) usar **documentação real como referência** e\nvalidar imports/métodos contra ela; (2) **validar a saída em código** — rodar o script\nnum pipeline de teste com dados de exemplo, não só revisar o texto. Bônus: pedir ao modelo\nque cite a fonte da API e recusar quando não houver.",
+      "seq": 84,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos09",
+      "numero": 9,
+      "nivel": "dificil",
+      "enunciado": "Um relatório diário passa a mostrar totais diferentes para o mesmo CSV. Liste três controles, do mais barato ao mais caro, e diga o que cada um **não** resolve.",
+      "detalhes": [
+        "**P.** Um relatório diário passa a mostrar totais diferentes para o mesmo CSV. Liste três",
+        "controles, do mais barato ao mais caro, e diga o que cada um **não** resolve."
+      ],
+      "resposta": "1. **Fixar critério e versão** (prompt + modelo + parâmetros documentados) — barato;\nnão resolve entrada/contexto diferente nem modelo do provedor que muda por baixo.\n2. **Temperatura 0 + cache/idempotência** — reduz variação e repete a mesma saída; não\ngarante determinismo e não corrige critério ambíguo.\n3. **Eval com repetição + validação de saída** — mede a variação e barra saída inválida;\ncusta N execuções e não recupera um caso que ninguém pensou em testar.\nAntes dos três: garantir que \"total\" tem **uma definição só** (o problema pode ser\n[[Ambiguidade]], não inferência).",
+      "seq": 85,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos10",
+      "numero": 10,
+      "nivel": "dificil",
+      "enunciado": "O agente ignora a regra \"valores em centavos\" depois de 30 mensagens. Proponha três medidas, ordene por custo e explique por que \"repetir a regra no chat\" é a pior delas.",
+      "detalhes": [
+        "**P.** O agente ignora a regra \"valores em centavos\" depois de 30 mensagens. Proponha",
+        "três medidas, ordene por custo e explique por que \"repetir a regra no chat\" é a pior",
+        "delas."
+      ],
+      "resposta": "1. **Reancorar no ponto de uso** (repetir a regra junto do pedido atual) — barato, mas\nocupa contexto e depende de disciplina.\n2. **Bloco de estado explícito** (regras/decisões fixas fora do histórico) — médio; exige\ndesenho do prompt.\n3. **Resumir/compactar o histórico + recuperar sob demanda** — mais caro; precisa de\npipeline e teste de regressão.\n\"Repetir no chat\" é a pior porque aumenta o contexto, não garante posição e será\nnovamente diluída — a regra volta a competir com todo o resto. O teste: mover/remover a\nregra e ver se a resposta muda.",
+      "seq": 86,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos11",
+      "numero": 11,
+      "nivel": "media",
+      "enunciado": "Reescreva o pedido \"faça um resumo das vendas\" como um **contrato** de pelo menos quatro cláusulas, e diga qual falha cada cláusula fecha.",
+      "detalhes": [
+        "**P.** Reescreva o pedido \"faça um resumo das vendas\" como um **contrato** de pelo menos",
+        "quatro cláusulas, e diga qual falha cada cláusula fecha."
+      ],
+      "resposta": "Exemplo: (1) **objetivo** — \"resumo executivo para a diretoria decidir o plano do próximo\nmês\"; (2) **escopo** — \"vendas de janeiro a setembro de 2026, arquivo X\"; (3) **formato**\n— \"5 bullets, cada um com número e comparação com o mês anterior\"; (4) **critério de\ncorreção** — \"todo número deve citar a linha/tabela de origem; se faltar dado, escrever\n'N/A'\"; (5) **o que não fazer** — \"não projetar cenário, não arredondar\". Cada cláusula\nfecha uma leitura possível (público, dados, forma, verdade e escopo) e reduz a\n[[Inconsistência]] entre execuções.",
+      "seq": 87,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos12",
+      "numero": 12,
+      "nivel": "media",
+      "enunciado": "O que é **revisar o plano proposto** com o agente? Dê um checklist de quatro pontos e explique por que isso é diferente de revisar a resposta final.",
+      "detalhes": [
+        "**P.** O que é **revisar o plano proposto** com o agente? Dê um checklist de quatro",
+        "pontos e explique por que isso é diferente de revisar a resposta final."
+      ],
+      "resposta": "É revisar **com o agente**, antes da execução, o plano que ele propôs — o que entendeu, os\npassos, os dados que vai usar e o resultado esperado. Checklist: (1) o objetivo do plano é\no meu pedido? (2) os dados/fontes são os certos? (3) os passos são coerentes entre si\n(nada fora de ordem ou faltando)? (4) o resultado esperado corresponde ao que defini como\ncorreto? É diferente de revisar a resposta final porque pega o desvio **antes** de ele\nvirar ação — quando o custo de corrigir ainda é baixo.",
+      "seq": 88,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos13",
+      "numero": 13,
+      "nivel": "dificil",
+      "enunciado": "Por que a validação de saída deve viver em **código**, e não no prompt? Dê um exemplo de regra que o prompt não garante.",
+      "detalhes": [
+        "**P.** Por que a validação de saída deve viver em **código**, e não no prompt? Dê um",
+        "exemplo de regra que o prompt não garante."
+      ],
+      "resposta": "Porque prompt é **pedido**, código é **garantia**: a instrução pode ser ignorada,\ndiluída em contexto longo ou sobrescrita por [[Prompt Injection]]. Em código, a saída\ninválida não vira resposta — vira erro, retry ou escalada. Exemplo: \"o total deve ser\nnumérico e igual à soma das linhas\" — o modelo pode escrever a regra e violá-la na mesma\nresposta; um validador determinístico recalcula e rejeita. Outros: JSON Schema, range de\ndatas, PII, citação que precisa existir na fonte.",
+      "seq": 89,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos14",
+      "numero": 14,
+      "nivel": "dificil",
+      "enunciado": "Um cliente pede \"zero alucinação\". Como você responde — tecnicamente e comercialmente — sem prometer o impossível?",
+      "detalhes": [
+        "**P.** Um cliente pede \"zero alucinação\". Como você responde — tecnicamente e",
+        "comercialmente — sem prometer o impossível?"
+      ],
+      "resposta": "Tecnicamente: alucinação é **taxa**, não exceção; o objetivo é reduzir e tornar o\nresidual **detectável e gerenciado** com camadas — grounding com citação, validação de\nsaída, guardrails, humano no crítico e [[Evals]] contínuos. Comercialmente: definir **nível\nde serviço por tipo de erro** (ex.: erro factual crítico → revisão humana; erro cosmético\n→ amostragem), com métrica, painel e processo de incidente. \"Zero\" só existe se o modelo\nnão responder sozinho — a decisão é quanto custa cada camada em tokens, latência e atrito,\ne quem absorve o residual.",
+      "seq": 90,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos15",
+      "numero": 15,
+      "nivel": "dificil",
+      "enunciado": "Caso jurídico: um assistente resume contratos e aponta cláusulas de risco. Escolha **três** controles obrigatórios, justifique cada um pelo tipo de erro que pega e diga qual é o trade-off.",
+      "detalhes": [
+        "**P.** Caso jurídico: um assistente resume contratos e aponta cláusulas de risco.",
+        "Escolha **três** controles obrigatórios, justifique cada um pelo tipo de erro que pega e",
+        "diga qual é o trade-off."
+      ],
+      "resposta": "1. **Grounding com citação obrigatória** — cada afirmação aponta o trecho do contrato;\npega alucinação factual. Trade-off: tokens/latência e necessidade de o texto estar no\ncorpus.\n2. **Human-in-the-loop no que é crítico** — parecer revisado por advogado antes de sair;\npega o residual grave que nenhuma regra previu. Trade-off: fila e custo humano; revisão\ncansada exige checklist e amostragem de controle.\n3. **Guardrails + trilha de auditoria** — bloqueia PII/vazamento e registra entrada,\nsaída, versão do modelo e do prompt; pega política e permite post-mortem. Trade-off:\nlatência e falsos positivos que precisam de escape.\nFechando: **[[Evals]]** com casos reais do domínio medem se os três seguram — sem isso, é\nachismo com verniz.",
+      "seq": 91,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos16",
+      "numero": 16,
+      "nivel": "facil",
+      "enunciado": "O que faz uma falha ser **inerente à arquitetura**? Cite as três causas e explique por que aumentar o modelo não resolve.",
+      "detalhes": [
+        "**P.** O que faz uma falha ser **inerente à arquitetura**? Cite as três causas e explique",
+        "por que aumentar o modelo não resolve."
+      ],
+      "resposta": "É a falha que vem de **como o modelo é construído**, não de um bug ou prompt ruim. As três\ncausas: (1) **estimar probabilidade** — gera continuação plausível, sem verificação de\nverdade; (2) **contexto finito** — janela limitada e atenção que perde o meio; (3)\n**pedido ambíguo** — a formulação do input admite mais de uma leitura. Modelo maior reduz a **taxa**,\nmas mantém a estrutura: continua sem fonte de verdade, com janela finita e operando sobre\nlinguagem ambígua. O que resolve é o que está em volta: fonte, validação, contexto e\ncontrato de pergunta.",
+      "seq": 92,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos17",
+      "numero": 17,
+      "nivel": "media",
+      "enunciado": "\"A IA não tem pensamento em si.\" Explique o que isso significa e por que a **fluência** do texto não contradiz a afirmação.",
+      "detalhes": [
+        "**P.** \"A IA não tem pensamento em si.\" Explique o que isso significa e por que a",
+        "**fluência** do texto não contradiz a afirmação."
+      ],
+      "resposta": "Significa que não há intenção, crença nem verificação interna: existe cálculo de\nprobabilidade sobre o próximo token. O texto fluente é o **resultado esperado** desse\nmecanismo — plausibilidade, não verdade. \"Cadeia de pensamento\" também é texto gerado, não\ndeliberação interna; por isso o modelo pode \"explicar\" um erro com a mesma segurança com\nque explica um acerto. A verificação precisa ser externa: documento, schema, ferramenta,\nhumano, [[Evals]].",
+      "seq": 93,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos18",
+      "numero": 18,
+      "nivel": "media",
+      "enunciado": "Mapeie cada falha (alucinação, inconsistência, ambiguidade, perda de contexto) à causa estrutural principal. Escolha uma e mostre por que ela tem **mais de uma** causa.",
+      "detalhes": [
+        "**P.** Mapeie cada falha (alucinação, inconsistência, ambiguidade, perda de contexto) à",
+        "causa estrutural principal. Escolha uma e mostre por que ela tem **mais de uma** causa."
+      ],
+      "resposta": "| Falha | Causa principal |\n| --- | --- |\n| Alucinação | probabilidade (plausível ≠ verdadeiro) |\n| Inconsistência | amostragem + ausência de estado |\n| Ambiguidade | formulação do pedido |\n| Perda de contexto | janela finita + posição no contexto |\nExemplo de causa múltipla: **inconsistência** vem da amostragem ([[Temperatura]]), mas\ntambém de [[Ambiguidade]] (cada execução escolhe uma leitura) e de contexto diferente\n(histórico/ordem dos documentos). Por isso o controle também é múltiplo: fixar critério,\nbaixar temperatura, dar estado explícito e medir com repetição.",
+      "seq": 94,
+      "tema": "riscos e falhas"
+    },
+    {
+      "id": "qriscos19",
+      "numero": 19,
+      "nivel": "dificil",
+      "enunciado": "Um gerente propõe: \"vamos trocar para o maior modelo e aumentar a janela de contexto; isso resolve as alucinações e a perda de contexto\". Responda com o conceito de **erro inerente** e proponha três controles que o upgrade **não** substitui.",
+      "detalhes": [
+        "**P.** Um gerente propõe: \"vamos trocar para o maior modelo e aumentar a janela de",
+        "contexto; isso resolve as alucinações e a perda de contexto\". Responda com o conceito de",
+        "**erro inerente** e proponha três controles que o upgrade **não** substitui."
+      ],
+      "resposta": "O upgrade reduz **taxa**, não remove a natureza: o modelo continua estimando\nprobabilidade (sem fonte de verdade) e a atenção continua perdendo o meio de contextos\nlongos. Três controles que ele não substitui: (1) **grounding com citação** — sem\ndocumento real, o modelo maior continua inventando com mais fluência; (2) **validação de\nsaída em código** — schema/regras pegam o que a amostragem deixou passar; (3)\n**arquitetura de contexto** — reancorar, posicionar e resumir, porque mais janela não\ngarante uso da informação. Fechando com [[Evals]] para provar que a troca melhorou no\n**seu** domínio, não só no leaderboard.",
+      "seq": 95,
+      "tema": "riscos e falhas"
     }
   ]
 }

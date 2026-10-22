@@ -50,6 +50,7 @@ O passo 4 é o coração: cada token renova o próprio significado usando o cont
 ## Onde vi isso
 
 - Visto em: [[Arquitetura Transformers e Attention]]
+- Aprofundamento: [[Pesquisa - Transformer e self-attention]] · [[Lab 03 - Inspecionando a atenção]]
 
 ## Ver também
 

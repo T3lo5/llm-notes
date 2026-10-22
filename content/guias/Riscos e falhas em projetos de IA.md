@@ -10,7 +10,7 @@ date: "2026-10-26"
 # Riscos e falhas em projetos de IA
 
 > **Meta:** abrir a disciplina de riscos e falhas com o enquadramento que falta nas
-> três anteriores: em IA, **falha não é exceção — é taxa**. A aula define o
+> três anteriores: em IA, **falha não é exceção — é taxa**. A seção define o
 > vocabulário de risco e mostra por que a resposta à pergunta "como evitar que a IA
 > erre?" não é "testar mais", e sim **camadas empilhadas**.
 
@@ -119,7 +119,7 @@ flowchart TB
 | Evals: Medindo a Qualidade da IA | — | Como medir se as defesas seguram |
 | Entrega final — IA no Setor Jurídico | — | Aplicação da disciplina num caso de alto risco |
 
-> Cada item da disciplina, na ordem oficial; as aulas restantes ainda não têm nota.
+> Cada item da disciplina, na ordem oficial; as seções restantes ainda não têm nota.
 
 ## Perguntas para validar
 

@@ -416,6 +416,83 @@ def limpar_checkboxes_vazios(corpo):
     return "\n".join(linhas)
 
 
+def linha_so_com_links(linha):
+    """Verdadeiro se, tirando wikilinks e separadores, nao sobra prosa."""
+    resto = re.sub(r"\[\[[^\]]+\]\]", "", linha)
+    resto = re.sub(r"[·•|,;:\-–—\s]+", "", resto)
+    return resto == ""
+
+
+def limpar_rotulos_vazios(corpo):
+    """
+    Depois de resolver os links, alguns rotulos ficam sem conteudo:
+    "- Visto em:" quando o unico alvo nao foi publicado. Remove o bullet vazio
+    e tambem separadores orfaos no fim de uma lista ("[[A]] ·").
+    """
+    linhas = []
+    for l in corpo.split("\n"):
+        if re.match(r"^\s*[-*]\s+[^:]{1,40}:\s*$", l):
+            continue
+        l = re.sub(r":\s*(?:[·•]\s*)+", ": ", l)
+        l = re.sub(r"(?:[·•]\s*){2,}", "· ", l)
+        l = re.sub(r"\s*[·•]\s*$", "", l)
+        if re.match(r"^\s*[-*]\s*[·•]\s*$", l):
+            continue
+        linhas.append(l)
+    return "\n".join(linhas)
+
+
+def remover_secoes_internas(corpo):
+    """
+    Checklist de conclusao e Log sao ferramentas de estudo do vault, nao
+    conteudo de guia publico. A secao inteira sai ate o proximo titulo de nivel 2.
+    """
+    linhas, saida, pular = corpo.split("\n"), [], False
+    for l in linhas:
+        if re.match(r"^##\s+", l):
+            pular = bool(re.match(r"^##\s+(?:Checklist de conclusão|Log)\s*$", l, re.I))
+            if pular:
+                continue
+        if pular and l.lstrip().startswith(("<script", "<style")):
+            pular = False
+        if not pular:
+            saida.append(l)
+    return "\n".join(saida)
+
+
+def neutralizar_palavra_aula(texto):
+    """
+    O site nao nomeia a origem do material. "Aula" e o ultimo vestigio que
+    sobrevive aos links e aos titulos; troca por "secao" preservando o genero
+    feminino e as frases ao redor. Frases feitas sao resolvidas antes.
+    """
+    texto = re.sub(
+        r"^-\s*(?:\[\[[^\]]+\]\]|Aula\s+\d+)\s*[—–-]\s*.*\(plataforma\)\s*$",
+        "", texto, flags=re.M,
+    )
+    texto = re.sub(r"^-\s*Banco:.*$", "", texto, flags=re.M)
+    texto = re.sub(r"\baula\s+assistida\b", "sessão de estudo", texto)
+    texto = re.sub(r"\baulas\s+assistidas\b", "sessões de estudo", texto)
+    texto = re.sub(r"\bAulas\s+relacionadas\b", "Ver também", texto)
+    texto = re.sub(r"^-\s*Aulas:\s*", "- Ver também: ", texto, flags=re.M)
+    texto = re.sub(r"\bAulas\b", "Seções", texto)
+    texto = re.sub(r"\baulas\b", "seções", texto)
+    texto = re.sub(r"\bAula\b", "Seção", texto)
+    texto = re.sub(r"\baula\b", "seção", texto)
+    return texto
+
+
+def neutralizar_aula_em(obj):
+    """Aplica a neutralizacao a strings, listas e dicionarios (questoes)."""
+    if isinstance(obj, str):
+        return neutralizar_palavra_aula(obj)
+    if isinstance(obj, list):
+        return [neutralizar_aula_em(v) for v in obj]
+    if isinstance(obj, dict):
+        return {k: neutralizar_aula_em(v) for k, v in obj.items()}
+    return obj
+
+
 def limpar_rodape(corpo):
     """
     Remove a navegacao que o Obsidian injeta no fim das notas.
@@ -442,9 +519,9 @@ def limpar_rodape(corpo):
 
         # Linha solta so com links internos, sem prosa. Uma linha que comeca
         # com "**Categoria** —" e lista de wikilinks e conteudo, nao rodape.
-        if "·" in l and l.count("[[") >= 2 and not re.match(
-            r"^\s*(\*\*|-\s*\*\*)", l
-        ):
+        # O teste antigo (comecar com "**") tambem derrubava linhas de tabela
+        # e linhas rotuladas ("Fichas: [[A]] · [[B]]"), que sao conteudo.
+        if "·" in l and l.count("[[") >= 2 and linha_so_com_links(l):
             i += 1
             continue
 
@@ -1025,8 +1102,9 @@ def main():
         limpo = injetar_correcao_mermaid(limpo)
         limpo = resolver_referencias(limpo, guias_numeros)
         limpo = neutralizar_rotulo_de_avaliacao(limpo)
+        limpo = neutralizar_palavra_aula(limpo)
         with open(destino, "w", encoding="utf-8") as f:
-            f.write(render_yaml(fm) + "\n\n" + cortar_vazamento(limpo))
+            f.write(render_yaml(fm) + "\n\n" + limpar_rotulos_vazios(remover_secoes_internas(cortar_vazamento(limpo))))
         exportados.append(destino)
 
     # 2. indice de cada pasta, com titulo e descricao proprios. Sem isso o
@@ -1050,7 +1128,7 @@ def main():
     # do banco. Os dois identificam de onde o material veio, entao nenhum vai
     # para o payload.
     publicas = [
-        {k: v for k, v in q.items() if k not in ("fonte", "origem")}
+        neutralizar_aula_em({k: v for k, v in q.items() if k not in ("fonte", "origem")})
         for q in questoes
     ]
 

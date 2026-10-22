@@ -21,7 +21,7 @@ date: "2026-10-16"
 
 ## O que esta disciplina cobre
 
-| Aula | Tema | O que fecha |
+| Seção | Tema | O que fecha |
 | --- | --- | --- |
 | 21 | Seleção de modelos: por onde começar | o enquadramento (esta nota) |
 | 22 | [[O mito do melhor modelo]] | por que "melhor" é relativo |

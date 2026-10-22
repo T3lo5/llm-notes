@@ -47,6 +47,7 @@ def cos(a, b):
 
 ## Onde vi isso
 
+- Visto em: [[Embeddings e vetorização]] · [[Distância de Coseno e Significado]]
 
 ## Ver também
 
